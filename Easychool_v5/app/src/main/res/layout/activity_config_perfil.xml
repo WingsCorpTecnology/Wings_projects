@@ -11,103 +11,100 @@
         android:id="@+id/imageView5"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/settings__1_" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="0dp"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/config_perfil"
         android:textColor="@color/text"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <EditText
         android:id="@+id/edtNome"
-        android:layout_width="0dp"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:ems="10"
         android:hint="@string/txt_nome"
         android:inputType="textPersonName"
         android:textColorHint="@color/colorPrimary"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edtTelefone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <EditText
+    <com.cursoandroid.easychool_v4.helper.PhoneEditText
         android:id="@+id/edtTelefone"
-        android:layout_width="0dp"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
         android:ems="10"
         android:hint="@string/txt_telefone"
         android:inputType="number"
         android:textColorHint="@color/colorPrimary"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edtCpf"
         app:layout_constraintEnd_toEndOf="@+id/edtNome"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/edtNome"
         app:layout_constraintTop_toBottomOf="@+id/edtNome" />
 
     <EditText
         android:id="@+id/edtCpf"
-        android:layout_width="0dp"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
         android:ems="10"
         android:hint="@string/txt_cpf"
         android:inputType="number"
         android:textColorHint="@color/colorPrimary"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edtRg"
         app:layout_constraintEnd_toEndOf="@+id/edtTelefone"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/edtTelefone"
         app:layout_constraintTop_toBottomOf="@+id/edtTelefone" />
 
     <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="0dp"
+        android:id="@+id/edtRg"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
         android:ems="10"
-        android:hint="@string/txt_email"
-        android:inputType="textPersonName|text|textEmailAddress"
+        android:hint="@string/txt_rg"
+        android:inputType="number"
         android:textColorHint="@color/colorPrimary"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edtSenhaNova"
         app:layout_constraintEnd_toEndOf="@+id/edtCpf"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/edtCpf"
         app:layout_constraintTop_toBottomOf="@+id/edtCpf" />
 
     <EditText
         android:id="@+id/edtSenhaNova"
-        android:layout_width="0dp"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
         android:ems="10"
         android:hint="@string/senha_nova"
         android:inputType="textPassword"
         android:textColorHint="@color/colorPrimary"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/edtEmail"
-        app:layout_constraintStart_toStartOf="@+id/edtEmail"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
+        app:layout_constraintBottom_toTopOf="@+id/btnSalvar"
+        app:layout_constraintEnd_toEndOf="@+id/edtRg"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edtRg"
+        app:layout_constraintTop_toBottomOf="@+id/edtRg" />
 
     <Button
         android:id="@+id/btnSalvar"
@@ -117,8 +114,9 @@
         android:text="@string/salvar"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edtSenhaNova"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edtSenhaNova"
         app:layout_constraintTop_toBottomOf="@+id/edtSenhaNova" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
