@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/title_pesquisa"
+        android:orderInCategory="200"/>
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_baseline_group_24"
+        android:title="@string/title_fila"
+        android:orderInCategory="100"/>
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_round_settings_24"
+        android:title="@string/title_confguracao"
+        android:orderInCategory="300"/>
+
+</menu>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "11861476850",
+    "firebase_url": "https://easychool-f.firebaseio.com",
+    "project_id": "easychool-f",
+    "storage_bucket": "easychool-f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11861476850:android:7819485295e7e34636176b",
+        "android_client_info": {
+          "package_name": "com.cursoandroid.easychool_v4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11861476850-65auc7fpa3dea1ngt9l3m2catjlic1ue.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cursoandroid.easychool_v4",
+            "certificate_hash": "79bdc8b06ab1e0f4b48b76fc53d066210332db7a"
+          }
+        },
+        {
+          "client_id": "11861476850-5t3recbad31dm19j4rihg778k1spfil8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW-plbXDxeIraEFece3kpJ7QTNjmG88Mk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11861476850-5t3recbad31dm19j4rihg778k1spfil8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

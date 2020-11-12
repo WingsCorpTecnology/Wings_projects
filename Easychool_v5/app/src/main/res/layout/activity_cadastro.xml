@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo_telas_login_cadastro"
+    tools:context=".activity.CadastroActivity">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="226dp"
+        android:layout_height="186dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_easychool_removebg_preview" />
+
+    <TextView
+        android:id="@+id/txt_cadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastro_pai_aluno"
+        android:textColor="@color/text"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/txt_desc_cadastro"
+        android:layout_width="309dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/fazer_cadastro_desc"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_cadastro" />
+
+    <EditText
+        android:id="@+id/txt_nome"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/text_customizado"
+        android:ems="10"
+        android:hint="@string/txt_nome"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/legenda"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_desc_cadastro" />
+
+    <EditText
+        android:id="@+id/txt_email"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_customizado"
+        android:ems="10"
+        android:hint="@string/txt_email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/legenda"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_telefone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_nome" />
+
+    <com.cursoandroid.easychool_v4.helper.PhoneEditText
+        android:id="@+id/txt_telefone"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_customizado"
+        android:ems="10"
+        android:hint="@string/txt_telefone"
+        android:inputType="phone"
+        android:paddingLeft="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/legenda"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_rg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
+
+    <EditText
+        android:id="@+id/txt_rg"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_customizado"
+        android:ems="10"
+        android:hint="@string/txt_rg"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/legenda"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_cpf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_telefone" />
+
+    <EditText
+        android:id="@+id/txt_cpf"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/text_customizado"
+        android:ems="10"
+        android:hint="@string/txt_cpf"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/legenda"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCadastrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_rg" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/botao_customizado"
+        android:onClick="telaIncial"
+        android:text="@string/continuar"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo_telas_login_cadastro"
+    tools:context=".activity.CadastroSenhaActivity">
+
+    <CheckBox
+        android:id="@+id/cbCondicaoUso2"
+        android:layout_width="337dp"
+        android:layout_height="75dp"
+        android:buttonTint="@color/border"
+        android:text="@string/termos_uso"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_confirmar_senha_escola"
+        app:layout_constraintVertical_bias="0.120000005" />
+
+    <EditText
+        android:id="@+id/txt_confirmar_senha_escola"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/text_customizado"
+        android:ems="10"
+        android:hint="@string/txt_confirmar_senha"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/legenda"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_senha_escola" />
+
+    <EditText
+        android:id="@+id/txt_senha_escola"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/text_customizado"
+        android:ems="10"
+        android:hint="@string/txt_senha"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/legenda"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_desc_cadastro_escola" />
+
+    <TextView
+        android:id="@+id/txt_desc_cadastro_escola"
+        android:layout_width="309dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/desc_definir"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title_cadastro_escola" />
+
+    <TextView
+        android:id="@+id/txt_title_cadastro_escola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/definir_senha"
+        android:textColor="@color/text"
+        android:textSize="28sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="226dp"
+        android:layout_height="186dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_easychool_removebg_preview" />
+
+    <Button
+        android:id="@+id/btn_cadastrar"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/botao_customizado"
+        android:onClick="login"
+        android:text="@string/btn_cadastrar"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbCondicaoUso2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

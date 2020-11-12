@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo_telas_login_cadastro"
+    tools:context=".activity.LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo__1_" />
+
+    <TextView
+        android:id="@+id/txt_title_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fazer_login_title"
+        android:textColor="@color/text"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/txt_desc_login"
+        android:layout_width="309dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/fazer_login_desc"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title_login" />
+
+    <EditText
+        android:id="@+id/txt_email"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/text_customizado"
+        android:ems="10"
+        android:hint="@string/txt_email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/legenda"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_desc_login" />
+
+    <EditText
+        android:id="@+id/txtSenha"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/text_customizado"
+        android:ems="10"
+        android:hint="@string/txt_senha"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/legenda"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
+
+    <TextView
+        android:id="@+id/esqueceuSenha"
+        android:layout_width="326dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="@string/esqueceu_senha"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSenha" />
+
+    <CheckBox
+        android:id="@+id/cb_manter_conectado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/manter_conctado"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        android:buttonTint="@color/border"
+        app:layout_constraintStart_toStartOf="@+id/txtSenha"
+        app:layout_constraintTop_toBottomOf="@+id/esqueceuSenha" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:background="@drawable/botao_customizado"
+        android:onClick="telaInicial"
+        android:text="@string/btn_login"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_manter_conectado" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
