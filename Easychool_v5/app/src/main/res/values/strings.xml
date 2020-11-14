@@ -43,5 +43,39 @@
     <string name="senha_nova">Digite a senha nova</string>
     <string name="config_title_prefire">Salve uma localização padrão para a realização das pesquisas</string>
     <string name="conf_cep">CEP</string>
-    <string name="conf_cep_salvo">CEP salvo:</string>
+    <string name="conf_rua">Rua</string>
+    <string name="conf_estado">Estado</string>
+    <string name="conf_cidade">Cidade</string>
+    <string name="conf_bairro">Bairro</string>
+    <string name="conf_numero">Número</string>
+    <string-array name="conf_estado">
+        <item>Estado</item>
+        <item>AC</item>
+        <item>AL</item>
+        <item>AP</item>
+        <item>AM</item>
+        <item>BA</item>
+        <item>CE</item>
+        <item>DF</item>
+        <item>ES</item>
+        <item>GO</item>
+        <item>MA</item>
+        <item>MT</item>
+        <item>MS</item>
+        <item>MG</item>
+        <item>PA</item>
+        <item>PB</item>
+        <item>PR</item>
+        <item>PE</item>
+        <item>PI</item>
+        <item>RJ</item>
+        <item>RN</item>
+        <item>RS</item>
+        <item>RO</item>
+        <item>RR</item>
+        <item>SC</item>
+        <item>SP</item>
+        <item>SE</item>
+        <item>TO</item>
+    </string-array>
 </resources>
