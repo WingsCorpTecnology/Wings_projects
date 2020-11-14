@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
@@ -126,8 +125,8 @@ public class CadastroSenhaActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    String idResponsavel = Base64Custom.codificarBase64(responsavelAluno.getEmail());
-                    responsavelAluno.setId(idResponsavel);
+                    /*String idResponsavel = Base64Custom.codificarBase64(responsavelAluno.getEmail());
+                    responsavelAluno.setId(idResponsavel);*/
                     responsavelAluno.salvar();
 
                     abrirMainActivity();
