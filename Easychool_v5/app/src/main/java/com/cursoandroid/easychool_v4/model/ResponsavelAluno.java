@@ -79,6 +79,6 @@ public class ResponsavelAluno implements Serializable {
 
     public void salvar(){
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDatabase();
-        firebase.child("ResponsavelAluno").push().setValue(this);
+        firebase.child("ResponsavelAluno").child(this.id).setValue(this);
     }
 }

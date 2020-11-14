@@ -47,6 +47,7 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         edtRg = findViewById(R.id.edtRg);
         //edtEmail = findViewById(R.id.edtEmail);
         edtNewSenha = findViewById(R.id.edtSenhaNova);
+        edtRg = findViewById(R.id.edtRg);
         btnSalvar = findViewById(R.id.btnSalvar);
 
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
@@ -93,7 +94,7 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         if(!edtNome.getText().toString().isEmpty()){
             alterarNome(edtNome.getText().toString().trim());
         }
-        if(!edtTelefone.getText().toString().isEmpty()){
+        if(!edtTelefone.getText().toString().isEmpty() && !edtTelefone.getText().toString().equals("(  )     -")){
             alterarTelefone(edtTelefone.getText().toString().trim());
         }
         if(!edtCpf.getText().toString().isEmpty()){
@@ -107,6 +108,13 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         if(!edtNewSenha.getText().toString().isEmpty()){
             alterarSenha(edtNewSenha.getText().toString().trim());
         }
+        if(!edtRg.getText().toString().isEmpty()){
+            alterarRg(edtRg.getText().toString().trim());
+        }
+    }
+
+    private void alterarRg(String rg) {
+        usuarioRef.child("rg").setValue(rg);
     }
 
     public void alterarNome(String nome){
@@ -126,7 +134,6 @@ public class ConfigPerfilActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                     
 
                     Log.i("alteraEmail", "Email alterado com sucesso");
                 }
