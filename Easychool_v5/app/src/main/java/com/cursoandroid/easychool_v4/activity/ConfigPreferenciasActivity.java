@@ -1,7 +1,6 @@
 package com.cursoandroid.easychool_v4.activity;
 
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -29,8 +28,6 @@ import java.util.Locale;
 public class ConfigPreferenciasActivity extends AppCompatActivity {
     private Button btnSalvar;
     private EditText edtCep, edtRua, edtNumero, edtEstado, edtCidade, edtBairro;
-    private SharedPreferences preferences;
-    private final String ARQUIVO_PREFERENCIA = "ArquivoPreferencia";
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private DatabaseReference usuarioRef;
@@ -52,7 +49,6 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
         edtCidade = findViewById(R.id.edtCidade);
         edtBairro = findViewById(R.id.edtBairro);
 
-        preferences = getSharedPreferences(ARQUIVO_PREFERENCIA, 0);
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
 
         edtEstado.addTextChangedListener(new TextWatcher() {
