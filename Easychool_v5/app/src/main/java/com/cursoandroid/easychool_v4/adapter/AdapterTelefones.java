@@ -8,15 +8,14 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cursoandroid.easychool_v4.R;
-import com.cursoandroid.easychool_v4.model.TelefoneEscola;
 
 import java.util.List;
 
 public class AdapterTelefones extends RecyclerView.Adapter<AdapterTelefones.MyViewHolder> {
 
-    private List<TelefoneEscola> telefones;
+    private List<String> telefones;
 
-    public AdapterTelefones(List<TelefoneEscola> telefones) {
+    public AdapterTelefones(List<String> telefones) {
         this.telefones = telefones;
     }
 
@@ -29,9 +28,9 @@ public class AdapterTelefones extends RecyclerView.Adapter<AdapterTelefones.MyVi
 
     @Override
     public void onBindViewHolder(AdapterTelefones.MyViewHolder holder, int position) {
-        TelefoneEscola telefoneEscola = telefones.get(position);
+        String telefoneEscola = telefones.get(position);
 
-        holder.telefone.setText(telefoneEscola.getTelefone());
+        holder.telefone.setText(telefoneEscola);
     }
 
 

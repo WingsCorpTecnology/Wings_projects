@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -15,8 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cursoandroid.easychool_v4.R;
+import com.cursoandroid.easychool_v4.activity.PerfilEscolaActivity;
 import com.cursoandroid.easychool_v4.adapter.Adapter;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
+import com.cursoandroid.easychool_v4.config.RecyclerItemClickListener;
 import com.cursoandroid.easychool_v4.helper.Base64Custom;
 import com.cursoandroid.easychool_v4.model.Escola;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +41,7 @@ public class PesquisaFrament extends Fragment {
     private String emailEscola = autenticacao.getCurrentUser().getEmail();
     private String idEscola = Base64Custom.codificarBase64(emailEscola);
     private ValueEventListener valueEventListenerEscola;
+    private Escola escolaSelecionada;
     //private ValueEventListener valueEventListenerMovimentacao;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -57,6 +61,32 @@ public class PesquisaFrament extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
         recyclerView.setAdapter(adapter);
+
+        //Evento de Click
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    }
+
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        //Recuperando escola selecionada
+                        escolaSelecionada = listaEscolas.get(position);
+
+                        //Envia a escola para a tela de perfil da escola
+                        Intent intent = new Intent(getActivity(), PerfilEscolaActivity.class);
+                        intent.putExtra("escolaSelecionada", escolaSelecionada);
+
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+                }));
 
         return root;
     }
@@ -83,6 +113,8 @@ public class PesquisaFrament extends Fragment {
 
                 for(DataSnapshot dados: dataSnapshot.getChildren()){
                     Escola escola = dados.getValue(Escola.class);
+
+                    escola.setId(dados.getKey());
 
                     listaEscolas.add(escola);
                 }
