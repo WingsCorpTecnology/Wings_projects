@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
+import com.cursoandroid.easychool_v4.helper.Geocoding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -35,6 +36,7 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
     private String idResponsavel = Base64Custom.codificarBase64(emailResponsavel);
     private String enderecoCompleto, estado, rua, numero, cidade, bairro;
     private Double latitude, longitude;
+    private Geocoding geocoding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,14 +136,19 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 numero = edtNumero.getText().toString();
 
-                geocoding();
+                enderecoCompleto = rua+ ", " +numero+ " - " +bairro+ ", " +cidade+ " - " +estado;
+
+                geocoding = new Geocoding(getApplicationContext(), enderecoCompleto);
+
+                edtCep.setText(geocoding.getCep());
             }
         });
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                geocoding();
+                latitude = geocoding.getLatitude();
+                longitude = geocoding.getLongitude();
 
                 confirmarEndereco();
             }
@@ -167,37 +174,6 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
 
         }
     }*/
-
-    public void geocoding(){
-        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-        enderecoCompleto = rua+ ", " +numero+ " - " +bairro+ ", " +cidade+ " - " +estado;
-
-        try {
-            //List<Address> listaEndereco = geocoder.getFromLocationName("Rua Bertolínia, 272 - Jardim Soares, São Paulo - SP", 1);
-            List<Address> listaEndereco = geocoder.getFromLocationName(enderecoCompleto, 1);
-            //List<Address> listaEndereco = geocoder.getFromLocation(-23.5495244, -46.40220360000001, 1);
-
-            if(listaEndereco != null && listaEndereco.size() > 0){
-                Address endereco = listaEndereco.get(0);
-               // Address endereco2 = listaEnderecoTeste.get(0);
-
-                Log.d("Local", " "+endereco.toString());
-                Log.d("Local", " "+endereco.getLatitude());
-                Log.d("Local", " "+endereco.getLongitude());
-
-                //Setar os textos com base no cep
-                edtCep.setText(endereco.getPostalCode());
-
-                //Double distancia = CalcularDistancia.CalcularDistancia(endereco.getLatitude(), endereco.getLongitude(), endereco2.getLatitude(), endereco2.getLongitude());
-                //Log.d("Local", " "+distancia);
-
-                latitude = endereco.getLatitude();
-                longitude = endereco.getLongitude();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void confirmarEndereco(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
