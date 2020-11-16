@@ -33,7 +33,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
         holder.nome.setText(escola.getNome());
         holder.endereco.setText("Rua: " +escola.getRua()+ ", " +String.valueOf(escola.getNumero())+ ", " +escola.getBairro()+ ", " +escola.getCidade()+ ", " +escola.getUf());
-        //holder.distancia.setText("Calculando...");
+        holder.distancia.setText("Calculando...");
     }
 
 

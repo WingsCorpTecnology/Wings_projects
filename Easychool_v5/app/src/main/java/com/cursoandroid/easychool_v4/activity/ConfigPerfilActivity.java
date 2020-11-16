@@ -22,7 +22,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class ConfigPerfilActivity extends AppCompatActivity {
     private EditText edtNome, edtTelefone, edtCpf, edtNewSenha, edtRg;
@@ -33,7 +36,7 @@ public class ConfigPerfilActivity extends AppCompatActivity {
     private DatabaseReference usuarioRef;
     private String emailResponsavel = autenticacao.getCurrentUser().getEmail();
     private String idResponsavel = Base64Custom.codificarBase64(emailResponsavel);
-    private ResponsavelAluno responsavel = new ResponsavelAluno();
+    private ResponsavelAluno responsavel;
     private String CPF;
 
     @Override
@@ -51,6 +54,29 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         btnSalvar = findViewById(R.id.btnSalvar);
 
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
+        responsavel = new ResponsavelAluno();
+
+        usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                responsavel.setNome((String) dataSnapshot.child("nome").getValue());
+                responsavel.setTelefone((String) dataSnapshot.child("telefone").getValue());
+                responsavel.setCpf((String) dataSnapshot.child("cpf").getValue());
+                responsavel.setRg((String) dataSnapshot.child("rg").getValue());
+
+                Log.i("nome", responsavel.getNome());
+
+                edtNome.setText(responsavel.getNome());
+                edtTelefone.setText(responsavel.getTelefone());
+                edtCpf.setText(responsavel.getCpf());
+                edtRg.setText(responsavel.getRg());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         getSupportActionBar().hide();
 
