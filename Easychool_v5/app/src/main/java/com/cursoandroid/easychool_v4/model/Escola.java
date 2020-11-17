@@ -11,7 +11,7 @@ public class Escola implements Serializable {
     private String cidade;
     private String bairro;
     private String rua;
-    private int numero;
+    private String numero;
     private String complemento;
     private String imgPerfil;
     private String cnpj;
@@ -83,11 +83,11 @@ public class Escola implements Serializable {
         this.rua = rua;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
