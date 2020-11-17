@@ -3,11 +3,12 @@ const funcionario_database = {};
 (function () {
         let funcionario_id = false;
 
-        function new_funcionario(nome, email, cpf) {
+        function new_funcionario(nome, email, cpf, senha) {
                 const funcionario_data = {
                         email: email,
                         nome: nome,
-                        cpf: cpf
+                        cpf: cpf,
+                        senha: senha
                 };
 
                 //if (!escola_id)
@@ -49,6 +50,16 @@ const funcionario_database = {};
                         })
                 //window.location.href = "../CadastroFunci/cadastroFuncionario.html";
 
+                firebase.auth().createUserWithEmailAndPassword(email, senha)
+                        .then(function(){
+                                return {
+                                        sucess: true,
+                                        message: 'Funcionario cadastrado'
+                                };
+                        })
+                        .catch(function(error) {
+                                console.error(error);
+                      });
         }
 
         function remove_funcionario() {}
@@ -58,4 +69,15 @@ const funcionario_database = {};
         funcionario_database.new = new_funcionario;
         funcionario_database.remove = remove_funcionario;
         funcionario_database.update = update_funcionario;
+
+        function login(email, senha){
+                const login_data = {
+                        email : email,
+                        senha : senha
+                }
+
+                firebase.auth().signInWithEmailAndPassword(email, senha).catch(function(error) {
+                        console.error(error);
+                      });
+        }
 })()
