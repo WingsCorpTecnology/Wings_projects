@@ -11,7 +11,7 @@ const escola_database = {};
                         rua: rua,
                         bairro: bairro,
                         cidade: cidade,
-                        estado: estado,
+                        uf: estado,
                         cep: cep,
                         email: email,
                         nome: nome,
