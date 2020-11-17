@@ -10,6 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="style.css" />
+  <link href="../assets/img/logoEasy.png" rel="icon">
   <title>Entre ou cadastre-se</title>
 </head>
 
@@ -34,8 +35,8 @@
         <form action="#" class="sign-in-form">
           <h2 class="title">Entre</h2>
           <div class="input-field">
-            <i class="fa fa-user"></i>
-            <input id="nome" type="text" placeholder="Nome" />
+            <i class="fa fa-envelope"></i>
+            <input id="email" type="email" placeholder="Email" />
           </div>
           <div class="input-field">
             <i class="fas fa-eye" onclick="show()"></i>
@@ -128,7 +129,7 @@
               $('#nome_register').val(),
               $('#email_register').val(),
               $('#cep').val(),
-              'SP',
+              $('#uf').val(),
               $('#cidade').val(),
               $('#bairro').val(),
               $('#rua').val(),
