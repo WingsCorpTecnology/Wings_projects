@@ -3,7 +3,7 @@ const funcionario_database = {};
 (function () {
         let funcionario_id = false;
 
-        function new_funcionario(nome, email, cpf, /*senha*/) {
+        function new_funcionario(nome, email, cpf, /*senha*/ ) {
                 const funcionario_data = {
                         email: email,
                         nome: nome,
@@ -12,26 +12,26 @@ const funcionario_database = {};
                 };
 
                 //if (!escola_id)
-                        //escola_id = firebase.database().ref().child('escolas').push().key;
-                
+                //escola_id = firebase.database().ref().child('escolas').push().key;
+
                 //escola_database.new('gustavo', 'gustavo@gmail.com', '03570-120', 'são paulo', 'são paulo', 'parque savoy city', 'monesia', '34', 'a', '767868957896');
-                
+
                 //../CadastroFunci/cadastroFuncionario.html
 
 
                 // var escola64 = btoa(unescape(encodeURIComponent(escola)));
 
                 //var escola64 = decodeURIComponent(escape(window.atob(escola)));
-                                
+
                 var emailKey = email;
                 emailKey.toString();
-                                
+
                 var emailBase64 = btoa(emailKey);
-                
+
                 console.log(emailBase64);
-                
+
                 let updates = {};
-                updates['/Funcionario/' +emailBase64] = funcionario_data;
+                updates['/Funcionario/' + emailBase64] = funcionario_data;
 
                 let funcionario_ref = firebase.database().ref();
 
@@ -66,18 +66,42 @@ const funcionario_database = {};
 
         function update_funcionario() {}
 
+        function cadastrar_funcionario_auth(email, senha) {
+                const insert_auth_data = {
+                        email: email,
+                        senha: senha,
+                }
+
+                firebase.auth().createUserWithEmailAndPassword(email, senha).catch(function (error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // ...
+                });
+        }
+
+        function login_funcionario(email, senha) {
+                const login_data = {
+                        email: email,
+                        senha: senha,
+                }
+
+                firebase.auth().signInWithEmailAndPassword(email, senha).catch(function (error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        $(location).attr('href', '../CadastroFunci/cadastroFuncionario.html');
+
+                        // ...
+                });
+
+        }
+
         funcionario_database.new = new_funcionario;
         funcionario_database.remove = remove_funcionario;
         funcionario_database.update = update_funcionario;
+        funcionario_database.insert_auth = cadastrar_funcionario_auth;
+        funcionario_database.login = login_funcionario;
 
-        function login(email, senha){
-                const login_data = {
-                        email : email,
-                        senha : senha
-                }
 
-                firebase.auth().signInWithEmailAndPassword(email, senha).catch(function(error) {
-                        console.error(error);
-                      });
-        }
 })()
