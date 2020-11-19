@@ -67,6 +67,7 @@ const funcionario_database = {};
         function update_funcionario() {}
 
         function cadastrar_funcionario_auth(email, senha) {
+
                 const insert_auth_data = {
                         email: email,
                         senha: senha,
@@ -81,20 +82,44 @@ const funcionario_database = {};
         }
 
         function login_funcionario(email, senha) {
+                //var result = new Boolean(true);
+                var result;
+                var sucess;
+
                 const login_data = {
                         email: email,
                         senha: senha,
                 }
 
-                firebase.auth().signInWithEmailAndPassword(email, senha).catch(function (error) {
+                firebase.auth().signInWithEmailAndPassword(email, senha).then(function (){
+                        result = true;
+                        sucess = result;
+
+                        sucess = result;
+
+                        console.log(sucess.valueOf());
+
+                }).catch(function (error) {
                         // Handle Errors here.
                         var errorCode = error.code;
                         var errorMessage = error.message;
-                        $(location).attr('href', '../CadastroFunci/cadastroFuncionario.html');
+                        //$(location).attr('href', '../CadastroFunci/cadastroFuncionario.html');
 
+                        result = false;
+                        sucess = result;
+
+                        console.log(sucess.valueOf());
                         // ...
                 });
 
+                //var sucess = result;
+
+                /*if(sucess){
+                        );
+                }
+                else{
+                        console.log(sucess.valueOf());
+                }*/
         }
 
         funcionario_database.new = new_funcionario;
