@@ -38,13 +38,13 @@ const funcionario_database = {};
                 funcionario_ref.update(updates)
                         .then(function () {
                                 return {
-                                        sucess: true,
+                                        sucesso: true,
                                         message: 'Funcionario cadastrado'
                                 };
                         })
                         .catch(function (error) {
                                 return {
-                                        sucess: false,
+                                        sucesso: false,
                                         message: 'Falha ao cadastrar o funcionario: ${error.message}'
                                 };
                         })
@@ -66,35 +66,35 @@ const funcionario_database = {};
 
         function update_funcionario() {}
 
-        function cadastrar_funcionario_auth(email, senha) {
-                const insert_auth_data = {
-                        email: email,
-                        senha: senha,
-                }
+        async function cadastrar_funcionario_auth(email, senha) {
 
-                firebase.auth().createUserWithEmailAndPassword(email, senha).catch(function (error) {
-                        // Handle Errors here.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        // ...
-                });
+                return await firebase.auth().createUserWithEmailAndPassword(email, senha)
+                        .then(() => {
+                                return{
+                                        cadastro: true
+                                }
+                        }).catch(data => {
+                                // Handle Errors here.
+                                return {
+                                        cadastro: false,
+                                        message: data.message
+                                }
+                                // ...
+                        });
         }
 
-        function login_funcionario(email, senha) {
-                const login_data = {
-                        email: email,
-                        senha: senha,
-                }
-
-                firebase.auth().signInWithEmailAndPassword(email, senha).catch(function (error) {
-                        // Handle Errors here.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        $(location).attr('href', '../CadastroFunci/cadastroFuncionario.html');
-
-                        // ...
-                });
-
+        async function login_funcionario(email, senha) {
+                return await firebase.auth().signInWithEmailAndPassword(email, senha)
+                        .then(() => {
+                                return {
+                                        login: true
+                                }
+                        }).catch(data => {
+                                return {
+                                        login: false,
+                                        message: data.message
+                                }
+                        });
         }
 
         funcionario_database.new = new_funcionario;

@@ -48,18 +48,22 @@
         </form>
 
         <script>
-          function login() {
+          async function login() {
             event.preventDefault();
             console.log("submit");
 
-            funcionario_database.login(
+            const loginValido = await funcionario_database.login(
               $('#email').val(),
               $('#senha').val()
             );
 
-            setTimeout(function(){
-              $(location).attr('href', '../index.html');
-            }, 1500);
+            if(loginValido.login){
+              console.log('pode logar');
+            }
+            else{
+              alert(`Erro no login: ${loginValido.message}`);
+              console.log('não vai logar');
+            }
           }
         </script>
 
