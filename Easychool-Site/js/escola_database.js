@@ -3,7 +3,7 @@ const escola_database = {};
 (function () {
         let escola_id = false;
 
-        function new_escola(nome, email, cep, estado, cidade, bairro, rua, numero, complemento, cnpj) {
+        async function new_escola(nome, email, cep, estado, cidade, bairro, rua, numero, complemento, cnpj) {
                 const escola_data = {
                         cnpj: cnpj,
                         complemento: complemento,
@@ -41,7 +41,7 @@ const escola_database = {};
 
                 let escola_ref = firebase.database().ref();
 
-                escola_ref.update(updates)
+                await escola_ref.update(updates)
                         .then(function () {
                                 return {
                                         sucess: true,

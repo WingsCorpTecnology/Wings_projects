@@ -67,26 +67,36 @@
                                                 event.preventDefault();
                                                 console.log("submit");
 
-                                                const cadSucess = await funcionario_database.new(
-                                                        $('#nome').val(),
-                                                        $('#email').val(),
-                                                        $('#cpf').val(),
-                                                        //$('#senha').val()
-                                                );
-
                                                 const insertSucess = await funcionario_database.insert_auth(
                                                         $('#email').val(),
                                                         $('#senha').val(),
                                                 );
-                                                console.log(cadSucess);
+
+                                                if (insertSucess.cadastro) {
+                                                        console.log('antes');
+                                                        const cadSucess = await funcionario_database.new(
+                                                                $('#nome').val(),
+                                                                $('#email').val(),
+                                                                $('#cpf').val(),
+                                                                //$('#senha').val()
+                                                        );
+                                                        console.log('depois');
+                                                        $(location).attr('href', '../LoginEasychool/login.html');
+                                                } else {
+                                                        alert(`Erro ao cadastrar funcionario: ${insertSucess.message}`);
+                                                        $(location).attr('href', 'cadastroFuncionario.html');
+                                                }
+
+                                                /*console.log(cadSucess);
                                                 console.log(insertSucess);
                                                 if (cadSucess == true && insertSucess.cadastro == true) {
-                                                        //$(location).attr('href', '../LoginEasychool/login.html');
+                                                        //
                                                 } else {
-                                                       // $(location).attr('href', 'cadastroFuncionario.html');
-                                                        alert('Erro de cadastro: ${insertSucess.message}');
-                                                }
+                                                        // 
+                                                        
+                                                }*/
                                         }
+
                                 </script>
                         </div>
                 </div>
