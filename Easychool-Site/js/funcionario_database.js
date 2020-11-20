@@ -66,6 +66,7 @@ const funcionario_database = {};
 
         function update_funcionario() {}
 
+<<<<<<< HEAD
         async function cadastrar_funcionario_auth(email, senha) {
 
                 return await firebase.auth().createUserWithEmailAndPassword(email, senha)
@@ -81,10 +82,26 @@ const funcionario_database = {};
                                 }
                                 // ...
                         });
+=======
+        function cadastrar_funcionario_auth(email, senha) {
+
+                const insert_auth_data = {
+                        email: email,
+                        senha: senha,
+                }
+
+                firebase.auth().createUserWithEmailAndPassword(email, senha).catch(function (error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // ...
+                });
+>>>>>>> 5b6da174c012c278ad788837361247b3e742185b
         }
 
         async function login_funcionario(email, senha) {
                 return await firebase.auth().signInWithEmailAndPassword(email, senha)
+<<<<<<< HEAD
                         .then(() => {
                                 return {
                                         login: true
@@ -95,6 +112,18 @@ const funcionario_database = {};
                                         message: data.message
                                 }
                         });
+=======
+                .then(() => {
+                        return {
+                                login: true
+                        }
+                }).catch(data => {
+                        return {
+                                login: false,
+                                message: data.message
+                        }
+                });
+>>>>>>> 5b6da174c012c278ad788837361247b3e742185b
         }
 
         funcionario_database.new = new_funcionario;
