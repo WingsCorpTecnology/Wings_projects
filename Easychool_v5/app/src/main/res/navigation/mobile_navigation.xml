@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_perfil">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -30,4 +31,14 @@
         android:name="com.cursoandroid.easychool_v4.fragments.ConfigurationFragment"
         android:label="@string/title_confguracao"
         tools:layout="@layout/fragment_configuracoes" />
+
+    <fragment
+        android:id="@+id/navigation_perfil"
+        android:name="com.cursoandroid.easychool_v4.fragments.PerfilFragment"
+        android:label="@string/nav_perfil"
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_navigation_perfil_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

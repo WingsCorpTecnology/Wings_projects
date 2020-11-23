@@ -65,6 +65,7 @@
                 android:text="Distancia: ...Km"
                 android:textColor="@color/legenda"
                 android:visibility="visible" />
+
         </LinearLayout>
     </LinearLayout>
 
