@@ -57,14 +57,16 @@
               $('#senha').val()
             );
 
-            if(loginValido.login){
+            if (loginValido.login) {
               console.log('pode logar');
-            }
-            else{
+              $(location).attr('href', '../index.html');
+            } else {
               alert(`Erro no login: ${loginValido.message}`);
               console.log('não vai logar');
+              $(location).attr('href', 'login.html');
             }
           }
+
         </script>
 
         <form id="formRegister" class="sign-up-form">
@@ -143,11 +145,11 @@
         </form>
 
         <script>
-          function cadastrar() {
+          async function cadastrar() {
             event.preventDefault();
             console.log("submit");
 
-            escola_database.new(
+            await escola_database.new(
               $('#nome_register').val(),
               $('#email_register').val(),
               $('#cep').val(),
@@ -160,15 +162,14 @@
               $('#cnpj').val()
             );
 
-            setTimeout(function(){
-              $(location).attr('href', '../CadastroFunci/cadastroFuncionario.html');
-            }, 1500);
+            $(location).attr('href', '../CadastroFunci/cadastroFuncionario.html');
           }
+
         </script>
 
 
         <script type="text/javascript">
-          $("#cep").focusout(function () {
+          $("#cep").focusout(function() {
             //Início do Comando AJAX
             $.ajax({
               //O campo URL diz o caminho de onde virá os dados
@@ -181,7 +182,7 @@
               //ele consiga ler a fonte de dados com sucesso.
               //O parâmetro dentro da função se refere ao nome da variável
               //que você vai dar para ler esse objeto.
-              success: function (resposta) {
+              success: function(resposta) {
                 //Agora basta definir os valores que você deseja preencher
                 //automaticamente nos campos acima.
                 $("#logradouro").val(resposta.logradouro);
@@ -195,6 +196,7 @@
               }
             });
           });
+
         </script>
       </div>
     </div>
@@ -251,6 +253,7 @@
         icon2.style.color = "grey";
       }
     }
+
   </script>
   <script src="app.js"></script>
 

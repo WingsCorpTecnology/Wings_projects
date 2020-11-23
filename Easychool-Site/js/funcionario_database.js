@@ -3,7 +3,7 @@ const funcionario_database = {};
 (function () {
         let funcionario_id = false;
 
-        function new_funcionario(nome, email, cpf, /*senha*/ ) {
+        async function new_funcionario(nome, email, cpf, /*senha*/ ) {
                 const funcionario_data = {
                         email: email,
                         nome: nome,
@@ -35,64 +35,55 @@ const funcionario_database = {};
 
                 let funcionario_ref = firebase.database().ref();
 
-                funcionario_ref.update(updates)
+                await funcionario_ref.update(updates)
                         .then(function () {
                                 return {
-                                        sucess: true,
+                                        sucesso: true,
                                         message: 'Funcionario cadastrado'
                                 };
                         })
                         .catch(function (error) {
                                 return {
-                                        sucess: false,
+                                        sucesso: false,
                                         message: 'Falha ao cadastrar o funcionario: ${error.message}'
                                 };
                         })
-                //window.location.href = "../CadastroFunci/cadastroFuncionario.html";
-
-                /*firebase.auth().createUserWithEmailAndPassword(email, senha)
-                        .then(function(){
-                                return {
-                                        sucess: true,
-                                        message: 'Funcionario cadastrado'
-                                };
-                        })
-                        .catch(function(error) {
-                                console.error(error);
-                      });*/
         }
 
         function remove_funcionario() {}
 
         function update_funcionario() {}
 
-        function cadastrar_funcionario_auth(email, senha) {
+        async function cadastrar_funcionario_auth(email, senha) {
 
-                const insert_auth_data = {
-                        email: email,
-                        senha: senha,
-                }
-
-                firebase.auth().createUserWithEmailAndPassword(email, senha).catch(function (error) {
-                        // Handle Errors here.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        // ...
-                });
+                return await firebase.auth().createUserWithEmailAndPassword(email, senha)
+                        .then(() => {
+                                return {
+                                        cadastro: true
+                                }
+                        }).catch(data => {
+                                // Handle Errors here.
+                                return {
+                                        cadastro: false,
+                                        message: data.message
+                                }
+                                // ...
+                        });
         }
 
         async function login_funcionario(email, senha) {
                 return await firebase.auth().signInWithEmailAndPassword(email, senha)
-                .then(() => {
-                        return {
-                                login: true
-                        }
-                }).catch(data => {
-                        return {
-                                login: false,
-                                message: data.message
-                        }
-                });
+                        .then(() => {
+                                return {
+                                        login: true
+                                }
+                        }).catch(data => {
+                                return {
+                                        login: false,
+                                        message: data.message
+                                }
+                        });
+
         }
 
         funcionario_database.new = new_funcionario;
