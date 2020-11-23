@@ -13,6 +13,7 @@ public class Geocoding {
     private String cep;
     private Double latitude;
     private Double longitude;
+    private String endereco;
 
     public Geocoding(Context context, String enderecoCompleto) {
         geocoder = new Geocoder(context, Locale.getDefault());
@@ -26,6 +27,22 @@ public class Geocoding {
                 setCep(endereco.getPostalCode());
                 setLatitude(endereco.getLatitude());
                 setLongitude(endereco.getLongitude());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Geocoding(Context context, Double latitude, Double longitude) {
+        geocoder = new Geocoder(context, Locale.getDefault());
+
+        try{
+            List<Address> listaEndereco = geocoder.getFromLocation(latitude, longitude, 1);
+
+            if(listaEndereco != null && listaEndereco.size() > 0){
+                Address endereco = listaEndereco.get(0);
+
+                setEndereco(endereco.getAddressLine(0));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,5 +71,13 @@ public class Geocoding {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 }
