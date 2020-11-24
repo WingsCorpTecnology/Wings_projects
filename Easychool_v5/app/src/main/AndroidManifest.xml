@@ -15,8 +15,12 @@
         android:roundIcon="@drawable/logo_easychool"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ConfigPreferenciasActivity"></activity>
-        <activity android:name=".activity.ConfigPerfilActivity" />
+        <activity android:name=".activity.ConfigFiltrosPesquisaActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ConfigPreferenciasActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ConfigPerfilActivity"
+            android:screenOrientation="portrait"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -27,12 +31,18 @@
         -->
         <activity
             android:name=".activity.PrincipalActivity"
-            android:label="@string/title_activity_principal" />
-        <activity android:name=".activity.CadastroSenhaActivity" />
-        <activity android:name=".activity.CadastroActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.PerfilEscolaActivity" />
-        <activity android:name=".activity.MainActivity">
+            android:label="@string/title_activity_principal"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.CadastroSenhaActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.CadastroActivity"
+        android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.PerfilEscolaActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

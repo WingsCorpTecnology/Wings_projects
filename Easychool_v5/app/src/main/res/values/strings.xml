@@ -40,7 +40,7 @@
     <string name="config_perfil">Altere seus dados, mantendo-os sempre atualizados</string>
     <string name="salvar">Salvar</string>
     <string name="senha_antiga">Digite sua senha atual:</string>
-    <string name="senha_nova">Digite a senha nova</string>
+    <string name="senha_nova">Digite a nova senha</string>
     <string name="config_title_prefire">Salve uma localização padrão para a realização das pesquisas</string>
     <string name="conf_cep">CEP</string>
     <string name="conf_rua">Rua</string>

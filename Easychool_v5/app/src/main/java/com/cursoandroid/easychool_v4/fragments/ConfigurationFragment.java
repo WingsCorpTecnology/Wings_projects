@@ -17,14 +17,14 @@ import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ConfigurationFragment extends Fragment {
-    private TextView btnPerfil, btnNotify, btnPrefire, btnLogout;
+    private TextView btnPerfil, btnFiltrosPesquisa, btnEndereco, btnLogout;
     private FirebaseAuth autenticacao;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_configuracoes, container, false);
         btnPerfil = root.findViewById(R.id.btn_config_perfil);
-        btnNotify = root.findViewById(R.id.btn_config_notify);
-        btnPrefire = root.findViewById(R.id.btn_config_prefire);
+        btnFiltrosPesquisa = root.findViewById(R.id.btn_config_filtros);
+        btnEndereco = root.findViewById(R.id.btn_config_endereco);
         btnLogout = root.findViewById(R.id.btn_logout);
 
         btnPerfil.setOnClickListener(new View.OnClickListener() {
@@ -34,17 +34,17 @@ public class ConfigurationFragment extends Fragment {
             }
         });
 
-        btnNotify.setOnClickListener(new View.OnClickListener() {
+        btnFiltrosPesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                configurarNotifyAbrir();
+                configurarFiltrosPesquisaAbrir();
             }
         });
 
-        btnPrefire.setOnClickListener(new View.OnClickListener() {
+        btnEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                configurarPrefireAbrir();
+                configurarEnderecoAbrir();
             }
         });
 
@@ -64,11 +64,11 @@ public class ConfigurationFragment extends Fragment {
         startActivity(new Intent(getActivity(), ConfigPerfilActivity.class));
     }
 
-    public void configurarNotifyAbrir(){
-        startActivity(new Intent(getActivity(), ConfigPerfilActivity.class));
+    public void configurarFiltrosPesquisaAbrir(){
+        startActivity(new Intent(getActivity(), ConfigFiltrosPesquisaActivity.class));
     }
 
-    public void configurarPrefireAbrir(){
+    public void configurarEnderecoAbrir(){
         startActivity(new Intent(getActivity(), ConfigPreferenciasActivity.class));
     }
 

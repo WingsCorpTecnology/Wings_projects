@@ -1,5 +1,7 @@
 package com.cursoandroid.easychool_v4.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
+import com.cursoandroid.easychool_v4.activity.ConfigPerfilActivity;
 import com.cursoandroid.easychool_v4.adapter.AdapterFiltros;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.helper.Geocoding;
@@ -38,6 +41,7 @@ public class PerfilFragment extends Fragment {
     private String idResponsavel = Base64Custom.codificarBase64(emailResponsavel);
     private ResponsavelAluno responsavel;
     private Geocoding geocoding;
+    private String espacamento = "  ";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_perfil, container, false);
@@ -49,11 +53,14 @@ public class PerfilFragment extends Fragment {
         edtRg = root.findViewById(R.id.rgUser);
         edtEmail = root.findViewById(R.id.emailUser);
         edtEndereco = root.findViewById(R.id.enderecoUser);
+        btnUpdate = root.findViewById(R.id.btnAlterar);
+        btnAddFiltros = root.findViewById(R.id.btnAddFiltros);
 
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
         responsavel = new ResponsavelAluno();
 
         usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 responsavel.setNome((String) dataSnapshot.child("nome").getValue());
@@ -70,19 +77,26 @@ public class PerfilFragment extends Fragment {
                 else{
                     geocoding = new Geocoding(getActivity(), latitude, longitude);
 
-                    edtEndereco.setText(geocoding.getEndereco());
+                    edtEndereco.setText(espacamento + geocoding.getEndereco());
                 }
 
-                edtNome.setText(responsavel.getNome());
-                edtTelefone.setText(responsavel.getTelefone());
-                edtCpf.setText(responsavel.getCpf());
-                edtRg.setText(responsavel.getRg());
-                edtEmail.setText(emailResponsavel);
+                edtNome.setText(espacamento + responsavel.getNome());
+                edtTelefone.setText(espacamento + responsavel.getTelefone());
+                edtCpf.setText(espacamento + responsavel.getCpf());
+                edtRg.setText(espacamento + responsavel.getRg());
+                edtEmail.setText(espacamento + emailResponsavel);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ConfigPerfilActivity.class));
             }
         });
 

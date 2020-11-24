@@ -7,6 +7,7 @@
     <color name="legenda">#6E000000</color>
     <color name="border">#65FF8F</color>
     <color name="text">#000000</color>
+    <color name="text_back">#39000000</color>
     <color name="colorTextWhite">#FFFFFF</color>
     <color name="color_back">#02950A</color>
 </resources>

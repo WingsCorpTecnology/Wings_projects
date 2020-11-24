@@ -7,6 +7,28 @@
     android:background="@drawable/fundo_telas_login_cadastro"
     tools:context=".activity.ConfigPerfilActivity">
 
+    <ImageView
+        android:id="@+id/imgPerfil2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/undraw_female_avat" />
+
+    <ImageView
+        android:id="@+id/imgAddImgPerfil2"
+        android:layout_width="63dp"
+        android:layout_height="47dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPerfil2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/imgPerfil2"
+        app:srcCompat="@drawable/ic_baseline_add_a_photo_24" />
+
     <com.cursoandroid.easychool_v4.helper.PhoneEditText
         android:id="@+id/edtTelefone"
         android:layout_width="0dp"
@@ -22,29 +44,18 @@
         app:layout_constraintStart_toStartOf="@+id/edtNome"
         app:layout_constraintTop_toBottomOf="@+id/edtNome" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.39"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/settings__1_" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/config_perfil"
         android:textColor="@color/text"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPerfil2" />
 
     <EditText
         android:id="@+id/edtNome"

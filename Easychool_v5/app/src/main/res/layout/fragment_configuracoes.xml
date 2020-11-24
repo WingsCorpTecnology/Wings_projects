@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_config_prefire"
+        app:layout_constraintTop_toBottomOf="@+id/btn_config_endereco"
         tools:ignore="RtlCompat" />
 
     <TextView
@@ -68,7 +68,7 @@
         tools:ignore="RtlCompat" />
 
     <TextView
-        android:id="@+id/btn_config_notify"
+        android:id="@+id/btn_config_filtros"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -76,10 +76,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:drawableLeft="@drawable/ic_notifications"
+        android:drawableLeft="@drawable/ic_baseline_filter_list_24"
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
-        android:text="@string/conf_notify"
+        android:text="Filtros de Pesquisa"
         android:textAlignment="textStart"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,7 @@
         tools:ignore="RtlCompat" />
 
     <TextView
-        android:id="@+id/btn_config_prefire"
+        android:id="@+id/btn_config_endereco"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -97,16 +97,16 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:drawableLeft="@drawable/ic_baseline_location_on_24"
+        android:drawableLeft="@drawable/ic_baseline_location"
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
-        android:text="@string/conf_prefire"
+        android:text="Endereço"
         android:textAlignment="textStart"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_config_notify"
+        app:layout_constraintTop_toBottomOf="@+id/btn_config_filtros"
         tools:ignore="RtlCompat" />
 
     <TextView
