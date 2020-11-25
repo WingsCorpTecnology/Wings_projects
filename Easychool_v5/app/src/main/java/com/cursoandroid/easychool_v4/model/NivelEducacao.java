@@ -13,7 +13,6 @@ public class NivelEducacao {
     public void setNiveis() {
         List<String> niveis = new ArrayList<>();
 
-        niveis.add("Pré-Escola");
         niveis.add("Educação Infantil");
         niveis.add("Ensino Fundamental I");
         niveis.add("Ensino Fundamental II");

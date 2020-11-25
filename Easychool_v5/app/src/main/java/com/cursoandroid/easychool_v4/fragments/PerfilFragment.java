@@ -30,6 +30,7 @@ import com.cursoandroid.easychool_v4.adapter.AdapterFiltros;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.helper.Geocoding;
 import com.cursoandroid.easychool_v4.model.Escola;
+import com.cursoandroid.easychool_v4.model.NivelEducacao;
 import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -111,8 +112,6 @@ public class PerfilFragment extends Fragment {
         super.onStart();
 
         recuperarFiltrosUser();
-        recuperarFiltrosUser();
-        recuperarFiltrosUser();
     }
 
     public void recuperarDadosUser(){
@@ -152,19 +151,54 @@ public class PerfilFragment extends Fragment {
     }
 
     public void recuperarFiltrosUser(){
-        filtros.clear();
+
 
         filtrosRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                filtros.clear();
+
+                NivelEducacao nivel = new NivelEducacao();
+
+                /*for(DataSnapshot data : dataSnapshot.getChildren()){
+                    if(data.child("Educação Infantil").getValue().equals(true)){
+                        filtros.add(data.getKey());
+                    }
+
+                }*/
+
+                //for(int i = 0; i < nivel.getNiveis().size(); i++){
+                    //boolean salvar = (boolean) dataSnapshot.child(nivel.getNiveis().get(i)).getValue();
+
+                    /*if(dataSnapshot.child(nivel.getNiveis().get(i)).getValue() != null || (boolean) dataSnapshot.child(nivel.getNiveis().get(i)).getValue()){
+                        filtros.add(nivel.getNiveis().get(i));
+                    }
+                }*/
 
 
                 //if(dataSnapshot.child("Educação Especial").getValue().toString().equals("true")){
-                    filtros.add(dataSnapshot.child("Educação Especial").getKey());
-                    filtros.add(dataSnapshot.child("Educação Infantil").getKey());
+                    //filtros.add(dataSnapshot.child("Educação Especial").getKey());
+                    //filtros.add(dataSnapshot.child("Educação Infantil").getKey());
 
-                adapter.notifyDataSetChanged();
+                //Log.i("teste", Objects.requireNonNull(dataSnapshot.child("Educação Especial").getKey()));
+                Log.i("teste", dataSnapshot.child("Educação Especial").getValue().toString());
+
+                if(dataSnapshot.child("Educação Especial").getValue().equals(true)){
+                    Log.i("teste", dataSnapshot.child("Educação Especial").getValue().toString());
+                    Log.i("teste", dataSnapshot.child("Educação Especial").getKey());
+                }
+
+                Log.i("teste", nivel.getNiveis().get(0));
+
+                for(int i = 0; i < nivel.getNiveis().size(); i++){
+
+                    Log.i("teste", nivel.getNiveis().get(i));
+                    Log.i("teste", dataSnapshot.child(nivel.getNiveis().get(i)).getValue().toString());
+                    Log.i("teste", dataSnapshot.child(nivel.getNiveis().get(i)).getKey());
+                }
+
+                //adapter.notifyDataSetChanged();
             }
 
             @Override
