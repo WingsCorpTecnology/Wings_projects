@@ -10,7 +10,7 @@
         android:id="@+id/btnAlterar"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/botao_customizado"
         android:drawableLeft="@drawable/ic_baseline_create_24"
         android:padding="8dp"
@@ -30,9 +30,10 @@
         android:padding="8dp"
         android:text="Adicionar Filtros"
         android:textColor="@color/colorTextWhite"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/recyclerView"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filtrosPesquisaTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -179,5 +180,19 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/telefoneUser" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filtrosPesquisaTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

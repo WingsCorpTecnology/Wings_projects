@@ -63,30 +63,23 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
     }
 
     public void verificarCombo(){
-        if(cbEdInfant.isChecked()){
-            filtros.add("Educação Infantil");
-            filtrosBool.add(cbEdInfant.isChecked());
-        }
-        if(cbEnsFund1.isChecked()){
-            filtros.add("Ensino Fundamental I");
-            filtrosBool.add(cbEnsFund1.isChecked());
-        }
-        if(cbEnsFund2.isChecked()){
-            filtros.add("Ensino Fundamental II");
-            filtrosBool.add(cbEnsFund2.isChecked());
-        }
-        if(cbEnsMedio.isChecked()){
-            filtros.add("Ensino Médio");
-            filtrosBool.add(cbEnsMedio.isChecked());
-        }
-        if(cbEdEspe.isChecked()){
-            filtros.add("Educação Especial");
-            filtrosBool.add(cbEdEspe.isChecked());
-        }
-        if(cbEja.isChecked()){
-            filtros.add("EJA");
-            filtrosBool.add(cbEja.isChecked());
-        }
+        filtros.add("Educação Infantil");
+        filtrosBool.add(cbEdInfant.isChecked());
+
+        filtros.add("Ensino Fundamental I");
+        filtrosBool.add(cbEnsFund1.isChecked());
+
+        filtros.add("Ensino Fundamental II");
+        filtrosBool.add(cbEnsFund2.isChecked());
+
+        filtros.add("Ensino Médio");
+        filtrosBool.add(cbEnsMedio.isChecked());
+
+        filtros.add("Educação Especial");
+        filtrosBool.add(cbEdEspe.isChecked());
+
+        filtros.add("EJA");
+        filtrosBool.add(cbEja.isChecked());
     }
 
     public void salvarFiltros(){

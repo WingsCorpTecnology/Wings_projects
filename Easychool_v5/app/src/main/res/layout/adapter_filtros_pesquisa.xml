@@ -5,24 +5,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imgNivel"
-        android:layout_width="92dp"
-        android:layout_height="60dp"
-        android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/alunos_e_professor_em_sala_de_aula_ilustracao_dos_desenhos_animados_102902_346" />
-
     <TextView
-        android:id="@+id/txtNivelEnsino"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="tipo ensino"
-        android:textColor="@color/colorTextWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/imgNivel"
-        app:layout_constraintEnd_toEndOf="@+id/imgNivel"
-        app:layout_constraintStart_toStartOf="@+id/imgNivel"
-        app:layout_constraintTop_toTopOf="@+id/imgNivel" />
+        android:id="@+id/txtNivel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Nivel Educação"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

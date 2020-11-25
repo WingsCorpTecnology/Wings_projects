@@ -17,10 +17,8 @@ import java.util.List;
 public class AdapterFiltros extends RecyclerView.Adapter<AdapterFiltros.MyViewHolder>{
     private List<String> niveis;
 
-    public AdapterFiltros() {
-        NivelEducacao nivelEducacao = new NivelEducacao();
-
-        this.niveis = nivelEducacao.getNiveis();
+    public AdapterFiltros(List<String> niveis) {
+        this.niveis = niveis;
     }
 
     @Override
@@ -32,8 +30,7 @@ public class AdapterFiltros extends RecyclerView.Adapter<AdapterFiltros.MyViewHo
 
     @Override
     public void onBindViewHolder(AdapterFiltros.MyViewHolder holder, int position) {
-        holder.nivel.setText(niveis.get(position));
-        holder.imgNivel.setImageResource(R.drawable.all_mountain);
+        holder.nivel.setText(niveis.get(0));
     }
 
 
@@ -45,13 +42,11 @@ public class AdapterFiltros extends RecyclerView.Adapter<AdapterFiltros.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView nivel;
-        ImageView imgNivel;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            nivel = itemView.findViewById(R.id.txtNivelEnsino);
-            imgNivel = itemView.findViewById(R.id.imgNivel);
+            nivel = itemView.findViewById(R.id.txtNivel);
         }
     }
 }
