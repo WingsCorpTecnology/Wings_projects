@@ -3,6 +3,7 @@ package com.cursoandroid.easychool_v4.activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
@@ -22,12 +24,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText txtEmail, txtSenha;
     private CheckBox cbManterConectado;
     private FirebaseAuth autenticacao;
     private ResponsavelAluno responsavel;
+    private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
+    private DatabaseReference responsavelRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,17 +95,38 @@ public class LoginActivity extends AppCompatActivity {
 
     public void validarLogin(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        autenticacao.signInWithEmailAndPassword(responsavel.getEmail(), responsavel.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    //msgLoginSucesso().show();
+        responsavelRef = firebaseRef.child("ResponsavelAluno").child(Base64Custom.codificarBase64(responsavel.getEmail()));
 
-                    abrirTelaPrincipal();
+        responsavelRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    //Log.e("erro", "usuario é um responsavel por aluno");
+
+                    autenticacao.signInWithEmailAndPassword(responsavel.getEmail(), responsavel.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                //msgLoginSucesso().show();
+
+                                abrirTelaPrincipal();
+                            }
+                            else{
+                                msgLoginErro(excessoes(task)).show();
+                            }
+                        }
+                    });
                 }
                 else{
-                    msgLoginErro(excessoes(task)).show();
+                    //Log.e("erro", "usuario não é um responsavel por aluno");
+
+                    msgLoginUserNaoResp().show();
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
@@ -124,5 +153,9 @@ public class LoginActivity extends AppCompatActivity {
     public void abrirTelaPrincipal(){
         startActivity(new Intent(this, PrincipalActivity.class));
         finish();
+    }
+
+    public Toast msgLoginUserNaoResp(){
+        return Toast.makeText(getApplicationContext(), "Esse usuário não é um responsável por aluno", Toast.LENGTH_LONG);
     }
 }
