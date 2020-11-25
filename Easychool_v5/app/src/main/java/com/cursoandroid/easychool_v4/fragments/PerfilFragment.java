@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
+import com.cursoandroid.easychool_v4.activity.ConfigFiltrosPesquisaActivity;
 import com.cursoandroid.easychool_v4.activity.ConfigPerfilActivity;
 import com.cursoandroid.easychool_v4.adapter.AdapterFiltros;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
@@ -97,6 +98,13 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), ConfigPerfilActivity.class));
+            }
+        });
+
+        btnAddFiltros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ConfigFiltrosPesquisaActivity.class));
             }
         });
 
