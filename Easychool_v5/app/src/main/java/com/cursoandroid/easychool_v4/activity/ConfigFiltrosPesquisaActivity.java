@@ -54,7 +54,7 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
         btnSalvar = findViewById(R.id.btnSalvar);
 
         filtrosRef = firebaseRef.child("FiltrosPesquisa").child(idResponsavel);
-        
+
         preencherCombo();
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +147,7 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
                 for(int position = 0; position < filtros.size(); position++) {
                     filtrosRef.child(filtros.get(position)).setValue(filtrosBool.get(position));
 
-                    mensagemAlteracoesSucesso();
+                    //mensagemAlteracoesSucesso();
 
                     finish();
                 }

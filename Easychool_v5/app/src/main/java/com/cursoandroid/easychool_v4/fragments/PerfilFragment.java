@@ -78,7 +78,7 @@ public class PerfilFragment extends Fragment {
         responsavel = new ResponsavelAluno();
 
         recuperarDadosUser();
-        //recuperarFiltrosUser();
+        recuperarFiltrosUser();
 
         //Configurar Adapter
         adapter = new AdapterFiltros(filtros);
@@ -152,7 +152,6 @@ public class PerfilFragment extends Fragment {
 
     public void recuperarFiltrosUser(){
 
-
         filtrosRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -160,45 +159,11 @@ public class PerfilFragment extends Fragment {
                 filtros.clear();
 
                 NivelEducacao nivel = new NivelEducacao();
-
-                /*for(DataSnapshot data : dataSnapshot.getChildren()){
-                    if(data.child("Educação Infantil").getValue().equals(true)){
-                        filtros.add(data.getKey());
-                    }
-
-                }*/
-
-                //for(int i = 0; i < nivel.getNiveis().size(); i++){
-                    //boolean salvar = (boolean) dataSnapshot.child(nivel.getNiveis().get(i)).getValue();
-
-                    /*if(dataSnapshot.child(nivel.getNiveis().get(i)).getValue() != null || (boolean) dataSnapshot.child(nivel.getNiveis().get(i)).getValue()){
-                        filtros.add(nivel.getNiveis().get(i));
-                    }
-                }*/
-
-
-                //if(dataSnapshot.child("Educação Especial").getValue().toString().equals("true")){
-                    //filtros.add(dataSnapshot.child("Educação Especial").getKey());
-                    //filtros.add(dataSnapshot.child("Educação Infantil").getKey());
-
-                //Log.i("teste", Objects.requireNonNull(dataSnapshot.child("Educação Especial").getKey()));
-                Log.i("teste", dataSnapshot.child("Educação Especial").getValue().toString());
-
-                if(dataSnapshot.child("Educação Especial").getValue().equals(true)){
-                    Log.i("teste", dataSnapshot.child("Educação Especial").getValue().toString());
-                    Log.i("teste", dataSnapshot.child("Educação Especial").getKey());
-                }
-
-                Log.i("teste", nivel.getNiveis().get(0));
-
-                for(int i = 0; i < nivel.getNiveis().size(); i++){
-                    if(Objects.equals(dataSnapshot.child(nivel.getNiveis().get(i)).getValue(), true)){
+                
+                for(int i = 0; i < nivel.getNiveis().size(); i++) {
+                    if (Objects.equals(dataSnapshot.child(nivel.getNiveis().get(i)).getValue(), true)) {
                         filtros.add(dataSnapshot.child(nivel.getNiveis().get(i)).getKey());
                     }
-
-                    //Log.i("teste", nivel.getNiveis().get(i));
-                    //Log.i("teste", dataSnapshot.child(nivel.getNiveis().get(i)).getValue().toString());
-                    //Log.i("teste", dataSnapshot.child(nivel.getNiveis().get(i)).getKey());
                 }
 
                 adapter.notifyDataSetChanged();

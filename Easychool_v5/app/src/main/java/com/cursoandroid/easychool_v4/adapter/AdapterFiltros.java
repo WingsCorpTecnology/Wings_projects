@@ -30,7 +30,7 @@ public class AdapterFiltros extends RecyclerView.Adapter<AdapterFiltros.MyViewHo
 
     @Override
     public void onBindViewHolder(AdapterFiltros.MyViewHolder holder, int position) {
-        holder.nivel.setText(niveis.get(0));
+        holder.nivel.setText(niveis.get(position));
     }
 
 
