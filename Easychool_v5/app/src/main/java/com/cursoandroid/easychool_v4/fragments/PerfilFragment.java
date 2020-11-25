@@ -192,13 +192,16 @@ public class PerfilFragment extends Fragment {
                 Log.i("teste", nivel.getNiveis().get(0));
 
                 for(int i = 0; i < nivel.getNiveis().size(); i++){
+                    if(Objects.equals(dataSnapshot.child(nivel.getNiveis().get(i)).getValue(), true)){
+                        filtros.add(dataSnapshot.child(nivel.getNiveis().get(i)).getKey());
+                    }
 
-                    Log.i("teste", nivel.getNiveis().get(i));
-                    Log.i("teste", dataSnapshot.child(nivel.getNiveis().get(i)).getValue().toString());
-                    Log.i("teste", dataSnapshot.child(nivel.getNiveis().get(i)).getKey());
+                    //Log.i("teste", nivel.getNiveis().get(i));
+                    //Log.i("teste", dataSnapshot.child(nivel.getNiveis().get(i)).getValue().toString());
+                    //Log.i("teste", dataSnapshot.child(nivel.getNiveis().get(i)).getKey());
                 }
 
-                //adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
 
             @Override

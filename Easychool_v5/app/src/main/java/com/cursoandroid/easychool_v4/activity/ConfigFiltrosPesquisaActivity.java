@@ -1,9 +1,12 @@
 package com.cursoandroid.easychool_v4.activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,11 +16,16 @@ import android.widget.Toast;
 import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
+import com.cursoandroid.easychool_v4.model.NivelEducacao;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
     private CheckBox cbEdInfant, cbEnsFund1, cbEnsFund2, cbEnsMedio, cbEdEspe, cbEja;
@@ -46,6 +54,8 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
         btnSalvar = findViewById(R.id.btnSalvar);
 
         filtrosRef = firebaseRef.child("FiltrosPesquisa").child(idResponsavel);
+        
+        preencherCombo();
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +68,47 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
                 else{
                     finish();
                 }
+            }
+        });
+    }
+
+    public void preencherCombo(){
+        final NivelEducacao nivel = new NivelEducacao();
+        final String[] combo = new String[1];
+
+        filtrosRef.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(int position = 0; position < nivel.getNiveis().size(); position++) {
+                    if(Objects.equals(dataSnapshot.child(nivel.getNiveis().get(position)).getValue(), true)){
+                        combo[0] = dataSnapshot.child(nivel.getNiveis().get(position)).getKey();
+
+                        if(cbEdInfant.getText().equals(combo[0])){
+                            cbEdInfant.setChecked(true);
+                        }
+                        if(cbEnsFund1.getText().equals(combo[0])){
+                            cbEnsFund1.setChecked(true);
+                        }
+                        if(cbEnsFund2.getText().equals(combo[0])){
+                            cbEnsFund2.setChecked(true);
+                        }
+                        if(cbEnsMedio.getText().equals(combo[0])){
+                            cbEnsMedio.setChecked(true);
+                        }
+                        if(cbEdEspe.getText().equals(combo[0])){
+                            cbEdEspe.setChecked(true);
+                        }
+                        if(cbEja.getText().equals(combo[0])){
+                            cbEja.setChecked(true);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
