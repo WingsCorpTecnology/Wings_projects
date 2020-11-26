@@ -3,7 +3,7 @@ const funcionario_database = {};
 (function () {
         let funcionario_id = false;
 
-        async function new_funcionario(nome, email, cpf, /*senha*/ ) {
+        async function new_funcionario(nome, email, cpf, emailEscola ) {
                 const funcionario_data = {
                         email: email,
                         nome: nome,
@@ -31,7 +31,7 @@ const funcionario_database = {};
                 console.log(emailBase64);
 
                 let updates = {};
-                updates['/Funcionario/' + emailBase64] = funcionario_data;
+                updates['/Funcionario/'+ emailEscola + '/' + emailBase64] = funcionario_data;
 
                 let funcionario_ref = firebase.database().ref();
 
