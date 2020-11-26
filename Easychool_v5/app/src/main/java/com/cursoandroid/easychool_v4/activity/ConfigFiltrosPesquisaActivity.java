@@ -46,15 +46,6 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_filtros_pesquisa);
 
-        /*setButtonBackVisible(false);
-        setButtonNextVisible(false);
-        //setButtonCtaVisible(false);
-        setPagerIndicatorVisible(false);
-
-        //Slides de Fragments
-        /*addSlide(new FragmentSlide.Builder().background(android.R.color.white).fragment(R.layout.fragment_slider_filtros_1).build());
-        addSlide(new FragmentSlide.Builder().background(android.R.color.white).fragment(R.layout.fragment_slider_filtros_2).canGoForward(false).build());*/
-
         getSupportActionBar().hide();
 
         cbEdInfant = findViewById(R.id.cb_ed_infant);
@@ -70,8 +61,6 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
 
         filtrosRef = firebaseRef.child("FiltrosPesquisa").child(idResponsavel);
 
-        //slider1.preencherCombo();
-        //slider1.mensagemAlteracoesSucesso();
         preencherCombo();
 
         next.setOnClickListener(new View.OnClickListener() {
@@ -169,8 +158,6 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
                 for(int position = 0; position < filtros.size(); position++) {
                     filtrosRef.child(filtros.get(position)).setValue(filtrosBool.get(position));
 
-                    //mensagemAlteracoesSucesso();
-
                     finish();
                 }
             }
@@ -185,9 +172,5 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
 
         AlertDialog alert = alertDialog.create();
         alert.show();
-    }
-
-    public void mensagemAlteracoesSucesso(){
-        Toast.makeText(this, "Alterações salvas com sucesso", Toast.LENGTH_SHORT).show();
     }
 }
