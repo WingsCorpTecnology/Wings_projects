@@ -6,11 +6,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cursoandroid.easychool_v4.Base64Custom;
@@ -30,6 +32,7 @@ import java.util.Objects;
 public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
     private CheckBox cbEdInfant, cbEnsFund1, cbEnsFund2, cbEnsMedio, cbEdEspe, cbEja;
     private Button btnSalvar;
+    private ImageView next;
     private List<String> filtros = new ArrayList<>();
     private List<Boolean> filtrosBool = new ArrayList<>();
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
@@ -63,11 +66,21 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
 
         btnSalvar = findViewById(R.id.btn_salvar_filtros);
 
+        next = findViewById(R.id.img_next);
+
         filtrosRef = firebaseRef.child("FiltrosPesquisa").child(idResponsavel);
 
         //slider1.preencherCombo();
         //slider1.mensagemAlteracoesSucesso();
         preencherCombo();
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ConfigFiltrosPesquisaAnosActivity.class));
+                finish();
+            }
+        });
     }
 
     public void clickBotao(View view){

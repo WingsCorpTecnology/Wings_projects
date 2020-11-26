@@ -15,7 +15,7 @@
         android:roundIcon="@drawable/logo_easychool"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConfigFiltrosPesquisaDistanciaActivity"></activity>
+        <activity android:name=".activity.ConfigFiltrosPesquisaDistanciaActivity"></activity>
         <activity android:name=".activity.ConfigFiltrosPesquisaAnosActivity" />
         <activity
             android:name=".activity.ConfigFiltrosPesquisaActivity"

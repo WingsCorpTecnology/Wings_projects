@@ -1,8 +1,10 @@
-package com.cursoandroid.easychool_v4;
+package com.cursoandroid.easychool_v4.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.cursoandroid.easychool_v4.R;
 
 public class ConfigFiltrosPesquisaDistanciaActivity extends AppCompatActivity {
 
