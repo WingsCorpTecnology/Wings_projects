@@ -25,6 +25,7 @@
         <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
         <script src="../js/funcionario_database.js"></script>
         <script src="../js/firebase.js"></script>
+        <script src="../js/email_escola.js"></script>
         <!--Importando Script Jquery-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -78,7 +79,7 @@
                                                                 $('#nome').val(),
                                                                 $('#email').val(),
                                                                 $('#cpf').val(),
-                                                                //$('#senha').val()
+                                                                emailu.email_obj
                                                         );
                                                         console.log('depois');
                                                         $(location).attr('href', '../LoginEasychool/login.html');

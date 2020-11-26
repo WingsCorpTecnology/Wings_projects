@@ -2,260 +2,268 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="style.css" />
-  <link href="../assets/img/logoEasy.png" rel="icon">
-  <title>Entre ou cadastre-se</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <link href="../assets/img/logoEasy.png" rel="icon">
+        <title>Entre ou cadastre-se</title>
 </head>
 
 <body>
 
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
 
-  <!-- TODO: Add SDKs for Firebase products that you want to use
+        <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
-  <script src="../js/escola_database.js"></script>
-  <script src="../js/funcionario_database.js"></script>
-  <script src="../js/firebase.js"></script>
-  <!--Importando Script Jquery-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+        <script src="../js/escola_database.js"></script>
+        <script src="../js/funcionario_database.js"></script>
+        <script src="../js/firebase.js"></script>
+        <script src="../js/email_escola.js"></script>
+        <!--Importando Script Jquery-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-  <div class="container">
-    <div class="forms-container">
-      <div class="signin-signup">
+        <div class="container">
+                <div class="forms-container">
+                        <div class="signin-signup">
 
-        <form action="#" class="sign-in-form">
-          <h2 class="title">Entre</h2>
-          <div class="input-field">
-            <i class="fa fa-envelope"></i>
-            <input id="email" type="email" placeholder="Email" />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-eye" onclick="show()"></i>
-            <input id="senha" type="password" placeholder="Senha" />
-          </div>
-          <button type="submit" onclick="login()" class="btn solid">Login</button>
-        </form>
+                                <form action="#" class="sign-in-form">
+                                        <h2 class="title">Entre</h2>
+                                        <div class="input-field">
+                                                <i class="fa fa-envelope"></i>
+                                                <input id="email" type="email" placeholder="Email" />
+                                        </div>
+                                        <div class="input-field">
+                                                <i class="fas fa-eye" onclick="show()"></i>
+                                                <input id="senha" type="password" placeholder="Senha" />
+                                        </div>
+                                        <button type="submit" onclick="login()" class="btn solid">Login</button>
+                                </form>
 
-        <script>
-          async function login() {
-            event.preventDefault();
-            console.log("submit");
+                                <script>
+                                        async function login() {
+                                                event.preventDefault();
+                                                console.log("submit");
 
-            const loginValido = await funcionario_database.login(
-              $('#email').val(),
-              $('#senha').val()
-            );
+                                                const loginValido = await funcionario_database.login(
+                                                        $('#email').val(),
+                                                        $('#senha').val()
+                                                );
 
-            if (loginValido.login) {
-              console.log('pode logar');
-              $(location).attr('href', '../index.html');
-            } else {
-              alert(`Erro no login: ${loginValido.message}`);
-              console.log('não vai logar');
-              $(location).attr('href', 'login.html');
-            }
-          }
+                                                if (loginValido.login) {
+                                                        console.log('pode logar');
+                                                        $(location).attr('href', '../index.html');
+                                                } else {
+                                                        alert(`Erro no login: ${loginValido.message}`);
+                                                        console.log('não vai logar');
+                                                        $(location).attr('href', 'login.html');
+                                                }
+                                        }
 
-        </script>
+                                </script>
 
-        <form id="formRegister" class="sign-up-form">
-          <h2 class="title2">Cadastre-se</h2>
-          <div class="input-field2">
-            <i class="fas fa-user"></i>
-            <input id="nome_register" type="text" placeholder="Nome" />
-          </div>
-          <div class="input-field2">
-            <i class="fa fa-envelope"></i>
-            <input id="email_register" type="email" placeholder="Email" />
-          </div>
-          <div class="input-field2">
-            <i class="fas fa-address-book"></i>
-            <input id="cep" type="text" class="form-control" onkeypress="$(this).mask('00000-000')" placeholder="cep">
-          </div>
-          <div class="input-field2">
-            <i class="far fa-address-book"></i>
-            <select name="estados-brasil" id="uf" required>
-              <option value="" disabled selected>Estado</option>
-              <option value="AC">Acre</option>
-              <option value="AL">Alagoas</option>
-              <option value="AP">Amapá</option>
-              <option value="AM">Amazonas</option>
-              <option value="BA">Bahia</option>
-              <option value="CE">Ceará</option>
-              <option value="DF">Distrito Federal</option>
-              <option value="ES">Espírito Santo</option>
-              <option value="GO">Goiás</option>
-              <option value="MA">Maranhão</option>
-              <option value="MT">Mato Grosso</option>
-              <option value="MS">Mato Grosso do Sul</option>
-              <option value="MG">Minas Gerais</option>
-              <option value="PA">Pará</option>
-              <option value="PB">Paraíba</option>
-              <option value="PR">Paraná</option>
-              <option value="PE">Pernambuco</option>
-              <option value="PI">Piauí</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="RN">Rio Grande do Norte</option>
-              <option value="RS">Rio Grande do Sul</option>
-              <option value="RO">Rondônia</option>
-              <option value="RR">Roraima</option>
-              <option value="SC">Santa Catarina</option>
-              <option value="SP">São Paulo</option>
-              <option value="SE">Sergipe</option>
-              <option value="TO">Tocantins</option>
-            </select>
-          </div>
-          <div class="input-field2">
-            <i class="fas fa-city"></i>
-            <input id="cidade" type="text" placeholder="Cidade" />
-          </div>
-          <div class="input-field2">
-            <i class="fas fa-house-user"></i>
-            <input id="bairro" type="text" placeholder="Bairro" />
-          </div>
-          <div class="input-field2">
-            <i class="fas fa-road"></i>
-            <input id="rua" type="text" placeholder="Rua" />
-          </div>
-          <div class="input-field2">
-            <i class="fa fa-list-ol" aria-hidden="true"></i>
-            <input id="numero" type="text" placeholder="Número" />
-          </div>
-          <div class="input-field2">
-            <i class="fas fa-clipboard-list"></i>
-            <input id="complemento" type="text" placeholder="Complemento" />
-          </div>
-          <div class="input-field2">
-            <i class="fas fa-address-card"></i>
-            <input id="cnpj" type="text" class="form-control" onkeypress="$(this).mask('00.000.000/0000-00')" placeholder="Cnpj">
-          </div>
+                                <form id="formRegister" class="sign-up-form">
+                                        <h2 class="title2">Cadastre uma escola</h2>
+                                        <div class="input-field2">
+                                                <i class="fas fa-user"></i>
+                                                <input id="nome_register" type="text" placeholder="Nome" />
+                                        </div>
+                                        <div class="input-field2">
+                                                <i class="fa fa-envelope"></i>
+                                                <input id="email_register" type="email" placeholder="Email" />
+                                        </div>
+                                        <div class="input-field2">
+                                                <i class="fas fa-address-book"></i>
+                                                <input id="cep" type="text" class="form-control" onkeypress="$(this).mask('00000-000')" placeholder="cep">
+                                        </div>
+                                        <div class="input-field2">
+                                                <i class="far fa-address-book"></i>
+                                                <select name="estados-brasil" id="uf" required>
+                                                        <option value="" disabled selected>Estado</option>
+                                                        <option value="AC">Acre</option>
+                                                        <option value="AL">Alagoas</option>
+                                                        <option value="AP">Amapá</option>
+                                                        <option value="AM">Amazonas</option>
+                                                        <option value="BA">Bahia</option>
+                                                        <option value="CE">Ceará</option>
+                                                        <option value="DF">Distrito Federal</option>
+                                                        <option value="ES">Espírito Santo</option>
+                                                        <option value="GO">Goiás</option>
+                                                        <option value="MA">Maranhão</option>
+                                                        <option value="MT">Mato Grosso</option>
+                                                        <option value="MS">Mato Grosso do Sul</option>
+                                                        <option value="MG">Minas Gerais</option>
+                                                        <option value="PA">Pará</option>
+                                                        <option value="PB">Paraíba</option>
+                                                        <option value="PR">Paraná</option>
+                                                        <option value="PE">Pernambuco</option>
+                                                        <option value="PI">Piauí</option>
+                                                        <option value="RJ">Rio de Janeiro</option>
+                                                        <option value="RN">Rio Grande do Norte</option>
+                                                        <option value="RS">Rio Grande do Sul</option>
+                                                        <option value="RO">Rondônia</option>
+                                                        <option value="RR">Roraima</option>
+                                                        <option value="SC">Santa Catarina</option>
+                                                        <option value="SP">São Paulo</option>
+                                                        <option value="SE">Sergipe</option>
+                                                        <option value="TO">Tocantins</option>
+                                                </select>
+                                        </div>
+                                        <div class="input-field2">
+                                                <i class="fas fa-city"></i>
+                                                <input id="cidade" type="text" placeholder="Cidade" />
+                                        </div>
+                                        <div class="input-field2">
+                                                <i class="fas fa-house-user"></i>
+                                                <input id="bairro" type="text" placeholder="Bairro" />
+                                        </div>
+                                        <div class="input-field2">
+                                                <i class="fas fa-road"></i>
+                                                <input id="rua" type="text" placeholder="Rua" />
+                                        </div>
+                                        <div class="input-field2">
+                                                <i class="fa fa-list-ol" aria-hidden="true"></i>
+                                                <input id="numero" type="text" placeholder="Número" />
+                                        </div>
+                                        <div class="input-field2">
+                                                <i class="fas fa-clipboard-list"></i>
+                                                <input id="complemento" type="text" placeholder="Complemento" />
+                                        </div>
+                                        <div class="input-field2">
+                                                <i class="fas fa-address-card"></i>
+                                                <input id="cnpj" type="text" class="form-control" onkeypress="$(this).mask('00.000.000/0000-00')" placeholder="Cnpj">
+                                        </div>
 
-          <button id="buton" onclick="cadastrar()" class="btn">Cadastre-se</button>
-        </form>
+                                        <button id="buton" onclick="cadastrar()" class="btn">Cadastre-se</button>
+                                </form>
 
-        <script>
-          async function cadastrar() {
-            event.preventDefault();
-            console.log("submit");
+                                <script>
+                                        async function cadastrar() {
+                                                event.preventDefault();
+                                                console.log("submit");
 
-            await escola_database.new(
-              $('#nome_register').val(),
-              $('#email_register').val(),
-              $('#cep').val(),
-              $('#uf').val(),
-              $('#cidade').val(),
-              $('#bairro').val(),
-              $('#rua').val(),
-              $('#numero').val(),
-              $('#complemento').val(),
-              $('#cnpj').val()
-            );
+                                                const email = await escola_database.new(
+                                                        $('#nome_register').val(),
+                                                        $('#email_register').val(),
+                                                        $('#cep').val(),
+                                                        $('#uf').val(),
+                                                        $('#cidade').val(),
+                                                        $('#bairro').val(),
+                                                        $('#rua').val(),
+                                                        $('#numero').val(),
+                                                        $('#complemento').val(),
+                                                        $('#cnpj').val()
+                                                );
+                                                
+                                                //var emailEscola64 = $('#email_register').val();
+                                                
+                                                //email_obj = "Testando";
+                                                
+                                                const emailu = new EmailEscola();
+                                                emailu.email_obj = 'Testando';
 
-            $(location).attr('href', '../CadastroFunci/cadastroFuncionario.html');
-          }
+                                                $(location).attr('href', '../CadastroFunci/cadastroFuncionario.html');
+                                        }
 
-        </script>
+                                </script>
 
 
-        <script type="text/javascript">
-          $("#cep").focusout(function() {
-            //Início do Comando AJAX
-            $.ajax({
-              //O campo URL diz o caminho de onde virá os dados
-              //É importante concatenar o valor digitado no CEP
-              url: 'https://viacep.com.br/ws/' + $(this).val() + '/json/unicode/',
-              //Aqui você deve preencher o tipo de dados que será lido,
-              //no caso, estamos lendo JSON.
-              dataType: 'json',
-              //SUCESS é referente a função que será executada caso
-              //ele consiga ler a fonte de dados com sucesso.
-              //O parâmetro dentro da função se refere ao nome da variável
-              //que você vai dar para ler esse objeto.
-              success: function(resposta) {
-                //Agora basta definir os valores que você deseja preencher
-                //automaticamente nos campos acima.
-                $("#logradouro").val(resposta.logradouro);
-                $("#complemento").val(resposta.complemento);
-                $("#bairro").val(resposta.bairro);
-                $("#cidade").val(resposta.localidade);
-                $("#uf").val(resposta.uf);
-                //Vamos incluir para que o Número seja focado automaticamente
-                //melhorando a experiência do usuário
-                $("#numero").focus();
-              }
-            });
-          });
+                                <script type="text/javascript">
+                                        $("#cep").focusout(function() {
+                                                //Início do Comando AJAX
+                                                $.ajax({
+                                                        //O campo URL diz o caminho de onde virá os dados
+                                                        //É importante concatenar o valor digitado no CEP
+                                                        url: 'https://viacep.com.br/ws/' + $(this).val() + '/json/unicode/',
+                                                        //Aqui você deve preencher o tipo de dados que será lido,
+                                                        //no caso, estamos lendo JSON.
+                                                        dataType: 'json',
+                                                        //SUCESS é referente a função que será executada caso
+                                                        //ele consiga ler a fonte de dados com sucesso.
+                                                        //O parâmetro dentro da função se refere ao nome da variável
+                                                        //que você vai dar para ler esse objeto.
+                                                        success: function(resposta) {
+                                                                //Agora basta definir os valores que você deseja preencher
+                                                                //automaticamente nos campos acima.
+                                                                $("#logradouro").val(resposta.logradouro);
+                                                                $("#complemento").val(resposta.complemento);
+                                                                $("#bairro").val(resposta.bairro);
+                                                                $("#cidade").val(resposta.localidade);
+                                                                $("#uf").val(resposta.uf);
+                                                                //Vamos incluir para que o Número seja focado automaticamente
+                                                                //melhorando a experiência do usuário
+                                                                $("#numero").focus();
+                                                        }
+                                                });
+                                        });
 
-        </script>
-      </div>
-    </div>
+                                </script>
+                        </div>
+                </div>
 
-    <div class="panels-container">
-      <div class="panel left-panel">
-        <div class="content">
-          <h3>Novo Por Aqui?</h3>
-          <p>
-            Não perca tempo, cadastre-se para aproveitar nossa plataforma!
-          </p>
-          <button class="btn transparent" id="sign-up-btn">
-            Cadastre-se
-          </button>
+                <div class="panels-container">
+                        <div class="panel left-panel">
+                                <div class="content">
+                                        <h3>Novo Por Aqui?</h3>
+                                        <p>
+                                                Não perca tempo, cadastre-se para aproveitar nossa plataforma!
+                                        </p>
+                                        <button class="btn transparent" id="sign-up-btn">
+                                                Cadastre-se
+                                        </button>
+                                </div>
+                                <img src="img/green.svg" class="image" alt="" />
+                        </div>
+                        <div class="panel right-panel">
+                                <div class="content">
+                                        <h3>Já possui uma Conta ?</h3>
+                                        <p>
+                                                Entre para uma melhor experiência.
+                                        </p>
+                                        <button class="btn transparent" id="sign-in-btn">
+                                                Entre
+                                        </button>
+                                </div>
+                                <img src="img/log2.svg" class="image" alt="" />
+                        </div>
+                </div>
         </div>
-        <img src="img/green.svg" class="image" alt="" />
-      </div>
-      <div class="panel right-panel">
-        <div class="content">
-          <h3>Já possui uma Conta ?</h3>
-          <p>
-            Entre para uma melhor experiência.
-          </p>
-          <button class="btn transparent" id="sign-in-btn">
-            Entre
-          </button>
-        </div>
-        <img src="img/log2.svg" class="image" alt="" />
-      </div>
-    </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-  <script>
-    function show() {
-      var senha = document.getElementById('senha');
-      var icon = document.querySelector('.fas');
-      if (senha.type === "password") {
-        senha.type = "text";
-        icon.style.color = "#30F926";
-      } else {
-        senha.type = "password";
-        icon.style.color = "grey";
-      }
-    }
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <script>
+                function show() {
+                        var senha = document.getElementById('senha');
+                        var icon = document.querySelector('.fas');
+                        if (senha.type === "password") {
+                                senha.type = "text";
+                                icon.style.color = "#30F926";
+                        } else {
+                                senha.type = "password";
+                                icon.style.color = "grey";
+                        }
+                }
 
-    function show2() {
-      var senha2 = document.getElementById('senha2');
-      var icon2 = document.getElementById('top');
-      if (senha2.type === "password") {
-        senha2.type = "text";
-        icon2.style.color = "#30F926";
-      } else {
-        senha2.type = "password";
-        icon2.style.color = "grey";
-      }
-    }
+                function show2() {
+                        var senha2 = document.getElementById('senha2');
+                        var icon2 = document.getElementById('top');
+                        if (senha2.type === "password") {
+                                senha2.type = "text";
+                                icon2.style.color = "#30F926";
+                        } else {
+                                senha2.type = "password";
+                                icon2.style.color = "grey";
+                        }
+                }
 
-  </script>
-  <script src="app.js"></script>
+        </script>
+        <script src="app.js"></script>
 
 </body>
 
