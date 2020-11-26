@@ -51,7 +51,7 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         //edtEmail = findViewById(R.id.edtEmail);
         edtNewSenha = findViewById(R.id.edtSenhaNova);
         edtRg = findViewById(R.id.edtRg);
-        btnSalvar = findViewById(R.id.btnSalvar);
+        btnSalvar = findViewById(R.id.btn_salvar_filtros);
 
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
         responsavel = new ResponsavelAluno();

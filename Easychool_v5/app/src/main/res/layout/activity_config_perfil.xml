@@ -116,14 +116,14 @@
         android:inputType="textPassword"
         android:textColorHint="@color/colorPrimary"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSalvar"
+        app:layout_constraintBottom_toTopOf="@+id/btn_salvar_filtros"
         app:layout_constraintEnd_toEndOf="@+id/edtRg"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/edtRg"
         app:layout_constraintTop_toBottomOf="@+id/edtRg" />
 
     <Button
-        android:id="@+id/btnSalvar"
+        android:id="@+id/btn_salvar_filtros"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:background="@drawable/botao_customizado"

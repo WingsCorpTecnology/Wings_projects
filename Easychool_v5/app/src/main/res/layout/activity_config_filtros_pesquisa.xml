@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo_telas_login_cadastro"
     tools:context=".activity.ConfigFiltrosPesquisaActivity">
 
     <LinearLayout
@@ -22,33 +21,29 @@
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:layout_marginTop="15dp"
-            android:src="@drawable/undraw_file_searching_re_3evy" />
+            app:srcCompat="@drawable/undraw_file_searching_re_3evy" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="Filtros de Pesquisa"
         android:textColor="@color/text"
         android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="0dp"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:gravity="center"
         android:text="Selecione os níveis educacionais desejados para a filtragem das pesquisas"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cb_ed_infant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -57,84 +52,96 @@
         android:id="@+id/cb_ed_infant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:buttonTint="@color/border"
         android:text="Educação Infantil"
         android:textColor="@color/text"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cb_fund_1"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <CheckBox
-        android:id="@+id/cb_ens_fund_ii"
+        android:id="@+id/cb_fund_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:buttonTint="@color/border"
         android:text="Ensino Fundamental II"
         android:textColor="@color/text"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/cb_ens_fund_i"
-        app:layout_constraintTop_toBottomOf="@+id/cb_ens_fund_i" />
+        app:layout_constraintBottom_toTopOf="@+id/cb_ens_med"
+        app:layout_constraintStart_toStartOf="@+id/cb_fund_1"
+        app:layout_constraintTop_toBottomOf="@+id/cb_fund_1" />
 
     <CheckBox
-        android:id="@+id/cb_ens_fund_i"
+        android:id="@+id/cb_fund_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:buttonTint="@color/border"
         android:text="Ensino Fundamental I"
         android:textColor="@color/text"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cb_fund_2"
         app:layout_constraintStart_toStartOf="@+id/cb_ed_infant"
         app:layout_constraintTop_toBottomOf="@+id/cb_ed_infant" />
 
     <CheckBox
-        android:id="@+id/cb_ed_esp"
+        android:id="@+id/cb_ed_espe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:buttonTint="@color/border"
         android:text="Educação Especial"
         android:textColor="@color/text"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/cb_ens_medi"
-        app:layout_constraintTop_toBottomOf="@+id/cb_ens_medi" />
+        app:layout_constraintBottom_toTopOf="@+id/cb_eja"
+        app:layout_constraintStart_toStartOf="@+id/cb_ens_med"
+        app:layout_constraintTop_toBottomOf="@+id/cb_ens_med" />
 
     <CheckBox
-        android:id="@+id/cb_ens_medi"
+        android:id="@+id/cb_ens_med"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:buttonTint="@color/border"
         android:text="Ensino Médio"
         android:textColor="@color/text"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/cb_ens_fund_ii"
-        app:layout_constraintTop_toBottomOf="@+id/cb_ens_fund_ii" />
+        app:layout_constraintBottom_toTopOf="@+id/cb_ed_espe"
+        app:layout_constraintStart_toStartOf="@+id/cb_fund_2"
+        app:layout_constraintTop_toBottomOf="@+id/cb_fund_2" />
 
     <CheckBox
         android:id="@+id/cb_eja"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:buttonTint="@color/border"
         android:text="EJA"
         android:textColor="@color/text"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/cb_ed_esp"
-        app:layout_constraintTop_toBottomOf="@+id/cb_ed_esp" />
+        app:layout_constraintBottom_toTopOf="@+id/btn_salvar_filtros"
+        app:layout_constraintStart_toStartOf="@+id/cb_ed_espe"
+        app:layout_constraintTop_toBottomOf="@+id/cb_ed_espe" />
 
     <Button
-        android:id="@+id/btnSalvar"
+        android:id="@+id/btn_salvar_filtros"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:background="@drawable/botao_customizado"
+        android:onClick="clickBotao"
         android:text="@string/salvar"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cb_eja" />
+
+    <ImageView
+        android:id="@+id/img_next"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_salvar_filtros"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_salvar_filtros"
+        app:srcCompat="@drawable/ic_round_navigate_next_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

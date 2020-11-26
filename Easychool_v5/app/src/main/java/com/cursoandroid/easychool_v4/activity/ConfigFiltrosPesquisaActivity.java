@@ -43,33 +43,42 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_filtros_pesquisa);
 
+        /*setButtonBackVisible(false);
+        setButtonNextVisible(false);
+        //setButtonCtaVisible(false);
+        setPagerIndicatorVisible(false);
+
+        //Slides de Fragments
+        /*addSlide(new FragmentSlide.Builder().background(android.R.color.white).fragment(R.layout.fragment_slider_filtros_1).build());
+        addSlide(new FragmentSlide.Builder().background(android.R.color.white).fragment(R.layout.fragment_slider_filtros_2).canGoForward(false).build());*/
+
         getSupportActionBar().hide();
 
         cbEdInfant = findViewById(R.id.cb_ed_infant);
-        cbEnsFund1 = findViewById(R.id.cb_ens_fund_i);
-        cbEnsFund2 = findViewById(R.id.cb_ens_fund_ii);
-        cbEnsMedio = findViewById(R.id.cb_ens_medi);
-        cbEdEspe = findViewById(R.id.cb_ed_esp);
+        cbEnsFund1 = findViewById(R.id.cb_fund_1);
+        cbEnsFund2 = findViewById(R.id.cb_fund_2);
+        cbEnsMedio = findViewById(R.id.cb_ens_med);
+        cbEdEspe = findViewById(R.id.cb_ed_espe);
         cbEja = findViewById(R.id.cb_eja);
-        btnSalvar = findViewById(R.id.btnSalvar);
+
+        btnSalvar = findViewById(R.id.btn_salvar_filtros);
 
         filtrosRef = firebaseRef.child("FiltrosPesquisa").child(idResponsavel);
 
+        //slider1.preencherCombo();
+        //slider1.mensagemAlteracoesSucesso();
         preencherCombo();
+    }
 
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                verificarCombo();
+    public void clickBotao(View view){
+        verificarCombo();
 
-                if(filtros.size() != 0){
-                    salvarFiltros();
-                }
-                else{
-                    finish();
-                }
-            }
-        });
+        if(filtros.size() != 0){
+            salvarFiltros();
+        }
+        else{
+            finish();
+        }
     }
 
     public void preencherCombo(){

@@ -1,12 +1,9 @@
 package com.cursoandroid.easychool_v4.activity;
 
 import android.content.DialogInterface;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +18,6 @@ import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.helper.Geocoding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class ConfigPreferenciasActivity extends AppCompatActivity {
     private Button btnSalvar;
@@ -43,7 +36,7 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_preferencias);
 
-        btnSalvar = findViewById(R.id.btnSalvar);
+        btnSalvar = findViewById(R.id.btn_salvar_filtros);
         edtCep = findViewById(R.id.edtCep);
         edtRua = findViewById(R.id.edtRua);
         edtNumero = findViewById(R.id.edtNumero);
