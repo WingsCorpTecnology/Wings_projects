@@ -17,6 +17,8 @@ public class ConfigFiltrosPesquisaAnosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_filtros_pesquisa_anos);
 
+        getSupportActionBar().hide();
+
         next = findViewById(R.id.img_next);
         preview = findViewById(R.id.img_preview);
 
