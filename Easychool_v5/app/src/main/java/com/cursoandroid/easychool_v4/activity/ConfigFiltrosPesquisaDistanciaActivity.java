@@ -36,7 +36,7 @@ public class ConfigFiltrosPesquisaDistanciaActivity extends AppCompatActivity im
                 finish();
             }
         });
-        
+
         getSupportActionBar().hide();
     }
 

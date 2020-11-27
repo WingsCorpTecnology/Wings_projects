@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:layout_marginTop="15dp"
-            app:srcCompat="@drawable/undraw_file_searching_re_3evy" />
+            app:srcCompat="@drawable/undraw_navigation_re_laranja" />
     </LinearLayout>
 
     <TextView
