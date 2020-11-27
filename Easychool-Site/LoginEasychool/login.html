@@ -27,7 +27,6 @@
         <script src="../js/escola_database.js"></script>
         <script src="../js/funcionario_database.js"></script>
         <script src="../js/firebase.js"></script>
-        <script src="../js/email_escola.js"></script>
         <!--Importando Script Jquery-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -163,12 +162,8 @@
                                                         $('#cnpj').val()
                                                 );
                                                 
-                                                var emailEscola64 = $('#email_register').val();
+                                                localStorage.setItem("id_item", $('#email_register').val());
                                                 
-                                                email_obj = "Testando";
-                                                
-                                                obj.email = email_obj;
-
                                                 $(location).attr('href', '../CadastroFunci/cadastroFuncionario.html');
                                         }
 
