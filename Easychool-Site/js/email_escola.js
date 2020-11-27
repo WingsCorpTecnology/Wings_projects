@@ -1,13 +1,10 @@
-class EmailEscola{
-        constructor(){
-                this.data = {};
-        }
+var obj = {
+        email: "Indefinido",
         
-        get email_obj(){
-                return this.data.email_obj;
+        get email_escola(){
+                return this.email;
+        },
+        set email_escola(value){
+                this.email = value;
         }
-        
-        set email_obj(value){
-                this.data[' email_school '] = value;
-        }
-}
+};
