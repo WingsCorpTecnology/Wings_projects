@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/logo_easychool"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ConfigFiltrosPesquisaDistanciaActivity"></activity>
+        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.ConfigFiltrosPesquisaDistanciaActivity" />
         <activity android:name=".activity.ConfigFiltrosPesquisaAnosActivity" />
         <activity
             android:name=".activity.ConfigFiltrosPesquisaActivity"
@@ -51,7 +52,7 @@
             android:name=".activity.PerfilEscolaActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
