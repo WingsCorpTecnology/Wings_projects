@@ -1,39 +1,56 @@
 <html>
-        <head>
-                <title>Insere Imagem Storage</title>
-                <meta charset="utf-8">
-        </head>
-        <body>
-                Inserir Imagem no Storage
-                <br>
-                <br>
-                <form id="insere">
-                        <input type="file" id="imagem">
-                        <br>
-                        <br>
-                        <input type="submit" onclick="inserir()" value="Enviar">
-                </form>
-                <script>
-                        async function inserir(){
-                                const ref = firebase.storage().ref();
-                                
-                                const file = document.querySelector("#imagem").files[0];
-                                
-                                const name = new Date() + '-' + file.name;
-                                
-                                const metadata = {
-                                        contentType: file.type
-                                };
-                                
-                                const task = ref.child(name).put(file, metadata);
-                                
-                                task
+
+<head>
+        <title>Insere Imagem Storage</title>
+        <meta charset="utf-8">
+</head>
+
+<body>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+
+        <script src="js/firebase.js"></script>
+        Inserir Imagem no Storage
+        <br>
+        <br>
+        <input type="file" id="photo">
+        <br>
+        <br>
+        <img id="image" />
+        <br>
+        <br>
+        <button onclick="inserir()">Enviar</button>
+        <script>
+                function inserir() {
+                        const ref = firebase.storage().ref();
+
+                        const file = document.querySelector('#photo').files[0];
+                        
+                        var email_funcionario = localStorage.getItem("email_funci");
+                        
+                        var email_funci64 = btoa(email_funcionario);
+
+                        const name = email_funci64;
+
+                        const metadata = {
+                                contentType: file.type
+                        };
+
+                        const task = ref.child(name).put(file, metadata);
+
+                        task
                                 .then(snapshot => snapshot.ref.getDownloadURL())
-                                .then(url +> {
+                                .then(url => {
                                         console.log(url)
                                         alert("Sucesso")
+                                        const image = document.querySelector('#image')
+                                        image.src = url
                                 })
-                        }
-                </script>
-        </body>
+                }
+
+        </script>
+</body>
+
 </html>
