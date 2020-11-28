@@ -81,4 +81,10 @@
     <string name="nav_perfil">Perfil</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="distancias">
+        <item>Até 5 Km</item>
+        <item>Até 10 Km</item>
+        <item>Até 15 Km</item>
+        <item>20 Km ou mais</item>
+    </string-array>
 </resources>
