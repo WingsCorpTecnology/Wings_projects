@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela do Usuario</title>
+  <link rel="stylesheet" href="file:///E:/fontawesome/css/all.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="fontawesome/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+
+</head>
+
+<body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+  <script src="../js/firebase.js"></script>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <h1>Easychool</h1>
+      </div>
+      <div class="bars">
+        <span><i class="fa fa-bars"></i></span>
+      </div>
+      <div class="nav">
+        <ul>
+          <li>
+            <h3>Home</h3>
+          </li>
+          <li>
+            <h3>About</h3>
+          </li>
+          <li>
+            <h3>Contact</h3>
+          </li>
+          <li class="active">
+            <h3>Account</h3>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <div class="nav-mobile">
+      <ul>
+        <li>
+          <span><i class="fa fa-home" aria-hidden="true"></i></span>
+          <h3>Home</h3>
+        </li>
+        <li>
+          <span><i class="fa fa-address-card" aria-hidden="true"></i></span>
+          <h3>About</h3>
+        </li>
+        <li>
+          <span><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+          <h3>Contact</h3>
+        </li>
+        <li class="active">
+          <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+          <h3>Account</h3>
+        </li>
+      </ul>
+    </div>
+    <div class="m-bar">
+      <span><i class="fa fa-ellipsis-v"></i></span>
+    </div>
+    <aside class="sidebar">
+      <h1>Perfil <span class="close"><i class="fa fa-times"></i></span></h1>
+      <div class="user-side">
+        <div class="user-pic">
+          <img width="100" src="img/img2.png" alt="">
+        </div>
+        <div class="user-info">
+          <span class="name">Easychool</span>
+          <span class="mail">gabriela@gmail.com</span>
+          <span class="status">Online</span>
+        </div>
+      </div>
+      <div class="search">
+        <form>
+          <div class="row">
+            <input type="text" placeholder="Search Profile...">
+            <button type="submit"><span><i class="fa fa-search"></i></span></button>
+          </div>
+        </form>
+      </div>
+      <div class="side-nav">
+        <h2>General</h2>
+        <nav>
+          <ul>
+            <li class="active" onclick="show(0)">
+              <span><i class="fa fa-tachometer"></i></span>
+              <h3>Funcionários</h3>
+            </li>
+            <li onclick="show(1)">
+              <span><i class="fa fa-star"></i></span>
+              <h3>Turmas</h3>
+            </li>
+            <li onclick="show(2)">
+              <span><i class="fa fa-comments"></i></span>
+              <h3>Fila de Espera</h3>
+            </li>
+            <li onclick="show(3)">
+              <span><i class="fa fa-cog"></i></span>
+              <h3>Configurações</h3>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="bt-nav">
+        <ul>
+          <li class="alert" title="Alert">
+            <span><i class="fa fa-bell"></i></span>
+          </li>
+          <li class="message" title="Message">
+            <span><i class="fa fa-envelope"></i></span>
+          </li>
+          <li class="set" title="Settings">
+            <span><i class="fa fa-cog"></i></span>
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <div class="main">
+      <section class="profile tabs">
+        <h1>Funcionários</h1>
+        <div class="userpost">
+          <div class="posts">
+            <span><i class="fa fa-plus"></i></span>
+          </div>
+          <div class="posts">
+            <img width="200" src="img/img1.png" alt="">
+            <p>Title or Name</p>
+          </div>
+          <div class="posts">
+            <img width="200" src="img/img2.png" alt="">
+            <p>Title or Name</p>
+          </div>
+          <div class="posts">
+            <img width="200" src="img/img3.png" alt="">
+            <p>Title or Name</p>
+          </div>
+          <div class="posts">
+            <img width="200" src="img/img3.png" alt="">
+            <p>Title or Name</p>
+          </div>
+        </div>
+      </section>
+      <section class="tabs">
+        <!-- <h1>Cadastrar Turmas</h1> -->
+        <div class="wrapper2">
+          <div class="header2">
+            <div class="title">
+              Cadastrar Turmas
+            </div>
+
+            <div class="search_box">
+              <input type="text" id="search_input" placeholder="Procurar turmas...">
+            </div>
+          </div>
+
+          <div class="table_wrap">
+            <div class="table_header">
+              <ul>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>NAME</span>
+                    </div>
+                    <div class="phone">
+                      <span>PHONE</span>
+                    </div>
+                    <div class="issue">
+                      <span>ISSUE</span>
+                    </div>
+                    <div class="status">
+                      <span>STATUS</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="table_body">
+              <ul>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Alex</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 111 222 333</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem ipsum dolor sit amet.</span>
+                    </div>
+                    <div class="status">
+                      <span class="open">Open</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Max Johnson</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum dolor sit amet consectetur adipisicing.</span>
+                    </div>
+                    <div class="status">
+                      <span class="reopened">Reopened</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>scarlett johansson</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 341 242 336</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum dolor.</span>
+                    </div>
+                    <div class="status">
+                      <span class="fixed">Fixed</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Rosey</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem ipsum dolor sit amet consectetur.</span>
+                    </div>
+                    <div class="status">
+                      <span class="closed">Closed</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>John</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum.</span>
+                    </div>
+                    <div class="status">
+                      <span class="hold">Hold</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Max Johnson</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum dolor sit amet consectetur adipisicing.</span>
+                    </div>
+                    <div class="status">
+                      <span class="open">open</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Sarah Glenn</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 111 222 333</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem ipsum dolor sit amet.</span>
+                    </div>
+                    <div class="status">
+                      <span class="open">Open</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Hayley Matthews</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem ipsum dolor sit.</span>
+                    </div>
+                    <div class="status">
+                      <span class="canceled">Canceled</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Sarah Glenn</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 111 222 333</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem ipsum dolor sit amet.</span>
+                    </div>
+                    <div class="status">
+                      <span class="open">Open</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>John</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum.</span>
+                    </div>
+                    <div class="status">
+                      <span class="hold">Hold</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Kate Cross</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 341 242 336</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum dolor.</span>
+                    </div>
+                    <div class="status">
+                      <span class="fixed">Fixed</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Jake Lehmann</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem ipsum dolor sit amet consectetur.</span>
+                    </div>
+                    <div class="status">
+                      <span class="closed">Closed</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Richard Gleeson</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum.</span>
+                    </div>
+                    <div class="status">
+                      <span class="hold">Hold</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Oliver Robinson</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum dolor sit amet consectetur adipisicing.</span>
+                    </div>
+                    <div class="status">
+                      <span class="reopened">Reopened</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Richard Gleeson</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum.</span>
+                    </div>
+                    <div class="status">
+                      <span class="hold">Hold</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Max Johnson</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem, ipsum dolor sit amet consectetur adipisicing.</span>
+                    </div>
+                    <div class="status">
+                      <span class="closed">closed</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <div class="name">
+                      <span>Sam Whiteman</span>
+                    </div>
+                    <div class="phone">
+                      <span>+1 331 442 436</span>
+                    </div>
+                    <div class="issue">
+                      <span>Lorem ipsum dolor sit.</span>
+                    </div>
+                    <div class="status">
+                      <span class="canceled">Canceled</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </section>
+      <section class="tabs">
+        <h1>Lista de Espera</h1>
+        <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+          Corporis eligendi excepturi vitae delectus ut! Doloremque perspiciatis </p>
+      </section>
+      <section class="tabs">
+        <h1>perfil do Usuário</h1>
+        <div class="container2">
+          <div class="wrapper">
+            <div class="image">
+              <img src="" alt="" class="imgt">
+            </div>
+            <div class="content">
+              <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div><br>
+              <div class="text">Nenhuma foto selecionada</div>
+            </div>
+            <div id="cancel-btn"><i class="fas fa-times"></i></div>
+            <div class="file-name">File name here</div>
+          </div>
+          <button onclick="defaultBtnActive()" id="custom-btn">Escolha uma foto</button>
+          <input id="default-btn" type="file" hidden onclick="enviar_foto()">
+          <script>
+            function enviar_foto() {
+              const ref = firebase.storage().ref();
+
+              const file = document.querySelector('#default-btn').files[0];
+
+              var email_funcionario = /*localStorage.getItem("email_funci");*/ "gustavo.cordeiro@etec.sp.gov.br";
+
+              var email_funci64 = btoa(email_funcionario);
+
+              const name = email_funci64;
+
+              const metadata = {
+                contentType: file.type
+              };
+
+              const task = ref.child(name).put(file, metadata);
+
+              task
+                .then(snapshot => snapshot.ref.getDownloadURL())
+                .then(url => {
+                  console.log(url)
+                  alert("Sucesso")
+                  //const image = document.querySelector('#image')
+                  //image.src = url
+                })
+            }
+
+          </script>
+
+          <div class="wrapper3">
+            <!-- <form action="#"> -->
+            <div class="input-data">
+              <input type="text" required>
+              <div class="underline"></div>
+              <label>Nome</label>
+            </div>
+            <br><br>
+            <div class="input-data">
+              <input type="password" required>
+              <div class="underline"></div>
+              <label>Senha</label>
+            </div>
+            <br><br>
+            <div class="input-data">
+              <input type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00');" required>
+              <div class="underline"></div>
+              <label>CPF</label>
+            </div>
+            <br>
+            <button type="submit" class="form__button"><i class="fa fa-pencil" aria-hidden="true"></i></i> Editar</i></button>
+
+            <!-- </form> -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="scripts.js"></script>
+  <script>
+    const tbtn = document.querySelectorAll(".side-nav ul li");
+    const tab = document.querySelectorAll(".tabs");
+
+    function show(panelIndex) {
+      tab.forEach(function(node) {
+        node.style.display = "none";
+      })
+      tab[panelIndex].style.display = "block";
+    }
+    show(0)
+
+  </script>
+
+  <script>
+    $(".side-nav ul li").click(function() {
+      $(this).addClass("active").siblings().removeClass("active");
+    });
+
+  </script>
+  <script>
+    const bar = document.querySelector(".bars");
+    const navM = document.querySelector(".nav-mobile");
+    bar.addEventListener("click", (nav) => {
+      navM.classList.toggle("show");
+    })
+
+  </script>
+  <script>
+    const Mbar = document.querySelector(".m-bar");
+    const aside = document.querySelector(".sidebar");
+    const close = document.querySelector(".close");
+    Mbar.addEventListener("click", () => {
+      aside.classList.add("show");
+    })
+    close.addEventListener("click", () => {
+      aside.classList.remove("show");
+    })
+
+  </script>
+  <script>
+    const wrapper = document.querySelector(".wrapper");
+    const fileName = document.querySelector(".file-name");
+    const defaultBtn = document.querySelector("#default-btn");
+    const customBtn = document.querySelector("#custom-btn");
+    const cancelBtn = document.querySelector("#cancel-btn i");
+    const img = document.querySelector(".imgt");
+    let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+
+    function defaultBtnActive() {
+      defaultBtn.click();
+    }
+    defaultBtn.addEventListener("change", function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          const result = reader.result;
+          img.src = result;
+          wrapper.classList.add("active");
+        }
+        cancelBtn.addEventListener("click", function() {
+          img.src = "";
+          wrapper.classList.remove("active");
+        })
+        reader.readAsDataURL(file);
+      }
+      if (this.value) {
+        let valueStore = this.value.match(regExp);
+        fileName.textContent = valueStore;
+      }
+    });
+
+  </script>
+</body>
+
+</html>
