@@ -77,9 +77,21 @@
           <img width="100" src="img/img2.png" alt="" id="imagem_perfil">
         </div>
         <div class="user-info">
-          <span class="name">Easychool</span>
-          <span class="mail">gabriela@gmail.com</span>
+          <label class="name" id="nome_perfil" for="nome_perfil">Nome</label>
+          <label class="mail" id="email_perfil" for="email_perfil">Email</label>
           <span class="status">Online</span>
+          <script>
+            window.onload = function alteraLabel(){
+              var email_perfil = localStorage.getItem("email_funci");
+              //var email_perfil = atob(email_perfil64);
+              var nome_perfil = "Gustavo";
+
+              //var email_funci64 = btoa(email_funcionario);
+              document.getElementById("nome_perfil").innerHTML = nome_perfil;
+              document.getElementById("email_perfil").innerHTML = email_perfil;
+              
+            }
+          </script>
         </div>
       </div>
       <div class="search">
@@ -495,7 +507,7 @@
 
               const file = document.querySelector('#default-btn').files[0];
 
-              var email_funcionario = /*localStorage.getItem("email_funci");*/ "gustavo.cordeiro@etec.sp.gov.br";
+              var email_funcionario = localStorage.getItem("email_funci");
 
               var email_funci64 = btoa(email_funcionario);
 
@@ -539,7 +551,7 @@
               <label>CPF</label>
             </div>
             <br>
-            <button type="submit" class="form__button"><i class="fa fa-pencil" aria-hidden="true"></i></i> Editar</i></button>
+            <button type="submit" class="form__button"><i class="fa fa-pencil" aria-hidden="true"></i><i> Editar</i></button>
 
             <!-- </form> -->
           </div>
