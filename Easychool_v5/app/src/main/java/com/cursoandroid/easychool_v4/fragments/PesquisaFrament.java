@@ -2,10 +2,13 @@ package com.cursoandroid.easychool_v4.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -42,15 +45,19 @@ public class PesquisaFrament extends Fragment {
     private String idEscola = Base64Custom.codificarBase64(emailEscola);
     private ValueEventListener valueEventListenerEscola;
     private Escola escolaSelecionada;
-    //private ValueEventListener valueEventListenerMovimentacao;
+    private EditText edtPesquisa;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_pesquisa, container, false);
 
         recyclerView = root.findViewById(R.id.recyclerEscolas);
+        edtPesquisa = root.findViewById(R.id.txt_pesquisa);
+
+        escolaRef = firebaseRef.child("Escola");
 
         recuperarEscolas();
+        pesquisa();
 
         //Configurar Adapter
         adapter = new Adapter(listaEscolas);
@@ -104,8 +111,6 @@ public class PesquisaFrament extends Fragment {
     }
 
     public void recuperarEscolas(){
-        escolaRef = firebaseRef.child("Escola");
-
         valueEventListenerEscola = escolaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -124,6 +129,40 @@ public class PesquisaFrament extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void pesquisa(){
+        edtPesquisa.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
+                List<Escola> listaEscolaBusca = new ArrayList<>();
+                String pesquisa = charSequence.toString().toLowerCase();
+
+                for(Escola escola : listaEscolas){
+                    String nomeEscola = escola.getNome().toLowerCase();
+                    String enderecoEscola = "Rua: " +escola.getRua()+ ", " +String.valueOf(escola.getNumero())+ ", " +escola.getBairro()+ ", " +escola.getCidade()+ ", " +escola.getUf().toLowerCase();
+
+                    if(nomeEscola.contains(pesquisa) || enderecoEscola.contains(pesquisa)){
+                        listaEscolaBusca.add(escola);
+
+                    }
+                }
+
+                adapter = new Adapter(listaEscolaBusca);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
