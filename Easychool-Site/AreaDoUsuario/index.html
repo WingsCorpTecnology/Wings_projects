@@ -74,7 +74,7 @@
       <h1>Perfil <span class="close"><i class="fa fa-times"></i></span></h1>
       <div class="user-side">
         <div class="user-pic">
-          <img width="100" src="img/img2.png" alt="">
+          <img width="100" src="img/img2.png" alt="" id="imagem_perfil">
         </div>
         <div class="user-info">
           <span class="name">Easychool</span>
@@ -474,17 +474,21 @@
         <div class="container2">
           <div class="wrapper">
             <div class="image">
-              <img src="" alt="" class="imgt">
+              <img src="" alt="" class="imgt" onclick="defaultBtnActive()">
+
             </div>
             <div class="content">
-              <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div><br>
-              <div class="text">Nenhuma foto selecionada</div>
+              <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <br>
+              <br>
+              <br>
+              <div class="text">Clique aqui para selecionar uma foto de perfil</div>
             </div>
             <div id="cancel-btn"><i class="fas fa-times"></i></div>
             <div class="file-name">File name here</div>
           </div>
-          <button onclick="defaultBtnActive()" id="custom-btn">Escolha uma foto</button>
-          <input id="default-btn" type="file" hidden onclick="enviar_foto()">
+          <button onclick="enviar_foto()" id="custom-btn">Salvar</button>
+          <input id="default-btn" type="file" hidden>
           <script>
             function enviar_foto() {
               const ref = firebase.storage().ref();
@@ -508,8 +512,8 @@
                 .then(url => {
                   console.log(url)
                   alert("Sucesso")
-                  //const image = document.querySelector('#image')
-                  //image.src = url
+                  const image = document.querySelector('#imagem_perfil')
+                  image.src = url
                 })
             }
 
