@@ -64,6 +64,7 @@ public class PesquisaFrament extends Fragment {
     private Geocoding geocoding;
     private Double latitude, longitude;
     private BigDecimal bd;
+    private List<Double> distancia = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -78,16 +79,11 @@ public class PesquisaFrament extends Fragment {
 
         responsavel = new ResponsavelAluno();
 
-        //recuperarEscolas();
-
-        //Toast.makeText(getActivity(), "tamanho lista = " +listaEscolas.size(), Toast.LENGTH_SHORT).show();
-
         pesquisa();
         recuperarDadosUser();
-        //escolasFiltros();
 
         //Configurar Adapter
-        adapter = new Adapter(listaEscolas);
+        adapter = new Adapter(listaEscolas, distancia);
 
         //Configurar RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -151,8 +147,6 @@ public class PesquisaFrament extends Fragment {
                     listaEscolas.add(escola);
                 }
 
-                //Toast.makeText(getActivity(), "tamanho lista = " +listaEscolas.size(), Toast.LENGTH_SHORT).show();
-
                 escolasFiltros();
 
                 adapter.notifyDataSetChanged();
@@ -176,20 +170,21 @@ public class PesquisaFrament extends Fragment {
             escola.setLatitude(geocoding.getLatitude());
             escola.setLongitude(geocoding.getLongitude());
 
-            Double distancia = CalcularDistancia.CalcularDistancia(latitude, longitude, escola.getLatitude(), escola.getLongitude());
+            Double km = CalcularDistancia.CalcularDistancia(latitude, longitude, escola.getLatitude(), escola.getLongitude());
 
-            bd = new BigDecimal(distancia).setScale(2, RoundingMode.HALF_EVEN);
+            bd = new BigDecimal(km).setScale(2, RoundingMode.HALF_EVEN);
+            distancia.add(bd.doubleValue());
 
             escola.setDistancia(bd.doubleValue());
 
             listaEscolasFiltro.add(escola);
 
-            Log.d("teste", "Escola: "+escola.getNome()+ " Distancia: " +escola.getDistancia());
+            //Log.d("teste", "Escola: "+escola.getNome()+ " Distancia: " +escola.getDistancia());
         }
 
         Collections.sort(listaEscolasFiltro);
 
-        adapter = new Adapter(listaEscolasFiltro);
+        adapter = new Adapter(listaEscolasFiltro, distancia);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -215,7 +210,7 @@ public class PesquisaFrament extends Fragment {
                     }
                 }
 
-                adapter = new Adapter(listaEscolaBusca);
+                adapter = new Adapter(listaEscolaBusca, distancia);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }

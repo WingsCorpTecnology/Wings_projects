@@ -10,14 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.model.Escola;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     private List<Escola> escolas;
+    private List<Double> distancia;
 
-    public Adapter(List<Escola> escolas) {
+    public Adapter(List<Escola> escolas, List<Double> distancia) {
         this.escolas = escolas;
+        this.distancia = distancia;
     }
 
     @Override
@@ -30,10 +33,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Escola escola = escolas.get(position);
+        Double distancias = distancia.get(position);
 
         holder.nome.setText(escola.getNome());
         holder.endereco.setText("Rua: " +escola.getRua()+ ", " +String.valueOf(escola.getNumero())+ ", " +escola.getBairro()+ ", " +escola.getCidade()+ ", " +escola.getUf());
-        holder.distancia.setText("Calculando...");
+        holder.distancia.setText(distancias+ " Km");
     }
 
 
