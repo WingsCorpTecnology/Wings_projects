@@ -1,6 +1,7 @@
 package com.cursoandroid.easychool_v4.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -147,7 +149,7 @@ public class PesquisaFrament extends Fragment {
                     listaEscolas.add(escola);
                 }
 
-                escolasFiltros();
+                //escolasFiltros();
 
                 adapter.notifyDataSetChanged();
             }
@@ -190,7 +192,7 @@ public class PesquisaFrament extends Fragment {
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -232,13 +234,17 @@ public class PesquisaFrament extends Fragment {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                responsavel.setNome((String) dataSnapshot.child("nome").getValue());
-                responsavel.setTelefone((String) dataSnapshot.child("telefone").getValue());
-                responsavel.setCpf((String) dataSnapshot.child("cpf").getValue());
-                responsavel.setRg((String) dataSnapshot.child("rg").getValue());
+                try {
+                    responsavel.setNome((String) dataSnapshot.child("nome").getValue());
+                    responsavel.setTelefone((String) dataSnapshot.child("telefone").getValue());
+                    responsavel.setCpf((String) dataSnapshot.child("cpf").getValue());
+                    responsavel.setRg((String) dataSnapshot.child("rg").getValue());
 
-                latitude = (Double) dataSnapshot.child("latitude").getValue();
-                longitude = (Double) dataSnapshot.child("longitude").getValue();
+                    latitude = (Double) dataSnapshot.child("latitude").getValue();
+                    longitude = (Double) dataSnapshot.child("longitude").getValue();
+                } catch (Exception e) {
+                    alertaSemEndereco();
+                }
             }
 
             @Override
@@ -246,5 +252,31 @@ public class PesquisaFrament extends Fragment {
 
             }
         });
+    }
+
+    public void alertaSemEndereco(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+
+        //Configurar AlertDialog
+        alertDialog.setTitle("Endereço não cadastrado");
+        alertDialog.setMessage("Você quer realizar a pesquisa sem o seu endereço?");
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                escolasFiltros();
+            }
+        });
+
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                recuperarEscolas();
+            }
+        });
+
+        AlertDialog alert = alertDialog.create();
+        alert.show();
     }
 }

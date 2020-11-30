@@ -74,6 +74,8 @@ public class ConfigurationFragment extends Fragment {
 
     public void logout(){
         autenticacao.signOut();
+
+        getActivity().finish();
     }
 
     public void confirmarLogout(){

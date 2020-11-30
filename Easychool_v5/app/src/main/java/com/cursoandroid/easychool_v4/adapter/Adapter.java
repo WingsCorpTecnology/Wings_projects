@@ -33,11 +33,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Escola escola = escolas.get(position);
-        Double distancias = distancia.get(position);
 
         holder.nome.setText(escola.getNome());
-        holder.endereco.setText("Rua: " +escola.getRua()+ ", " +String.valueOf(escola.getNumero())+ ", " +escola.getBairro()+ ", " +escola.getCidade()+ ", " +escola.getUf());
-        holder.distancia.setText(distancias+ " Km");
+        holder.endereco.setText("Rua: " + escola.getRua() + ", " + String.valueOf(escola.getNumero()) + ", " + escola.getBairro() + ", " + escola.getCidade() + ", " + escola.getUf());
+
+        if(distancia.size() != 0) {
+            Double distancias = distancia.get(position);
+
+            holder.distancia.setText(distancias + " Km");
+        }
+        else{
+            holder.distancia.setText("Não foi possível calcular");
+        }
     }
 
 
