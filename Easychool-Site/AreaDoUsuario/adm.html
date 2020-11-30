@@ -19,6 +19,7 @@
 <body>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
   <script src="../js/firebase.js"></script>
@@ -81,16 +82,25 @@
           <label class="mail" id="email_perfil" for="email_perfil">Email</label>
           <span class="status">Online</span>
           <script>
-            window.onload = function alteraLabel(){
+            window.onload = function alteraLabel() {
               var email_perfil = localStorage.getItem("email_funci");
-              //var email_perfil = atob(email_perfil64);
-              var nome_perfil = "Gustavo";
+              var email_perfil64 = btoa(email_perfil);
+              var userId = email_perfil64;
+              console.log(email_perfil);
+              console.log(userId);
+              return firebase.database().ref('/Funcionario/' + userId.getData + "/" + userId).once('value').then(function(snapshot) {
+                var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
+                console.log(username);
+                document.getElementById("nome_perfil").innerHTML = username;
+                document.getElementById("email_perfil").innerHTML = email_perfil;
+                // ...
+              });
 
               //var email_funci64 = btoa(email_funcionario);
-              document.getElementById("nome_perfil").innerHTML = nome_perfil;
-              document.getElementById("email_perfil").innerHTML = email_perfil;
-              
+
+
             }
+
           </script>
         </div>
       </div>
@@ -540,15 +550,15 @@
             </div>
             <br><br>
             <div class="input-data">
-              <input type="password" required>
-              <div class="underline"></div>
-              <label>Senha</label>
-            </div>
-            <br><br>
-            <div class="input-data">
               <input type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00');" required>
               <div class="underline"></div>
               <label>CPF</label>
+            </div>
+            <br><br>
+            <div class="input-data">
+              <input type="password" required>
+              <div class="underline"></div>
+              <label>Senha</label>
             </div>
             <br>
             <button type="submit" class="form__button"><i class="fa fa-pencil" aria-hidden="true"></i><i> Editar</i></button>
