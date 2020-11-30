@@ -1,15 +1,18 @@
 package com.cursoandroid.easychool_v4.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,14 +27,23 @@ import com.cursoandroid.easychool_v4.adapter.Adapter;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.config.RecyclerItemClickListener;
 import com.cursoandroid.easychool_v4.helper.Base64Custom;
+import com.cursoandroid.easychool_v4.helper.CalcularDistancia;
+import com.cursoandroid.easychool_v4.helper.Geocoding;
 import com.cursoandroid.easychool_v4.model.Escola;
+import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class PesquisaFrament extends Fragment {
@@ -41,11 +53,17 @@ public class PesquisaFrament extends Fragment {
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private DatabaseReference escolaRef;
-    private String emailEscola = autenticacao.getCurrentUser().getEmail();
-    private String idEscola = Base64Custom.codificarBase64(emailEscola);
-    private ValueEventListener valueEventListenerEscola;
+    private DatabaseReference filtrosRef;
+    private DatabaseReference responsavelRef;
+    private String emailResponsavel = autenticacao.getCurrentUser().getEmail();
+    private String idResponsavel = Base64Custom.codificarBase64(emailResponsavel);
+    private ResponsavelAluno responsavel;
     private Escola escolaSelecionada;
+    private Escola escola;
     private EditText edtPesquisa;
+    private Geocoding geocoding;
+    private Double latitude, longitude;
+    private BigDecimal bd;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,9 +73,18 @@ public class PesquisaFrament extends Fragment {
         edtPesquisa = root.findViewById(R.id.txt_pesquisa);
 
         escolaRef = firebaseRef.child("Escola");
+        filtrosRef = firebaseRef.child("FiltrosPesquisa");
+        responsavelRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
 
-        recuperarEscolas();
+        responsavel = new ResponsavelAluno();
+
+        //recuperarEscolas();
+
+        //Toast.makeText(getActivity(), "tamanho lista = " +listaEscolas.size(), Toast.LENGTH_SHORT).show();
+
         pesquisa();
+        recuperarDadosUser();
+        //escolasFiltros();
 
         //Configurar Adapter
         adapter = new Adapter(listaEscolas);
@@ -101,7 +128,7 @@ public class PesquisaFrament extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        recuperarEscolas();
+        //recuperarEscolas();
     }
 
     @Override
@@ -111,7 +138,7 @@ public class PesquisaFrament extends Fragment {
     }
 
     public void recuperarEscolas(){
-        valueEventListenerEscola = escolaRef.addValueEventListener(new ValueEventListener() {
+        escolaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaEscolas.clear();
@@ -124,6 +151,10 @@ public class PesquisaFrament extends Fragment {
                     listaEscolas.add(escola);
                 }
 
+                //Toast.makeText(getActivity(), "tamanho lista = " +listaEscolas.size(), Toast.LENGTH_SHORT).show();
+
+                escolasFiltros();
+
                 adapter.notifyDataSetChanged();
             }
 
@@ -132,6 +163,35 @@ public class PesquisaFrament extends Fragment {
 
             }
         });
+    }
+
+    public void escolasFiltros(){
+        List<Escola> listaEscolasFiltro = new ArrayList<>();
+
+        for(Escola escola : listaEscolas){
+            String enderecoEscola = "Rua: " +escola.getRua()+ ", " +String.valueOf(escola.getNumero())+ ", " +escola.getBairro()+ ", " +escola.getCidade()+ ", " +escola.getUf().toLowerCase();
+
+            geocoding = new Geocoding(getActivity(), enderecoEscola);
+
+            escola.setLatitude(geocoding.getLatitude());
+            escola.setLongitude(geocoding.getLongitude());
+
+            Double distancia = CalcularDistancia.CalcularDistancia(latitude, longitude, escola.getLatitude(), escola.getLongitude());
+
+            bd = new BigDecimal(distancia).setScale(2, RoundingMode.HALF_EVEN);
+
+            escola.setDistancia(bd.doubleValue());
+
+            listaEscolasFiltro.add(escola);
+
+            Log.d("teste", "Escola: "+escola.getNome()+ " Distancia: " +escola.getDistancia());
+        }
+
+        Collections.sort(listaEscolasFiltro);
+
+        adapter = new Adapter(listaEscolasFiltro);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     public void pesquisa(){
@@ -152,7 +212,6 @@ public class PesquisaFrament extends Fragment {
 
                     if(nomeEscola.contains(pesquisa) || enderecoEscola.contains(pesquisa)){
                         listaEscolaBusca.add(escola);
-
                     }
                 }
 
@@ -163,6 +222,27 @@ public class PesquisaFrament extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    public void recuperarDadosUser(){
+        responsavelRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                responsavel.setNome((String) dataSnapshot.child("nome").getValue());
+                responsavel.setTelefone((String) dataSnapshot.child("telefone").getValue());
+                responsavel.setCpf((String) dataSnapshot.child("cpf").getValue());
+                responsavel.setRg((String) dataSnapshot.child("rg").getValue());
+
+                latitude = (Double) dataSnapshot.child("latitude").getValue();
+                longitude = (Double) dataSnapshot.child("longitude").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
