@@ -162,31 +162,36 @@ public class PesquisaFrament extends Fragment {
     public void escolasFiltros(){
         List<Escola> listaEscolasFiltro = new ArrayList<>();
 
-        for(Escola escola : listaEscolas){
-            String enderecoEscola = "Rua: " +escola.getRua()+ ", " +String.valueOf(escola.getNumero())+ ", " +escola.getBairro()+ ", " +escola.getCidade()+ ", " +escola.getUf().toLowerCase();
+        try{
+            for(Escola escola : listaEscolas){
+                String enderecoEscola = "Rua: " +escola.getRua()+ ", " +String.valueOf(escola.getNumero())+ ", " +escola.getBairro()+ ", " +escola.getCidade()+ ", " +escola.getUf().toLowerCase();
 
-            geocoding = new Geocoding(getActivity(), enderecoEscola);
+                geocoding = new Geocoding(getActivity(), enderecoEscola);
 
-            escola.setLatitude(geocoding.getLatitude());
-            escola.setLongitude(geocoding.getLongitude());
+                escola.setLatitude(geocoding.getLatitude());
+                escola.setLongitude(geocoding.getLongitude());
 
-            Double km = CalcularDistancia.CalcularDistancia(latitude, longitude, escola.getLatitude(), escola.getLongitude());
+                Double km = CalcularDistancia.CalcularDistancia(latitude, longitude, escola.getLatitude(), escola.getLongitude());
 
-            bd = new BigDecimal(km).setScale(2, RoundingMode.HALF_EVEN);
-            distancia.add(bd.doubleValue());
+                bd = new BigDecimal(km).setScale(2, RoundingMode.HALF_EVEN);
+                //distancia.add(bd.doubleValue());
 
-            escola.setDistancia(bd.doubleValue());
+                escola.setDistancia(bd.doubleValue());
 
-            listaEscolasFiltro.add(escola);
+                listaEscolasFiltro.add(escola);
+                distancia.add(escola.getDistancia());
 
-            //Log.d("teste", "Escola: "+escola.getNome()+ " Distancia: " +escola.getDistancia());
+                //Log.d("teste", "Escola: "+escola.getNome()+ " Distancia: " +escola.getDistancia());
+            }
+            Collections.sort(listaEscolasFiltro);
+            Collections.sort(distancia);
+
+            adapter = new Adapter(listaEscolasFiltro, distancia);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        Collections.sort(listaEscolasFiltro);
-
-        adapter = new Adapter(listaEscolasFiltro, distancia);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 
     public void pesquisa(){
