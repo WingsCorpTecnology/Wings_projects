@@ -43,6 +43,7 @@ public class Geocoding {
                 Address endereco = listaEndereco.get(0);
 
                 setEndereco(endereco.getAddressLine(0));
+                setCep(endereco.getPostalCode());
             }
         } catch (IOException e) {
             e.printStackTrace();
