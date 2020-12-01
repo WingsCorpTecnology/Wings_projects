@@ -88,13 +88,23 @@
               var userId = email_perfil64;
               console.log(email_perfil);
               console.log(userId);
-              return firebase.database().ref('/Funcionario/' + userId.getData + "/" + userId).once('value').then(function(snapshot) {
+              return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
                 var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
                 console.log(username);
                 document.getElementById("nome_perfil").innerHTML = username;
                 document.getElementById("email_perfil").innerHTML = email_perfil;
                 // ...
               });
+
+              const storage = firebase.storage();
+
+              storage.ref(userId).getDownloadURL()
+                .then((url) => {
+                  alert("sucesso")
+                  const image = document.querySelector('#imagem_perfil')
+                  image.src = url
+                  // Do something with the URL ...
+                })
 
               //var email_funci64 = btoa(email_funcionario);
 

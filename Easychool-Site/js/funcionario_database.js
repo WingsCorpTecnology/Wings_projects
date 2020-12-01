@@ -4,11 +4,14 @@ const funcionario_database = {};
         let funcionario_id = false;
 
         async function new_funcionario(nome, email, cpf) {
+                 var teste = localStorage.getItem("id_item");
+                var teste64 = btoa(teste);
+                
                 const funcionario_data = {
                         email: email,
                         nome: nome,
                         cpf: cpf,
-                        //senha: senha
+                        escola: teste64
                 };
 
                 //if (!escola_id)
@@ -29,13 +32,9 @@ const funcionario_database = {};
                 var emailBase64 = btoa(emailKey);
 
                 console.log(emailBase64);
-                
-                var teste = localStorage.getItem("id_item");
-                
-                var teste64 = btoa(teste)
 
                 let updates = {};
-                updates['/Funcionario/' + teste64 + '/' + emailBase64] = funcionario_data;
+                updates['/Funcionario/' + emailBase64] = funcionario_data;
 
                 let funcionario_ref = firebase.database().ref();
 
