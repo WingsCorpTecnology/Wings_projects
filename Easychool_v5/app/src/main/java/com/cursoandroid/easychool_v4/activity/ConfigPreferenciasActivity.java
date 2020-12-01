@@ -162,13 +162,13 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        alertCancelar();
+        //alertCancelar();
         if(verificarCampos()){
             alertCancelar();
-
         }
-
-
+        else{
+            super.onBackPressed();
+        }
     }
 
     public void recuperarEndereco(){
@@ -214,6 +214,9 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
     }
 
     public boolean verificarCampos(){
+        if(!edtCep.getText().toString().isEmpty()){
+            return true;
+        }
         if(!edtEstado.getText().toString().isEmpty()){
             return true;
         }
