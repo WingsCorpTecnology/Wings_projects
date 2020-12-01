@@ -51,7 +51,7 @@
         android:gravity="center"
         android:text="Selecione os tipos de escola das opções abaixo:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/cb_ber_"
+        app:layout_constraintBottom_toTopOf="@+id/cb_escola_muni"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_distancias" />
@@ -69,31 +69,31 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <CheckBox
-        android:id="@+id/cb_ber_"
+        android:id="@+id/cb_escola_muni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/border"
         android:text="Escolas Municipais"
         android:textColor="@color/text"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/cb_ber_3"
+        app:layout_constraintBottom_toTopOf="@+id/cb_escola_esta"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <CheckBox
-        android:id="@+id/cb_ber_3"
+        android:id="@+id/cb_escola_esta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/border"
         android:text="Escolas Estaduais"
         android:textColor="@color/text"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/cb_ber_4"
-        app:layout_constraintStart_toStartOf="@+id/cb_ber_"
-        app:layout_constraintTop_toBottomOf="@+id/cb_ber_" />
+        app:layout_constraintBottom_toTopOf="@+id/cb_escola_fed"
+        app:layout_constraintStart_toStartOf="@+id/cb_escola_muni"
+        app:layout_constraintTop_toBottomOf="@+id/cb_escola_muni" />
 
     <CheckBox
-        android:id="@+id/cb_ber_4"
+        android:id="@+id/cb_escola_fed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/border"
@@ -101,8 +101,8 @@
         android:textColor="@color/text"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_salvar_filtros"
-        app:layout_constraintStart_toStartOf="@+id/cb_ber_3"
-        app:layout_constraintTop_toBottomOf="@+id/cb_ber_3" />
+        app:layout_constraintStart_toStartOf="@+id/cb_escola_esta"
+        app:layout_constraintTop_toBottomOf="@+id/cb_escola_esta" />
 
     <Button
         android:id="@+id/btn_salvar_filtros"
@@ -111,10 +111,11 @@
         android:background="@drawable/botao_customizado"
         android:text="@string/salvar"
         android:textSize="18sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cb_ber_4" />
+        app:layout_constraintTop_toBottomOf="@+id/cb_escola_fed" />
 
     <Spinner
         android:id="@+id/spinner_distancias"
@@ -130,7 +131,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_salvar_filtros"
-        app:layout_constraintStart_toStartOf="@+id/cb_ber_4"
+        app:layout_constraintStart_toStartOf="@+id/cb_escola_fed"
         app:layout_constraintTop_toTopOf="@+id/btn_salvar_filtros"
         app:srcCompat="@drawable/ic_baseline_navigate_before_24" />
 

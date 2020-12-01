@@ -4,17 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.cursoandroid.easychool_v4.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ConfigFiltrosPesquisaDistanciaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Spinner spinnerDistancia;
-    ImageView preview;
+    private Spinner spinnerDistancia;
+    private ImageView preview;
+    private List<String> filtrosNiveis = new ArrayList<>();
+    private boolean[] filtrosNiveisBool;
+    private Button salvar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +31,7 @@ public class ConfigFiltrosPesquisaDistanciaActivity extends AppCompatActivity im
 
         spinnerDistancia = findViewById(R.id.spinner_distancias);
         preview = findViewById(R.id.img_preview);
+        salvar = findViewById(R.id.btn_salvar_filtros);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.distancias, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -37,6 +46,13 @@ public class ConfigFiltrosPesquisaDistanciaActivity extends AppCompatActivity im
             }
         });
 
+        salvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recuperarFiltros();
+            }
+        });
+
         getSupportActionBar().hide();
     }
 
@@ -48,5 +64,18 @@ public class ConfigFiltrosPesquisaDistanciaActivity extends AppCompatActivity im
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    public void recuperarFiltros(){
+        filtrosNiveis = getIntent().getStringArrayListExtra("listaFiltros");
+
+        filtrosNiveisBool = new boolean[filtrosNiveisBool.length];
+
+        filtrosNiveisBool = getIntent().getBooleanArrayExtra("listaFiltrosBool");
+
+        for(int i = 0; i < filtrosNiveis.size(); i++) {
+            Log.d("teste", filtrosNiveis.get(i));
+            Log.d("teste", String.valueOf(filtrosNiveisBool[i]));
+        }
     }
 }

@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -66,6 +67,11 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ConfigFiltrosPesquisaDistanciaActivity.class);
+
+                intent.putExtra("listaFiltros", (Parcelable) filtros);
+                intent.putExtra("listaFiltrosBool", (Parcelable) filtrosBool);
+
                 startActivity(new Intent(getApplicationContext(), ConfigFiltrosPesquisaAnosActivity.class));
                 finish();
             }
