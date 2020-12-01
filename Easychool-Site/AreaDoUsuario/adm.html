@@ -88,6 +88,29 @@
               var userId = email_perfil64;
               console.log(email_perfil);
               console.log(userId);
+              
+              console.log("Teste: " + userId);
+              
+              var storageRef = firebase.storage();
+
+              var starsRef = storageRef.ref(userId);
+
+              // Get the download URL
+              starsRef.getDownloadURL().then(function(url) {
+                // Insert url into an <img> tag to "download"
+                console.log(url)
+                const image = document.querySelector('#imagem_perfil')
+                  image.src = url
+              }).catch(function(error) {
+                console.log(error)
+
+                // A full list of error codes is available at
+                // https://firebase.google.com/docs/storage/web/handle-errors
+
+              });
+
+              console.log("Teste");
+              
               return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
                 var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
                 console.log(username);
@@ -95,7 +118,11 @@
                 document.getElementById("email_perfil").innerHTML = email_perfil;
                 // ...
               });
+
               
+
+
+
               //var email_funci64 = btoa(email_funcionario);
 
 
