@@ -149,7 +149,7 @@ public class PesquisaFrament extends Fragment {
                     listaEscolas.add(escola);
                 }
 
-                //escolasFiltros();
+                escolasFiltros();
 
                 adapter.notifyDataSetChanged();
             }
