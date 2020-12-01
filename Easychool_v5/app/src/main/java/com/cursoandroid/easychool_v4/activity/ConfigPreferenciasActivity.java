@@ -160,6 +160,17 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
+    @Override
+    public void onBackPressed() {
+        alertCancelar();
+        if(verificarCampos()){
+            alertCancelar();
+
+        }
+
+
+    }
+
     public void recuperarEndereco(){
         usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -170,27 +181,29 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
                 Double latitude = (Double) dataSnapshot.child("latitude").getValue();
                 Double longitude = (Double) dataSnapshot.child("longitude").getValue();
 
-                geocoding = new Geocoding(getApplicationContext(), latitude, longitude);
-                enderecoCompleto = geocoding.getEndereco();
-                cep = geocoding.getCep();
+                if(latitude != null || longitude != null) {
+                    geocoding = new Geocoding(getApplicationContext(), latitude, longitude);
+                    enderecoCompleto = geocoding.getEndereco();
+                    cep = geocoding.getCep();
 
-                String[] rua = enderecoCompleto.split(",");
+                    String[] rua = enderecoCompleto.split(",");
 
-                edtRua.setText(rua[0]);
+                    edtRua.setText(rua[0]);
 
-                String[] numero = rua[1].split("-");
+                    String[] numero = rua[1].split("-");
 
-                edtNumero.setText(numero[0].trim());
-                edtBairro.setText(numero[1].trim());
+                    edtNumero.setText(numero[0].trim());
+                    edtBairro.setText(numero[1].trim());
 
-                String[] outroEnd = enderecoCompleto.split(rua[1]);
-                String[] outroEnd2 = outroEnd[1].split(",");
-                String[] cidade = outroEnd2[1].split("-");
+                    String[] outroEnd = enderecoCompleto.split(rua[1]);
+                    String[] outroEnd2 = outroEnd[1].split(",");
+                    String[] cidade = outroEnd2[1].split("-");
 
-                edtCidade.setText(cidade[0].trim());
-                edtEstado.setText(cidade[1].trim());
+                    edtCidade.setText(cidade[0].trim());
+                    edtEstado.setText(cidade[1].trim());
 
-                edtCep.setText(cep);
+                    edtCep.setText(cep);
+                }
             }
 
             @Override
@@ -200,23 +213,25 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
         });
     }
 
-    /*public void verificarCampos(){
+    public boolean verificarCampos(){
         if(!edtEstado.getText().toString().isEmpty()){
-
+            return true;
         }
         if(!edtCidade.getText().toString().isEmpty()){
-
+            return true;
         }
         if(!edtBairro.getText().toString().isEmpty()){
-
+            return true;
         }
         if(!edtRua.getText().toString().isEmpty()){
-
+            return true;
         }
         if(!edtNumero.getText().toString().isEmpty()){
-
+            return true;
         }
-    }*/
+
+        return false;
+    }
 
     public void confirmarEndereco(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -251,5 +266,31 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
 
     public void mensagemAlteracoesSucesso(){
         Toast.makeText(this, "Alterações salvas com sucesso", Toast.LENGTH_SHORT).show();
+    }
+
+    public void alertCancelar(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        //Configurar AlertDialog
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setMessage("Você deseja realmente voltar? As informações digitadas poderão ser perdidas");
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alert = alertDialog.create();
+        alert.show();
     }
 }
