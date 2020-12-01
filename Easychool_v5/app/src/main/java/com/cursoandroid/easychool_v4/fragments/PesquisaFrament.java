@@ -81,6 +81,7 @@ public class PesquisaFrament extends Fragment {
 
         responsavel = new ResponsavelAluno();
 
+        //recuperarEscolas();
         pesquisa();
         recuperarDadosUser();
 
