@@ -1,8 +1,10 @@
 package com.cursoandroid.easychool_v4.model;
 
+import com.cursoandroid.easychool_v4.helper.CalcularDistancia;
+
 import java.io.Serializable;
 
-public class Escola implements Serializable {
+public class Escola implements Serializable, Comparable<Escola> {
     private String id;
     private String nome;
     private String email;
@@ -15,8 +17,15 @@ public class Escola implements Serializable {
     private String complemento;
     private String imgPerfil;
     private String cnpj;
+    private Double latitude;
+    private Double longitude;
+    private Double distancia;
 
     public Escola() {
+    }
+
+    public Escola(Double latitude, Double longitude){
+        distancia = CalcularDistancia.CalcularDistancia(latitude, longitude, this.latitude, this.longitude);
     }
 
     public String getId() {
@@ -113,5 +122,40 @@ public class Escola implements Serializable {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(Double distancia) {
+        this.distancia = distancia;
+    }
+
+    @Override
+    public int compareTo(Escola escola) {
+        if(this.distancia < escola.getDistancia()){
+            return -1;
+        }
+        if(this.distancia > escola.getDistancia()){
+            return 1;
+        }
+        return 0;
     }
 }

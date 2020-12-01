@@ -4,11 +4,13 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,8 +18,12 @@ import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.helper.Geocoding;
+import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class ConfigPreferenciasActivity extends AppCompatActivity {
     private Button btnSalvar;
@@ -30,6 +36,7 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
     private String enderecoCompleto, estado, rua, numero, cidade, bairro;
     private Double latitude, longitude;
     private Geocoding geocoding;
+    private ResponsavelAluno responsavel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,9 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
         edtBairro = findViewById(R.id.edtBairro);
 
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
+        responsavel = new ResponsavelAluno();
+
+        recuperarEndereco();
 
         edtEstado.addTextChangedListener(new TextWatcher() {
             @Override
@@ -148,6 +158,46 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().hide();
+    }
+
+    public void recuperarEndereco(){
+        usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String cep;
+                String enderecoCompleto;
+
+                Double latitude = (Double) dataSnapshot.child("latitude").getValue();
+                Double longitude = (Double) dataSnapshot.child("longitude").getValue();
+
+                geocoding = new Geocoding(getApplicationContext(), latitude, longitude);
+                enderecoCompleto = geocoding.getEndereco();
+                cep = geocoding.getCep();
+
+                String[] rua = enderecoCompleto.split(",");
+
+                edtRua.setText(rua[0]);
+
+                String[] numero = rua[1].split("-");
+
+                edtNumero.setText(numero[0].trim());
+                edtBairro.setText(numero[1].trim());
+
+                String[] outroEnd = enderecoCompleto.split(rua[1]);
+                String[] outroEnd2 = outroEnd[1].split(",");
+                String[] cidade = outroEnd2[1].split("-");
+
+                edtCidade.setText(cidade[0].trim());
+                edtEstado.setText(cidade[1].trim());
+
+                edtCep.setText(cep);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /*public void verificarCampos(){
