@@ -50,7 +50,6 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         edtRg = findViewById(R.id.edtRg);
         //edtEmail = findViewById(R.id.edtEmail);
         edtNewSenha = findViewById(R.id.edtSenhaNova);
-        edtRg = findViewById(R.id.edtRg);
         btnSalvar = findViewById(R.id.btn_salvar_filtros);
 
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
@@ -88,6 +87,37 @@ public class ConfigPerfilActivity extends AppCompatActivity {
                 confirmarAlteracoes();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //alertCancelar();
+        if(verificarCampos()){
+            alertCancelar();
+        }
+        else{
+            super.onBackPressed();
+        }
+    }
+
+    public boolean verificarCampos(){
+        if(!edtNome.getText().toString().isEmpty()){
+            return true;
+        }
+        if(!edtTelefone.getText().toString().isEmpty()){
+            return true;
+        }
+        if(!edtCpf.getText().toString().isEmpty()){
+            return true;
+        }
+        if(!edtRg.getText().toString().isEmpty()){
+            return true;
+        }
+        if(!edtNewSenha.getText().toString().isEmpty()){
+            return true;
+        }
+
+        return false;
     }
 
     public boolean validarCpf(){
@@ -200,6 +230,32 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         });
 
         alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+    public void alertCancelar(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        //Configurar AlertDialog
+        alertDialog.setTitle("Voltar sem salvar");
+        alertDialog.setMessage("Você deseja realmente voltar? As informações digitadas poderão ser perdidas");
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 

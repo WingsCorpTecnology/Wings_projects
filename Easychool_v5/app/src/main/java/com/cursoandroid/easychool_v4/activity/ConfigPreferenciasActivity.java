@@ -275,7 +275,7 @@ public class ConfigPreferenciasActivity extends AppCompatActivity {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
         //Configurar AlertDialog
-        alertDialog.setTitle("Cancelar");
+        alertDialog.setTitle("Voltar sem salvar");
         alertDialog.setMessage("Você deseja realmente voltar? As informações digitadas poderão ser perdidas");
         alertDialog.setCancelable(false);
 
