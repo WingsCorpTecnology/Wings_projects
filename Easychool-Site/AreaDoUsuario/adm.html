@@ -21,6 +21,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
   <script src="../js/firebase.js"></script>
   <div class="container">
@@ -52,6 +53,11 @@
       <ul>
         <li>
           <span><i class="fa fa-home" aria-hidden="true"></i></span>
+          <script>
+            function apresentar(){
+              alert("Home");
+            }
+          </script>
           <h3>Home</h3>
         </li>
         <li>
@@ -88,9 +94,9 @@
               var userId = email_perfil64;
               console.log(email_perfil);
               console.log(userId);
-              
+
               console.log("Teste: " + userId);
-              
+
               var storageRef = firebase.storage();
 
               var starsRef = storageRef.ref(userId);
@@ -100,7 +106,7 @@
                 // Insert url into an <img> tag to "download"
                 console.log(url)
                 const image = document.querySelector('#imagem_perfil')
-                  image.src = url
+                image.src = url
               }).catch(function(error) {
                 console.log(error)
 
@@ -110,16 +116,19 @@
               });
 
               console.log("Teste");
-              
+
               return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
                 var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
+                var cpf = (snapshot.val() && snapshot.val().cpf) || 'Anonymous';
                 console.log(username);
                 document.getElementById("nome_perfil").innerHTML = username;
+                document.getElementById("nome_editar").value = username;
+                document.getElementById("cpf_editar").value = cpf;
                 document.getElementById("email_perfil").innerHTML = email_perfil;
                 // ...
               });
 
-              
+
 
 
 
@@ -571,24 +580,46 @@
           <div class="wrapper3">
             <!-- <form action="#"> -->
             <div class="input-data">
-              <input type="text" required>
+              <input type="text" id="nome_editar" required>
               <div class="underline"></div>
               <label>Nome</label>
             </div>
             <br><br>
             <div class="input-data">
-              <input type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00');" required>
+              <input type="text" id="cpf_editar" class="form-control" onkeypress="$(this).mask('000.000.000-00');" required>
               <div class="underline"></div>
               <label>CPF</label>
             </div>
             <br><br>
             <div class="input-data">
-              <input type="password" required>
+              <input type="password" id="senha_editar" required>
               <div class="underline"></div>
               <label>Senha</label>
             </div>
             <br>
-            <button type="submit" class="form__button"><i class="fa fa-pencil" aria-hidden="true"></i><i> Editar</i></button>
+            <button type="submit" class="form__button" onclick="editar()"><i class="fa fa-pencil" aria-hidden="true"></i><i> Editar</i></button>
+            <script>
+              function editar() {
+                var nome = $('#nome_editar').val();
+                var cpf = $('#cpf_editar').val();
+                var nova_senha = $('#senha_editar').val();
+                
+                var user = firebase.auth().currentUser;
+                
+                console.log(user);
+
+                user.updatePassword(nova_senha).then(function() {
+                  // Update successful.
+                }).catch(function(error) {
+                  // An error happened.
+                  console.log(error);
+                });
+                alert(nome);
+                alert(cpf);
+                alert(nova_senha);
+              }
+
+            </script>
 
             <!-- </form> -->
           </div>
