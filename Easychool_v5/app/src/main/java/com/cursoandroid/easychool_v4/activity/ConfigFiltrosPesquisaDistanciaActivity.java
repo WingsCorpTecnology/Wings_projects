@@ -14,6 +14,7 @@ import android.widget.Spinner;
 
 import com.cursoandroid.easychool_v4.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ConfigFiltrosPesquisaDistanciaActivity extends AppCompatActivity im
     private Spinner spinnerDistancia;
     private ImageView preview;
     private List<String> filtrosNiveis = new ArrayList<>();
-    private boolean[] filtrosNiveisBool;
+    private List<Boolean> filtrosNiveisBool = new ArrayList<>();
     private Button salvar;
 
     @Override
@@ -67,15 +68,15 @@ public class ConfigFiltrosPesquisaDistanciaActivity extends AppCompatActivity im
     }
 
     public void recuperarFiltros(){
-        filtrosNiveis = getIntent().getStringArrayListExtra("listaFiltros");
+        for(int i = 0; i < 6; i++) {
+            filtrosNiveis.add((String) getIntent().getSerializableExtra("listaFiltros" +i));
 
-        filtrosNiveisBool = new boolean[filtrosNiveisBool.length];
-
-        filtrosNiveisBool = getIntent().getBooleanArrayExtra("listaFiltrosBool");
+            filtrosNiveisBool.add((Boolean) getIntent().getSerializableExtra("listaFiltrosBool" +i));
+        }
 
         for(int i = 0; i < filtrosNiveis.size(); i++) {
             Log.d("teste", filtrosNiveis.get(i));
-            Log.d("teste", String.valueOf(filtrosNiveisBool[i]));
+            Log.d("teste", String.valueOf(filtrosNiveisBool.get(i)));
         }
     }
 }

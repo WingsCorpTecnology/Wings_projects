@@ -69,8 +69,10 @@ public class ConfigFiltrosPesquisaActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ConfigFiltrosPesquisaDistanciaActivity.class);
 
-                intent.putExtra("listaFiltros", (Parcelable) filtros);
-                intent.putExtra("listaFiltrosBool", (Parcelable) filtrosBool);
+                for(int i = 0; i < filtros.size(); i++) {
+                    intent.putExtra("listaFiltros" +i, filtros.get(i));
+                    intent.putExtra("listaFiltrosBool" +i, filtrosBool.get(i));
+                }
 
                 startActivity(new Intent(getApplicationContext(), ConfigFiltrosPesquisaAnosActivity.class));
                 finish();
