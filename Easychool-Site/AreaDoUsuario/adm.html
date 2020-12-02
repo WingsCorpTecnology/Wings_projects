@@ -191,6 +191,44 @@
     <div class="main">
       <section class="profile tabs">
         <h1>Funcionários</h1>
+        <div class="wrapper4">
+          <div class="search-input">
+            <a href="" target="_blank" hidden></a>
+            <input type="text" placeholder="Pesquise Funcionários..">
+            <div class="autocom-box"> 
+              <!-- here list are inserted from javascript -->
+            </div>
+            <a href="#popup"><div class="icon"><i class="fas fa-search"></i></div></a>
+          </div>
+        </div>
+        <!-- <div class="modal" id="modal">
+          <div class="modal__content">
+            <a href="#" class="modal__close">&times;</a>
+            <h2 class="modal__heading">Desi Developer</h2>
+            <p class="modal__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis possimus inventore suscipit mollitia, odit aliquam laudantium praesentium porro hic asperiores expedita obcaecati earum ullam, nisi laborum accusamus, id placeat tenetur?
+            Consequatur, neque. Explicabo, reiciendis quia distinctio eius facere pariatur expedita, amet hic alias illum harum inventore, ullam tempore quos. Quod, repellat ratione culpa qui harum blanditiis atque voluptatem iste id.
+            Rerum veniam ipsum quisquam mollitia vel fuga dicta tempora. Magni, labore beatae eaque suscipit mollitia pariatur impedit accusantium explicabo aspernatur adipisci sapiente eveniet qui facilis in voluptas nisi! Ipsum, praesentium!
+            Quos, ex. Ipsum asperiores quasi, nam atque voluptatibus reprehenderit repellat fuga pariatur consequatur quae hic, numquam commodi illo aut. Laborum et natus magni illum tenetur est, minus eligendi quisquam facilis.
+            Quis enim sit facilis, dolor, ab quas sint sapiente ut voluptatibus excepturi dolorum, consequuntur doloremque error facere? Nisi vel placeat magni asperiores, id, aliquid quisquam eos et eum repellat molestiae.</p>
+          </div>
+       </div> -->
+       <div class="popup" id="popup">
+         <div class="popup-inner">
+           <div class="popup-photo">
+             <img src="img/img2.png" alt="">
+           </div>
+           <div class="popup-text">
+             <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+             <p>
+               Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Iste culpa sint arcshitecto tempora porro quidem corporis 
+                asperiores accusantium ea similique pariatur, quisquam expedita, 
+                neque ullam? Eos laborum omnis facere aspernatur!
+             </p>
+           </div>
+         </div>
+         <a class="popup-close" href="#">X</a>
+       </div>
         <div class="userpost">
           <div class="posts">
             <span><i class="fa fa-plus"></i></span>
@@ -218,11 +256,13 @@
         <div class="wrapper2">
           <div class="header2">
             <div class="title">
-              Cadastrar Turmas
+              Turmas
             </div>
 
             <div class="search_box">
               <input type="text" id="search_input" placeholder="Procurar turmas...">
+              <br><br>
+                <button type="submit" class="form__button3"><i class="fa fa-plus" aria-hidden="true"></i></i>&nbsp;Cadastrar</i></button>
             </div>
           </div>
 
@@ -232,16 +272,19 @@
                 <li>
                   <div class="item">
                     <div class="name">
-                      <span>NAME</span>
+                      <span>Série</span>
                     </div>
                     <div class="phone">
-                      <span>PHONE</span>
+                      <span>Total de vagas</span>
                     </div>
                     <div class="issue">
-                      <span>ISSUE</span>
+                      <span>Vagas ocupadas</span>
                     </div>
                     <div class="status">
-                      <span>STATUS</span>
+                      <span>Período</span>
+                    </div>
+                    <div class="status">
+                      <span>Editar</span>
                     </div>
                   </div>
                 </li>
@@ -252,16 +295,19 @@
                 <li>
                   <div class="item">
                     <div class="name">
-                      <span>Alex</span>
+                      <span>9° Ano</span>
                     </div>
                     <div class="phone">
-                      <span>+1 111 222 333</span>
+                      <span>80</span>
                     </div>
                     <div class="issue">
-                      <span>Lorem ipsum dolor sit amet.</span>
+                      <span>50</span>
                     </div>
                     <div class="status">
-                      <span class="open">Open</span>
+                      <span class="open">Tarde</span>
+                    </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
                 </li>
@@ -278,6 +324,9 @@
                     </div>
                     <div class="status">
                       <span class="reopened">Reopened</span>
+                    </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
                 </li>
@@ -295,6 +344,9 @@
                     <div class="status">
                       <span class="fixed">Fixed</span>
                     </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                    </div>
                   </div>
                 </li>
                 <li>
@@ -311,6 +363,9 @@
                     <div class="status">
                       <span class="closed">Closed</span>
                     </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                    </div>
                   </div>
                 </li>
                 <li>
@@ -326,6 +381,9 @@
                     </div>
                     <div class="status">
                       <span class="hold">Hold</span>
+                    </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
                 </li>
@@ -343,6 +401,9 @@
                     <div class="status">
                       <span class="open">open</span>
                     </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                    </div>
                   </div>
                 </li>
                 <li>
@@ -358,6 +419,9 @@
                     </div>
                     <div class="status">
                       <span class="open">Open</span>
+                    </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
                 </li>
@@ -375,6 +439,9 @@
                     <div class="status">
                       <span class="canceled">Canceled</span>
                     </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                    </div>
                   </div>
                 </li>
                 <li>
@@ -390,6 +457,9 @@
                     </div>
                     <div class="status">
                       <span class="open">Open</span>
+                    </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
                 </li>
@@ -407,6 +477,9 @@
                     <div class="status">
                       <span class="hold">Hold</span>
                     </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                    </div>
                   </div>
                 </li>
                 <li>
@@ -422,6 +495,9 @@
                     </div>
                     <div class="status">
                       <span class="fixed">Fixed</span>
+                    </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
                 </li>
@@ -439,6 +515,9 @@
                     <div class="status">
                       <span class="closed">Closed</span>
                     </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                    </div>
                   </div>
                 </li>
                 <li>
@@ -454,6 +533,9 @@
                     </div>
                     <div class="status">
                       <span class="hold">Hold</span>
+                    </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
                 </li>
@@ -471,6 +553,9 @@
                     <div class="status">
                       <span class="reopened">Reopened</span>
                     </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                    </div>
                   </div>
                 </li>
                 <li>
@@ -486,6 +571,9 @@
                     </div>
                     <div class="status">
                       <span class="hold">Hold</span>
+                    </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
                 </li>
@@ -503,6 +591,9 @@
                     <div class="status">
                       <span class="closed">closed</span>
                     </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                    </div>
                   </div>
                 </li>
                 <li>
@@ -518,6 +609,9 @@
                     </div>
                     <div class="status">
                       <span class="canceled">Canceled</span>
+                    </div>
+                    <div class="status">
+                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
                 </li>
@@ -634,7 +728,10 @@
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="scripts.js"></script>
+  <script src="js/scriptFunc.js"></script>
+  <script src="js/scripts.js"></script>
+  <script src="js/suggestions.js"></script>
+  
   <script>
     const tbtn = document.querySelectorAll(".side-nav ul li");
     const tab = document.querySelectorAll(".tabs");
