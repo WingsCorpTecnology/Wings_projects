@@ -606,6 +606,7 @@
                 var nome = $('#nome_editar').val();
                 var cpf = $('#cpf_editar').val();
                 var nova_senha = $('#senha_editar').val();
+                var senha = localStorage.getItem("senha_funci");
                 
                 var user = firebase.auth().currentUser;
                 
