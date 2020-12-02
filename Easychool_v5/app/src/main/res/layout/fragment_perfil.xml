@@ -38,7 +38,7 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         android:background="@color/color_back"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,10 +48,10 @@
 
     </LinearLayout>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgPerfil"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"

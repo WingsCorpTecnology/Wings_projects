@@ -2,6 +2,7 @@ package com.cursoandroid.easychool_v4.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -18,9 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.activity.ConfigFiltrosPesquisaActivity;
@@ -29,10 +32,12 @@ import com.cursoandroid.easychool_v4.adapter.Adapter;
 import com.cursoandroid.easychool_v4.adapter.AdapterFiltros;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.helper.Geocoding;
+import com.cursoandroid.easychool_v4.helper.ResponsavelFirebase;
 import com.cursoandroid.easychool_v4.model.Escola;
 import com.cursoandroid.easychool_v4.model.NivelEducacao;
 import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,6 +62,7 @@ public class PerfilFragment extends Fragment {
     private AdapterFiltros adapter;
     private List<String> filtros = new ArrayList<>();
     private RecyclerView recyclerView;
+    private ImageView imgFoto;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_perfil, container, false);
@@ -71,6 +77,7 @@ public class PerfilFragment extends Fragment {
         btnUpdate = root.findViewById(R.id.btnAlterar);
         btnAddFiltros = root.findViewById(R.id.btnAddFiltros);
         recyclerView = root.findViewById(R.id.recyclerView);
+        imgFoto = root.findViewById(R.id.imgPerfil);
 
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
         filtrosRef = firebaseRef.child("FiltrosPesquisa").child(idResponsavel);
@@ -148,6 +155,16 @@ public class PerfilFragment extends Fragment {
 
             }
         });
+        //Recuperando dados do Usuário
+        FirebaseUser usuario = ResponsavelFirebase.getUsuarioAtual();
+        Uri url = usuario.getPhotoUrl();
+
+        if(url != null){
+            Glide.with(getActivity()).load(url).into(imgFoto);
+        }
+        else{
+            imgFoto.setImageResource(R.drawable.perfil);
+        }
     }
 
     public void recuperarFiltrosUser(){

@@ -91,10 +91,6 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         imgAddFoto = findViewById(R.id.imgAddImgPerfil);
         imgFoto = findViewById(R.id.imgPerfil);
 
-
-
-
-
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
         responsavel = new ResponsavelAluno();
 
