@@ -10,4 +10,5 @@
     <color name="text_back">#39000000</color>
     <color name="colorTextWhite">#FFFFFF</color>
     <color name="color_back">#02950A</color>
+    <color name="cinza_claro">#EEEEEE</color>
 </resources>
