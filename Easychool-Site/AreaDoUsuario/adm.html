@@ -27,6 +27,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
   <script src="../js/firebase.js"></script>
+  <script src="../js/funcionario_database.js"></script>
   <div class="container">
     <header>
       <div class="logo">
@@ -57,9 +58,10 @@
         <li>
           <span><i class="fa fa-home" aria-hidden="true"></i></span>
           <script>
-            function apresentar(){
+            function apresentar() {
               alert("Home");
             }
+
           </script>
           <h3>Home</h3>
         </li>
@@ -119,11 +121,12 @@
               return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
                 var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
                 var cpf = (snapshot.val() && snapshot.val().cpf) || 'Anonymous';
-                console.log(username);
+                var escola = (snapshot.val() && snapshot.val().escola) || 'Anonymous';
                 document.getElementById("nome_perfil").innerHTML = username;
                 document.getElementById("nome_editar").value = username;
                 document.getElementById("cpf_editar").value = cpf;
                 document.getElementById("email_perfil").innerHTML = email_perfil;
+                localStorage.setItem("escola_id", escola);
                 // ...
               });
 
@@ -191,10 +194,12 @@
           <div class="search-input">
             <a href="" target="_blank" hidden></a>
             <input type="text" placeholder="Pesquise Funcionários..">
-            <div class="autocom-box"> 
+            <div class="autocom-box">
               <!-- here list are inserted from javascript -->
             </div>
-            <a href="#popup"><div class="icon"><i class="fas fa-search"></i></div></a>
+            <a href="#popup">
+              <div class="icon"><i class="fas fa-search"></i></div>
+            </a>
           </div>
         </div>
         <!-- <div class="modal" id="modal">
@@ -208,24 +213,24 @@
             Quis enim sit facilis, dolor, ab quas sint sapiente ut voluptatibus excepturi dolorum, consequuntur doloremque error facere? Nisi vel placeat magni asperiores, id, aliquid quisquam eos et eum repellat molestiae.</p>
           </div>
        </div> -->
-       <div class="popup" id="popup">
-         <div class="popup-inner">
-           <div class="popup-photo">
-             <img src="img/img2.png" alt="">
-           </div>
-           <div class="popup-text">
-             <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-             <p>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Iste culpa sint arcshitecto tempora porro quidem corporis 
-                asperiores accusantium ea similique pariatur, quisquam expedita, 
+        <div class="popup" id="popup">
+          <div class="popup-inner">
+            <div class="popup-photo">
+              <img src="img/img2.png" alt="">
+            </div>
+            <div class="popup-text">
+              <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Iste culpa sint arcshitecto tempora porro quidem corporis
+                asperiores accusantium ea similique pariatur, quisquam expedita,
                 neque ullam? Eos laborum omnis facere aspernatur!
-             </p>
-           </div>
-           <button type="submit" class="form__button4"><i class="fa fa-trash" aria-hidden="true"></i></i>&nbsp;Excluir</i></button>
-         </div>
-         <a class="popup-close" href="#">X</a>
-       </div>
+              </p>
+            </div>
+            <button type="submit" class="form__button4"><i class="fa fa-trash" aria-hidden="true"></i></i>&nbsp;Excluir</i></button>
+          </div>
+          <a class="popup-close" href="#">X</a>
+        </div>
         <div class="userpost">
           <div class="posts">
             <span><i class="fa fa-plus"></i></span>
@@ -259,7 +264,7 @@
             <div class="search_box">
               <input type="text" id="search_input" placeholder="Procurar turmas...">
               <br><br>
-                <button type="submit" class="form__button3"><i class="fa fa-plus" aria-hidden="true"></i></i>&nbsp;Cadastrar</i></button>
+              <button type="submit" class="form__button3"><i class="fa fa-plus" aria-hidden="true"></i></i>&nbsp;Cadastrar</i></button>
             </div>
           </div>
 
@@ -688,7 +693,9 @@
               <br>
               <br>
               <br>
-              <center><div class="text">Clique aqui para selecionar uma foto de perfil</div></center>
+              <center>
+                <div class="text">Clique aqui para selecionar uma foto de perfil</div>
+              </center>
             </div>
             <div id="cancel-btn"><i class="fas fa-times"></i></div>
             <div class="file-name">File name here</div>
@@ -746,28 +753,34 @@
             <br>
             <button type="submit" class="form__button" onclick="editar()"><i class="fa fa-pencil" aria-hidden="true"></i><i> Editar</i></button>
             <script>
-              function editar() {
+              async function editar() {
                 var nome = $('#nome_editar').val();
-            var cpf = $('#cpf_editar').val();
-            var nova_senha = $('#senha_editar').val();
-            var senha = localStorage.getItem("senha_funci");
+                var cpf = $('#cpf_editar').val();
+                var nova_senha = $('#senha_editar').val();
+                var senha = localStorage.getItem("senha_funci");
 
-            var user = firebase.auth().currentUser;
-            var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
+                var user = firebase.auth().currentUser;
+                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
+                
+                const atualiza = await funcionario_database.new(
+                  nome,
+                  user.email,
+                  cpf
+                );
 
-            // Prompt the user to re-provide their sign-in credentials
+                // Prompt the user to re-provide their sign-in credentials
 
-            user.reauthenticateWithCredential(credential).then(function() {
-              user.updatePassword(nova_senha).then(function() {
-                // Update successful.
-              }).catch(function(error) {
-                // An error happened.
-                console.log(error);
-              });
-              // User re-authenticated.
-            }).catch(function(error) {
-              // An error happened.
-            });
+                user.reauthenticateWithCredential(credential).then(function() {
+                  user.updatePassword(nova_senha).then(function() {
+                    // Update successful.
+                  }).catch(function(error) {
+                    // An error happened.
+                    console.log(error);
+                  });
+                  // User re-authenticated.
+                }).catch(function(error) {
+                  // An error happened.
+                });
 
               }
 
@@ -785,7 +798,7 @@
   <script src="js/scriptFunc.js"></script>
   <script src="js/scripts.js"></script>
   <script src="js/suggestions.js"></script>
-  
+
   <script>
     const tbtn = document.querySelectorAll(".side-nav ul li");
     const tab = document.querySelectorAll(".tabs");
