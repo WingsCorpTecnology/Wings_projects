@@ -51,6 +51,7 @@ dependencies {
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
     implementation 'com.heinrichreimersoftware:material-intro:2.0.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.firebaseui:firebase-ui-storage:6.4.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
