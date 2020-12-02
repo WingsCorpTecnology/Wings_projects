@@ -28,6 +28,8 @@ import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
 import com.cursoandroid.easychool_v4.validar.DefinirTamanhoText;
 import com.cursoandroid.easychool_v4.validar.ValidarCpf;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +37,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
+import java.util.UUID;
 
 public class ConfigPerfilActivity extends AppCompatActivity {
     private EditText edtNome, edtTelefone, edtCpf, edtNewSenha, edtRg;
@@ -169,6 +177,48 @@ public class ConfigPerfilActivity extends AppCompatActivity {
                 alertaValidacaoPermissao();
             }
         }
+    }
+
+    private void salvarImgBanco(){
+        //Configura para imagem ser salva em memória
+        imgFoto.setDrawingCacheEnabled(true);
+        imgFoto.buildDrawingCache();
+
+        //Recupera bitmap da imagem (imagem a ser carregada)
+        Bitmap bitmap = imgFoto.getDrawingCache();
+
+        //Comprimo bitmap para um formato png/jpg
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 75, baos);
+
+        //converte o baos para pixel brutos em uma matriz de bytes
+        //(dados da imagem)
+        byte[] dadosImagem = baos.toByteArray();
+
+        //Define nós para storage
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference imagens = storageReference.child("imagensResponsaveisAluno");
+
+        //Nome da imagem
+        String nomeArquivo = idResponsavel;
+        StorageReference imagemRef = imagens.child(nomeArquivo+ ".png");
+
+        //Retorna objeto que irá controlar o upload
+        UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
+
+        uploadTask.addOnFailureListener(ConfigPerfilActivity.this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ConfigPerfilActivity.this, "Upload da imagem falhou: " +e.getMessage().toString(), Toast.LENGTH_LONG).show();
+            }
+        }).addOnSuccessListener(ConfigPerfilActivity.this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //Uri url = taskSnapshot.getDownloadUrl();
+
+                Toast.makeText(ConfigPerfilActivity.this, "Sucesso ao fazer upload", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void alertaValidacaoPermissao(){
@@ -310,6 +360,7 @@ public class ConfigPerfilActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 camposAlterar();
+                salvarImgBanco();
 
                 //Log.i("alteraSenha", "Senha: " + edtNewSenha.getText().toString());
 
