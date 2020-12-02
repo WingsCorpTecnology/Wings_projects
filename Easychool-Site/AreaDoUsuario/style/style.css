@@ -369,6 +369,7 @@ aside .search button{
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
   .wrapper img{
     height: 100%;
@@ -914,6 +915,47 @@ aside .search button{
   text-align: center;
   cursor: pointer;
   text-decoration: none;
+}
+.form__button4{
+  position: absolute;
+  display: block;
+  margin-top: 55%;
+  margin-left: 75%;
+  padding: .75rem 2rem;
+  outline: none;
+  border: none;
+  background-color: #ff2c25/* #e92c2c */ ;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: .6rem;
+  cursor: pointer;
+  transition: .3s;
+  /* top: 50%;
+  left: 25%; */
+  
+}
+.form__button4:hover{
+  box-shadow: 0 10px 36px rgba(0,0,0,.15);
+}
+.form__button5{
+  position: relative;
+    display: block;
+    margin-left: auto;
+    padding: .3rem 1rem;
+    outline: none;
+    border: none;
+    background-color: #ff2c25 ;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .3s;
+    top: 100%;
+    left: 25%;
+  
+}
+.form__button5:hover{
+  box-shadow: 0 10px 36px rgba(0,0,0,.15);
 }
 
 
