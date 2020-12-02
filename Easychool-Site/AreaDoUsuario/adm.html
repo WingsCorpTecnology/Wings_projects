@@ -98,8 +98,6 @@
               console.log(email_perfil);
               console.log(userId);
 
-              console.log("Teste: " + userId);
-
               var storageRef = firebase.storage();
 
               var starsRef = storageRef.ref(userId);
@@ -107,7 +105,6 @@
               // Get the download URL
               starsRef.getDownloadURL().then(function(url) {
                 // Insert url into an <img> tag to "download"
-                console.log(url)
                 const image = document.querySelector('#imagem_perfil')
                 image.src = url
               }).catch(function(error) {
@@ -118,7 +115,6 @@
 
               });
 
-              console.log("Teste");
 
               return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
                 var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
@@ -721,7 +717,6 @@
                 .then(snapshot => snapshot.ref.getDownloadURL())
                 .then(url => {
                   console.log(url)
-                  alert("Sucesso")
                   const image = document.querySelector('#imagem_perfil')
                   image.src = url
                 })
@@ -753,23 +748,27 @@
             <script>
               function editar() {
                 var nome = $('#nome_editar').val();
-                var cpf = $('#cpf_editar').val();
-                var nova_senha = $('#senha_editar').val();
-                var senha = localStorage.getItem("senha_funci");
-                
-                var user = firebase.auth().currentUser;
-                
-                console.log(user);
+            var cpf = $('#cpf_editar').val();
+            var nova_senha = $('#senha_editar').val();
+            var senha = localStorage.getItem("senha_funci");
 
-                user.updatePassword(nova_senha).then(function() {
-                  // Update successful.
-                }).catch(function(error) {
-                  // An error happened.
-                  console.log(error);
-                });
-                alert(nome);
-                alert(cpf);
-                alert(nova_senha);
+            var user = firebase.auth().currentUser;
+            var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
+
+            // Prompt the user to re-provide their sign-in credentials
+
+            user.reauthenticateWithCredential(credential).then(function() {
+              user.updatePassword(nova_senha).then(function() {
+                // Update successful.
+              }).catch(function(error) {
+                // An error happened.
+                console.log(error);
+              });
+              // User re-authenticated.
+            }).catch(function(error) {
+              // An error happened.
+            });
+
               }
 
             </script>
