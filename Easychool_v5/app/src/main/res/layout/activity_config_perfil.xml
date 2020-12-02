@@ -7,17 +7,15 @@
     android:background="@drawable/fundo_telas_login_cadastro"
     tools:context=".activity.ConfigPerfilActivity">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgPerfil"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:src="@drawable/perfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/undraw_female_avat" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgAddImgPerfil"

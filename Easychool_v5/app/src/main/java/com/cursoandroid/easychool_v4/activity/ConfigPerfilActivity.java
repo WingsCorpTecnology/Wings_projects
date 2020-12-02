@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -130,7 +132,32 @@ public class ConfigPerfilActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        
+        if(resultCode == RESULT_OK){
+            Bitmap imagem = null;
+
+            try{
+                switch(requestCode){
+                    case SELECAO_CAMERA:
+                        imagem = (Bitmap) data.getExtras().get("data");
+
+                        break;
+
+                    case SELECAO_GALERIA:
+                        Uri localImagemSelecionada = data.getData();
+
+                        imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada);
+
+                        break;
+                }
+
+                if(imagem != null){
+                    imgFoto.setImageBitmap(imagem);
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
