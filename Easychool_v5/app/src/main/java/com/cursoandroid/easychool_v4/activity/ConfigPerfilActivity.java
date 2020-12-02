@@ -1,20 +1,27 @@
 package com.cursoandroid.easychool_v4.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
+import com.cursoandroid.easychool_v4.helper.Permissao;
 import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
 import com.cursoandroid.easychool_v4.validar.DefinirTamanhoText;
 import com.cursoandroid.easychool_v4.validar.ValidarCpf;
@@ -30,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ConfigPerfilActivity extends AppCompatActivity {
     private EditText edtNome, edtTelefone, edtCpf, edtNewSenha, edtRg;
     private Button btnSalvar;
+    private ImageView imgFoto, imgAddFoto;
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private FirebaseUser responsavelUser = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
@@ -38,11 +46,20 @@ public class ConfigPerfilActivity extends AppCompatActivity {
     private String idResponsavel = Base64Custom.codificarBase64(emailResponsavel);
     private ResponsavelAluno responsavel;
     private String CPF;
+    private String[] permissoesNecessarias = new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
+    private static final int SELECAO_CAMERA = 100;
+    private static final int SELECAO_GALERIA = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_perfil);
+
+        //Valida permissões
+        Permissao.validarPermissoes(permissoesNecessarias, this, 1);
 
         edtNome = findViewById(R.id.edtNome);
         edtTelefone = findViewById(R.id.edtTelefone);
@@ -51,6 +68,8 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         //edtEmail = findViewById(R.id.edtEmail);
         edtNewSenha = findViewById(R.id.edtSenhaNova);
         btnSalvar = findViewById(R.id.btn_salvar_filtros);
+        imgAddFoto = findViewById(R.id.imgAddImgPerfil);
+        imgFoto = findViewById(R.id.imgPerfil);
 
         usuarioRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
         responsavel = new ResponsavelAluno();
@@ -87,6 +106,13 @@ public class ConfigPerfilActivity extends AppCompatActivity {
                 confirmarAlteracoes();
             }
         });
+
+        imgAddFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertCameraGaleria();
+            }
+        });
     }
 
     @Override
@@ -98,6 +124,43 @@ public class ConfigPerfilActivity extends AppCompatActivity {
         else{
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        for(int permissaoResultado : grantResults){
+            if(permissaoResultado == PackageManager.PERMISSION_DENIED){
+                alertaValidacaoPermissao();
+            }
+        }
+    }
+
+    private void alertaValidacaoPermissao(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        //Configurar AlertDialog
+        alertDialog.setTitle("Permissões Negadas");
+        alertDialog.setMessage("Para utilizar o app é necessário aceitar as permissões");
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+
+        AlertDialog alert = alertDialog.create();
+        alert.show();
     }
 
     public boolean verificarCampos(){
@@ -259,6 +322,40 @@ public class ConfigPerfilActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
+            }
+        });
+
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+    public void alertCameraGaleria(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        //Configurar AlertDialog
+        alertDialog.setTitle("Selecionar foto de perfil");
+        alertDialog.setMessage("Escolha uma das opções abaixo para escolher uma foto de perfil");
+        alertDialog.setCancelable(true);
+
+        alertDialog.setPositiveButton("Câmera", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                if(intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, SELECAO_CAMERA);
+                }
+            }
+        });
+
+        alertDialog.setNegativeButton("Galeria", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                if(intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, SELECAO_GALERIA);
+                }
             }
         });
 
