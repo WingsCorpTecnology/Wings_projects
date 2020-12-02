@@ -57,10 +57,9 @@
         <li>
           <span><i class="fa fa-home" aria-hidden="true"></i></span>
           <script>
-            function apresentar() {
+            function apresentar(){
               alert("Home");
             }
-
           </script>
           <h3>Home</h3>
         </li>
@@ -196,12 +195,10 @@
           <div class="search-input">
             <a href="" target="_blank" hidden></a>
             <input type="text" placeholder="Pesquise Funcionários..">
-            <div class="autocom-box">
+            <div class="autocom-box"> 
               <!-- here list are inserted from javascript -->
             </div>
-            <a href="#popup">
-              <div class="icon"><i class="fas fa-search"></i></div>
-            </a>
+            <a href="#popup"><div class="icon"><i class="fas fa-search"></i></div></a>
           </div>
         </div>
         <!-- <div class="modal" id="modal">
@@ -215,32 +212,24 @@
             Quis enim sit facilis, dolor, ab quas sint sapiente ut voluptatibus excepturi dolorum, consequuntur doloremque error facere? Nisi vel placeat magni asperiores, id, aliquid quisquam eos et eum repellat molestiae.</p>
           </div>
        </div> -->
-        <div class="popup" id="popup">
-          <div class="popup-inner">
-            <div class="popup-photo">
-              <img src="img/img2.png" alt="">
-            </div>
-            <div class="popup-text">
-              <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Iste culpa sint arcshitecto tempora porro quidem corporis
-                asperiores accusantium ea similique pariatur, quisquam expedita,
+       <div class="popup" id="popup">
+         <div class="popup-inner">
+           <div class="popup-photo">
+             <img src="img/img2.png" alt="">
+           </div>
+           <div class="popup-text">
+             <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+             <p>
+               Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Iste culpa sint arcshitecto tempora porro quidem corporis 
+                asperiores accusantium ea similique pariatur, quisquam expedita, 
                 neque ullam? Eos laborum omnis facere aspernatur!
-<<<<<<< HEAD
-              </p>
-            </div>
-          </div>
-          <a class="popup-close" href="#">X</a>
-        </div>
-=======
              </p>
            </div>
            <button type="submit" class="form__button4"><i class="fa fa-trash" aria-hidden="true"></i></i>&nbsp;Excluir</i></button>
          </div>
          <a class="popup-close" href="#">X</a>
        </div>
->>>>>>> d866ef40658af2b42631ff28457ce7609472fa00
         <div class="userpost">
           <div class="posts">
             <span><i class="fa fa-plus"></i></span>
@@ -274,7 +263,7 @@
             <div class="search_box">
               <input type="text" id="search_input" placeholder="Procurar turmas...">
               <br><br>
-              <button type="submit" class="form__button3"><i class="fa fa-plus" aria-hidden="true"></i></i>&nbsp;Cadastrar</i></button>
+                <button type="submit" class="form__button3"><i class="fa fa-plus" aria-hidden="true"></i></i>&nbsp;Cadastrar</i></button>
             </div>
           </div>
 
@@ -764,28 +753,28 @@
             <script>
               function editar() {
                 var nome = $('#nome_editar').val();
-                var cpf = $('#cpf_editar').val();
-                var nova_senha = $('#senha_editar').val();
-                var senha = localStorage.getItem("senha_funci");
+            var cpf = $('#cpf_editar').val();
+            var nova_senha = $('#senha_editar').val();
+            var senha = localStorage.getItem("senha_funci");
 
-                var user = firebase.auth().currentUser;
-                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
+            var user = firebase.auth().currentUser;
+            var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
 
-                // Prompt the user to re-provide their sign-in credentials
+            // Prompt the user to re-provide their sign-in credentials
 
-                user.reauthenticateWithCredential(credential).then(function() {
-                  user.updatePassword(nova_senha).then(function() {
-                  // Update successful.
-                }).catch(function(error) {
-                  // An error happened.
-                  console.log(error);
-                });
-                  // User re-authenticated.
-                }).catch(function(error) {
-                  // An error happened.
-                });
+            user.reauthenticateWithCredential(credential).then(function() {
+              user.updatePassword(nova_senha).then(function() {
+                // Update successful.
+              }).catch(function(error) {
+                // An error happened.
+                console.log(error);
+              });
+              // User re-authenticated.
+            }).catch(function(error) {
+              // An error happened.
+            });
 
-                console.log(user);
+            console.log(user);
               }
 
             </script>
@@ -802,7 +791,7 @@
   <script src="js/scriptFunc.js"></script>
   <script src="js/scripts.js"></script>
   <script src="js/suggestions.js"></script>
-
+  
   <script>
     const tbtn = document.querySelectorAll(".side-nav ul li");
     const tab = document.querySelectorAll(".tabs");
