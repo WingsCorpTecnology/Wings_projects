@@ -98,8 +98,6 @@
               console.log(email_perfil);
               console.log(userId);
 
-              console.log("Teste: " + userId);
-
               var storageRef = firebase.storage();
 
               var starsRef = storageRef.ref(userId);
@@ -107,7 +105,6 @@
               // Get the download URL
               starsRef.getDownloadURL().then(function(url) {
                 // Insert url into an <img> tag to "download"
-                console.log(url)
                 const image = document.querySelector('#imagem_perfil')
                 image.src = url
               }).catch(function(error) {
@@ -118,7 +115,6 @@
 
               });
 
-              console.log("Teste");
 
               return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
                 var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
@@ -721,7 +717,6 @@
                 .then(snapshot => snapshot.ref.getDownloadURL())
                 .then(url => {
                   console.log(url)
-                  alert("Sucesso")
                   const image = document.querySelector('#imagem_perfil')
                   image.src = url
                 })
@@ -774,7 +769,6 @@
               // An error happened.
             });
 
-            console.log(user);
               }
 
             </script>
