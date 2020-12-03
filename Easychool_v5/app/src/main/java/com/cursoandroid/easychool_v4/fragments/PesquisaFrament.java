@@ -30,8 +30,10 @@ import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.config.RecyclerItemClickListener;
 import com.cursoandroid.easychool_v4.helper.Base64Custom;
 import com.cursoandroid.easychool_v4.helper.CalcularDistancia;
+import com.cursoandroid.easychool_v4.helper.FiltrosFirebase;
 import com.cursoandroid.easychool_v4.helper.Geocoding;
 import com.cursoandroid.easychool_v4.model.Escola;
+import com.cursoandroid.easychool_v4.model.FiltrosPesquisa;
 import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -164,6 +166,9 @@ public class PesquisaFrament extends Fragment {
 
     public void escolasFiltros(){
         List<Escola> listaEscolasFiltro = new ArrayList<>();
+        FiltrosPesquisa filtrosPesquisa = new FiltrosPesquisa();
+        FiltrosFirebase.setFiltrosDistancia();
+        Integer limiteDistancia = filtrosPesquisa.getFiltrosDistancia();
 
         try{
             for(Escola escola : listaEscolas){
@@ -183,8 +188,6 @@ public class PesquisaFrament extends Fragment {
 
                 listaEscolasFiltro.add(escola);
                 distancia.add(escola.getDistancia());
-
-                //Log.d("teste", "Escola: "+escola.getNome()+ " Distancia: " +escola.getDistancia());
             }
             Collections.sort(listaEscolasFiltro);
             Collections.sort(distancia);
