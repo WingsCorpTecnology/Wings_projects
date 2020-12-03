@@ -682,7 +682,7 @@ aside .search button{
   /* BARRA DE PESQUISA FUNCIONARIOS */
   ::selection{
     color: #fff;
-    background: #664AFF;
+    background: #FF7C00;;
   }
   
   .wrapper4{
@@ -742,6 +742,7 @@ aside .search button{
   }
   .autocom-box li:hover{
     background: #efefef;
+    cursor: pointer;
   }
   
   .search-input .icon{
@@ -753,7 +754,7 @@ aside .search button{
     text-align: center;
     line-height: 55px;
     font-size: 20px;
-    color: #644bff;
+    color: #FF7C00;;
     cursor: pointer;
   }
 
@@ -916,6 +917,423 @@ aside .search button{
   cursor: pointer;
   text-decoration: none;
 }
+/* modal cadastro turmas */
+
+.popup2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 85vw;
+  height: 90vh;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .80);
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  transition: 0.74s ease-in-out;
+}
+.popup-inner2{
+  position: relative;
+  bottom: -100vw;
+  right: -100vh;
+  display: flex;
+  align-items:center;
+  max-width: 800px;
+  max-height: 599px;
+  width: 59%;
+  height: 80%;
+  background-color: white;
+  transform: rotate(32deg);
+  transition: 0.74s ease-in-out;
+}
+.popup-photo2{
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+  width: 40%;
+  height: 100%;
+  overflow: hidden;
+}
+.popup-photo3{
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+  width: 40%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  top: -40px;
+  right: -100px;
+}
+.popup-photo2 img{
+  width: auto;
+  height: 100%;
+
+}
+.popup-text2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 59%;
+  height: 100%;
+  padding: 4rem;
+  position: relative;
+  top: -30%;
+}
+
+.popup2:target{
+  visibility: visible;
+  opacity: 1;
+}
+.popup2:target .popup-inner2{
+  bottom: 0;
+  right: 0;
+  transform: rotate(0);
+
+}
+.popup-close2{
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 3rem;
+  height: 3rem;
+  font-size: 0.875rem;
+  font-size: 400;
+  border-radius: 100%;
+  background-color: #0a0a0a;
+  z-index: 4;
+  color: white;
+  line-height: 3rem;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+/* dentro do modal das turmas combo box etc */
+
+.container6 {
+  margin-top: -15px;
+  padding: 32px;
+  position: relative;
+  right: -10%;
+}
+.container6 h2{
+  margin: 16px;
+}
+
+.select-box {
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+}
+
+.select-box .options-container {
+  background: #2f3640;
+  color: #f5f6fa;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+
+  order: 1;
+}
+
+.selected {
+  background: #2f3640;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #f5f6fa;
+  position: relative;
+
+  order: 0;
+}
+
+.selected::after {
+  content: "";
+  background: url("img/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: 5px;
+
+  transition: all 0.4s;
+}
+
+.select-box .options-container.active {
+  max-height: 85px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.select-box .options-container.active + .selected::after {
+  transform: rotateX(180deg);
+  top: -6px;
+}
+
+.select-box .options-container::-webkit-scrollbar {
+  width: 8px;
+  background: #0d141f;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+  background: #525861;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .option,
+.selected {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.select-box .option:hover {
+  background: #414b57;
+}
+
+.select-box label {
+  cursor: pointer;
+}
+
+.select-box .option .radio {
+  display: none;
+}
+/* outro combo box modal */
+
+.container7 {
+  margin-top: 10%;
+  padding: 32px;
+  position: relative;
+  right: -10%;
+}
+.container7 h2{
+  margin: 16px;
+}
+
+.select-box2 {
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+}
+
+.select-box2 .options-container2 {
+  background: #2f3640;
+  color: #f5f6fa;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+
+  order: 1;
+}
+
+.selected2 {
+  background: #2f3640;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #f5f6fa;
+  position: relative;
+
+  order: 0;
+}
+
+.selected2::after {
+  content: "";
+  background: url("img/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: 5px;
+
+  transition: all 0.4s;
+}
+
+.select-box2 .options-container2.active {
+  max-height: 85px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.select-box2 .options-container2.active + .selected2::after {
+  transform: rotateX(180deg);
+  top: -6px;
+}
+
+.select-box2 .options-container2::-webkit-scrollbar {
+  width: 8px;
+  background: #0d141f;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box2 .options-container2::-webkit-scrollbar-thumb {
+  background: #525861;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box2 .option2,
+.selected2 {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.select-box2 .option2:hover {
+  background: #414b57;
+}
+
+.select-box2 label {
+  cursor: pointer;
+}
+
+.select-box2 .option2 .radio2 {
+  display: none;
+}
+
+/* input do modal */
+.wrapper5{
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  width: 250px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+.wrapper5 .input-data{
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+.wrapper5 .input-data input{
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid silver;
+}
+.input-data input:focus ~ label,
+.input-data input:valid ~ label{
+  transform: translateY(-20px);
+  font-size: 15px;
+  color: #FF7C00;
+}
+.wrapper5 .input-data label{
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  color: grey;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.input-data .underline{
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  bottom: 0;
+}
+.input-data .underline:before{
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: #FF7C00;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before{
+  transform: scaleX(1);
+}
+.form__button{
+  display: block;
+  margin-left: auto;
+  padding: .75rem 2rem;
+  outline: none;
+  border: none;
+  background-color: #5CD83E ;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  transition: .3s;
+}
+.form__button:hover{
+  box-shadow: 0 10px 36px rgba(0,0,0,.15);
+}
+/* outro input */
+.wrapper6{
+  position: absolute;
+  left: 10%;
+  top: 56%;
+  width: 250px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+.wrapper6 .input-data{
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+.wrapper6 .input-data input{
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid silver;
+}
+.input-data input:focus ~ label,
+.input-data input:valid ~ label{
+  transform: translateY(-20px);
+  font-size: 15px;
+  color: #FF7C00;
+}
+.wrapper6 .input-data label{
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  color: grey;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.input-data .underline{
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  bottom: 0;
+}
+.input-data .underline:before{
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: #FF7C00;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before{
+  transform: scaleX(1);
+}
+
+
 .form__button4{
   position: absolute;
   display: block;
