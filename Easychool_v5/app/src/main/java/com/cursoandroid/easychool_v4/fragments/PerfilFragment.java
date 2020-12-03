@@ -33,9 +33,11 @@ import com.cursoandroid.easychool_v4.adapter.AdapterFiltros;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.helper.Geocoding;
 import com.cursoandroid.easychool_v4.helper.ResponsavelFirebase;
+import com.cursoandroid.easychool_v4.model.AnosEscolares;
 import com.cursoandroid.easychool_v4.model.Escola;
 import com.cursoandroid.easychool_v4.model.NivelEducacao;
 import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
+import com.cursoandroid.easychool_v4.model.TipoEscola;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -180,6 +182,22 @@ public class PerfilFragment extends Fragment {
                 for(int i = 0; i < nivel.getNiveis().size(); i++) {
                     if (Objects.equals(dataSnapshot.child(nivel.getNiveis().get(i)).getValue(), true)) {
                         filtros.add(dataSnapshot.child(nivel.getNiveis().get(i)).getKey());
+                    }
+                }
+
+                AnosEscolares anos = new AnosEscolares();
+
+                for(int i = 0; i < anos.getAnos().size(); i++){
+                    if(Objects.equals(dataSnapshot.child(anos.getAnos().get(i)).getValue(), true)){
+                        filtros.add(dataSnapshot.child(anos.getAnos().get(i)).getKey());
+                    }
+                }
+
+                TipoEscola tipo = new TipoEscola();
+
+                for(int i = 0; i < tipo.getTipos().size(); i++){
+                    if(Objects.equals(dataSnapshot.child(tipo.getTipos().get(i)).getValue(), true)){
+                        filtros.add(dataSnapshot.child(tipo.getTipos().get(i)).getKey());
                     }
                 }
 
