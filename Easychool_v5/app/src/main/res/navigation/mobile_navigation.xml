@@ -11,12 +11,12 @@
         android:name="com.cursoandroid.easychool_v4.fragments.PesquisaFrament"
         android:label="@string/title_pesquisa"
         tools:layout="@layout/fragment_pesquisa" >
-        <action
+        <!--<action
             android:id="@+id/action_navigation_home_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
+            app:destination="@id/navigation_dashboard" />-->
     </fragment>
 
-    <fragment
+    <!--<fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.cursoandroid.easychool_v4.fragments.FilaEsperaFragment"
         android:label="@string/title_fila"
@@ -24,7 +24,7 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_notifications"
             app:destination="@id/navigation_notifications" />
-    </fragment>
+    </fragment>-->
 
     <fragment
         android:id="@+id/navigation_notifications"
