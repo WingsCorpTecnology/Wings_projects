@@ -363,7 +363,7 @@
                       </div>
                     </div>
 
-                    <div class="selected">
+                    <div class="selected" id="valor_turma">
                       Selecione a série&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
                     </div>
                   </div>
@@ -383,7 +383,7 @@
                   <div class="select-box2">
                     <div class="options-container2">
                       <div class="option2">
-                        <input type="radio" class="radio2" id="automobiles2" name="category" />
+                        <input type="radio" class="radio2" id="automobiles2" name="category2" />
                         <label for="automobiles2">Manhã</label>
                       </div>
 
@@ -403,8 +403,7 @@
                       </div>
                     </div>
 
-                    <div class="selected2">
-                      Selecione o período&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+                    <div class="selected2" id="valor_periodo">Selecione o período&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
                     </div>
                   </div>
                   <div class="wrapper6">
@@ -416,10 +415,19 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" class="form__button4"><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
+              <button type="submit" class="form__button4" onclick="cadastrar_turma()"><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
             </div>
             <a class="popup-close2" href="#">X</a>
           </div>
+          <script>
+            function cadastrar_turma() {
+              var turma = document.getElementById('valor_turma').innerText;
+              var periodo = document.getElementById('valor_periodo').innerText;
+              alert(turma);
+              alert(periodo);
+            }
+
+          </script>
 
           <div class="table_wrap">
             <div class="table_header">
@@ -469,6 +477,7 @@
                       <span><a href="#popup2"><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></a></span>
                     </div>
                     <div class="status">
+<<<<<<< HEAD
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
@@ -822,6 +831,9 @@
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+=======
+                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i><i></i></button></span>
+>>>>>>> 25c3a013ebf5c902ec2c33352bc5a13a4343d00c
                     </div>
                   </div>
                 </li>
@@ -908,7 +920,7 @@
             <button type="submit" class="form__button" onclick="editar()"><i class="fa fa-pencil" aria-hidden="true"></i><i> Editar</i></button>
             <script>
               async function editar() {
-                var nome = $('#nome_editar').val(); 
+                var nome = $('#nome_editar').val();
                 var cpf = $('#cpf_editar').val();
                 var nova_senha = $('#senha_editar').val();
                 var senha = localStorage.getItem("senha_funci");
@@ -928,7 +940,7 @@
                   // User re-authenticated.
                 }).catch(function(error) {
                   // An error happened.
-                }); 
+                });
                 var cpf = $('#cpf_editar').val();
                 var nova_senha = $('#senha_editar').val();
                 var senha = localStorage.getItem("senha_funci");
@@ -954,7 +966,7 @@
                   // User re-authenticated.
                 }).catch(function(error) {
                   // An error happened.
-                }); 
+                });
 
               }
 
