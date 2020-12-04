@@ -13,9 +13,9 @@ import java.util.List;
 
 public class AdapterTelefones extends RecyclerView.Adapter<AdapterTelefones.MyViewHolder> {
 
-    private List<String> telefones;
+    private List<Long> telefones;
 
-    public AdapterTelefones(List<String> telefones) {
+    public AdapterTelefones(List<Long> telefones) {
         this.telefones = telefones;
     }
 
@@ -28,9 +28,9 @@ public class AdapterTelefones extends RecyclerView.Adapter<AdapterTelefones.MyVi
 
     @Override
     public void onBindViewHolder(AdapterTelefones.MyViewHolder holder, int position) {
-        String telefoneEscola = telefones.get(position);
+        Long telefoneEscola = telefones.get(position);
 
-        holder.telefone.setText(telefoneEscola);
+        holder.telefone.setText(String.valueOf(telefoneEscola));
     }
 
 

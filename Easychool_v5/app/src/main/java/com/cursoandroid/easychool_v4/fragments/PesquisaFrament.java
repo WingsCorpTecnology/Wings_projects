@@ -72,7 +72,7 @@ public class PesquisaFrament extends Fragment {
         filtrosRef = firebaseRef.child("FiltrosPesquisa").child(idResponsavel);
         responsavelRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
 
-        //recuperarEscolas();
+        recuperarEscolas();
         pesquisa();
         recuperarDadosUser();
 
@@ -87,7 +87,7 @@ public class PesquisaFrament extends Fragment {
         recyclerView.setAdapter(adapter);
 
         //Evento de Click
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
+        /*recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -110,7 +110,7 @@ public class PesquisaFrament extends Fragment {
                     public void onLongItemClick(View view, int position) {
 
                     }
-                }));
+                }));*/
 
         return root;
     }
@@ -124,7 +124,7 @@ public class PesquisaFrament extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        recuperarEscolas();
+        //recuperarEscolas();
     }
 
     public void recuperarEscolas(){
@@ -154,7 +154,7 @@ public class PesquisaFrament extends Fragment {
     }
 
     public void escolasFiltros(){
-        List<Escola> listaEscolasFiltro = new ArrayList<>();
+        final List<Escola> listaEscolasFiltro = new ArrayList<>();
 
         try{
             for(Escola escola : listaEscolas){
@@ -180,6 +180,32 @@ public class PesquisaFrament extends Fragment {
             adapter = new Adapter(listaEscolasFiltro, distancia);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+
+            //Evento de Click
+            recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
+                    new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        }
+
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //Recuperando escola selecionada
+                            escolaSelecionada = listaEscolasFiltro.get(position);
+
+                            //Envia a escola para a tela de perfil da escola
+                            Intent intent = new Intent(getActivity(), PerfilEscolaActivity.class);
+                            intent.putExtra("escolaSelecionada", escolaSelecionada);
+
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onLongItemClick(View view, int position) {
+
+                        }
+                    }));
 
             filtroDistancia();
         } catch (Exception e) {
