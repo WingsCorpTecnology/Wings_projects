@@ -1,7 +1,13 @@
 package com.cursoandroid.easychool_v4.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,8 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.adapter.AdapterTelefones;
+import com.cursoandroid.easychool_v4.adapter.AdapterTurmas;
 import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
+import com.cursoandroid.easychool_v4.config.RecyclerItemClickListener;
 import com.cursoandroid.easychool_v4.model.Escola;
+import com.cursoandroid.easychool_v4.model.Turma;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,18 +37,19 @@ import java.util.List;
 
 public class PerfilEscolaActivity extends AppCompatActivity {
     private AdapterTelefones adapter;
+    private AdapterTurmas adapterTurmas;
     private RecyclerView recyclerView;
-    private List<String> listaTelefone = new ArrayList<String>();
-    private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+    private RecyclerView recyclerTurmas;
+    private List<Long> listaTelefone = new ArrayList<Long>();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private DatabaseReference telefoneRef;
-    private DatabaseReference escolaRef;
-    private String emailEscola = autenticacao.getCurrentUser().getEmail();
-    private String idEscola = Base64Custom.codificarBase64(emailEscola);
     private ValueEventListener valueEventListenerTelefone;
     private Escola escolaAtual;
     private TextView txtNome, txtEndereco, txtEstadoCidade, txtEmail;
+    private Long telefoneSelecionado;
+    private List<Turma> listaTurmas = new ArrayList<>();
 
+    @SuppressLint("WrongViewCast")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +66,7 @@ public class PerfilEscolaActivity extends AppCompatActivity {
         preencherCampos();
 
         recyclerView = findViewById(R.id.recyclerTelefone);
+        recyclerTurmas = findViewById(R.id.recyclerTurmas);
 
         recuperarTelefones();
 
@@ -70,6 +81,41 @@ public class PerfilEscolaActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         //escolaRef = firebaseRef.child("Escola").child();
+
+        //Evento de click
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //recuperando telefone selecionado
+                telefoneSelecionado = listaTelefone.get(position);
+
+                //Log.i("teste", "telefone: " +telefoneSelecionado);
+                Uri uri = Uri.parse("tel:"+telefoneSelecionado);
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        }));
+
+        /*recuperarTurmas();
+
+        //Configurar Adapter
+        adapterTurmas = new AdapterTurmas(listaTurmas);
+
+        //Configurar RecyclerView
+        recyclerTurmas.setLayoutManager(layoutManager);
+        recyclerTurmas.setHasFixedSize(true);
+        recyclerTurmas.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
+        recyclerTurmas.setAdapter(adapterTurmas);*/
     }
 
     private void preencherCampos() {
@@ -90,13 +136,13 @@ public class PerfilEscolaActivity extends AppCompatActivity {
                 listaTelefone.clear();
 
                 for(DataSnapshot dados : dataSnapshot.getChildren()){
-                    String telefone = dados.getValue(String.class);
+                    Long telefone = dados.getValue(Long.class);
 
                     //telefone.setId(dados.getKey());
 
                     listaTelefone.add(telefone);
 
-                    Log.i("telefones", telefone);
+                    //Log.i("teste", "telefone: "+telefone);
                 }
 
                 adapter.notifyDataSetChanged();
@@ -107,5 +153,9 @@ public class PerfilEscolaActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void recuperarTurmas(){
+
     }
 }

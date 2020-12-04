@@ -1376,6 +1376,104 @@ aside .search button{
   box-shadow: 0 10px 36px rgba(0,0,0,.15);
 }
 
+/* perfil da escola add foto */
+
+.container3{
+  height: 350px;
+  width: 430px;
+  position: relative;
+  
+}
+.container3 .wrapper7{
+  position: relative;
+  height: 300px;
+  width: 100%;
+  border-radius: 10px;
+  background: #fff;
+  border: 2px dashed #c2cdda;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.wrapper7.active{
+  border: none;
+}
+.wrapper7 .image2{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.wrapper7 img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.wrapper7 .icon2{
+  font-size: 100px;
+  color:#5CD83E ;
+  height: 100%;
+  place-items: center;
+  text-align: center;
+  margin-top: 10%;
+}
+.wrapper7 .text2{
+  font-size: 25px;
+  font-weight: 500;
+  color: #5B5B7B;
+  margin-top: -10%;
+  
+}
+.wrapper7 #cancel-btn2 i{
+  position: absolute;
+  font-size: 20px;
+  right: 15px;
+  top: 15px;
+  color: #FF7C00;
+  cursor: pointer;
+  display: none;
+}
+.wrapper7.active:hover #cancel-btn2 i{
+  display: block;
+}
+.wrapper7 #cancel-btn2 i:hover{
+  color: #e74c3c;
+  transition: .3s ease-in-out;
+}
+.wrapper7 .file-name2{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding: 8px 0;
+  font-size: 18px;
+  color: #fff;
+  display: none;
+  background: linear-gradient(135deg,#5CD83E  0%,#FF7C00  100%);
+}
+.wrapper7.active:hover .file-name2{
+  display: block;
+}
+.container3 #custom-btn2{
+  margin-top: 30px;
+  display: block;
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(135deg,#5CD83E  0%,#FF7C00 100%);
+}
 
 
 @media (max-width: 900px){

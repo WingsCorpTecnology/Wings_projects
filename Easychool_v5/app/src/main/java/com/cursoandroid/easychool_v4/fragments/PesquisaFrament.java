@@ -6,14 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,19 +30,15 @@ import com.cursoandroid.easychool_v4.helper.Base64Custom;
 import com.cursoandroid.easychool_v4.helper.CalcularDistancia;
 import com.cursoandroid.easychool_v4.helper.Geocoding;
 import com.cursoandroid.easychool_v4.model.Escola;
-import com.cursoandroid.easychool_v4.model.ResponsavelAluno;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,18 +49,17 @@ public class PesquisaFrament extends Fragment {
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private DatabaseReference escolaRef;
-    private DatabaseReference filtrosRef;
     private DatabaseReference responsavelRef;
     private String emailResponsavel = autenticacao.getCurrentUser().getEmail();
     private String idResponsavel = Base64Custom.codificarBase64(emailResponsavel);
-    private ResponsavelAluno responsavel;
+    private DatabaseReference filtrosRef;
     private Escola escolaSelecionada;
-    private Escola escola;
     private EditText edtPesquisa;
     private Geocoding geocoding;
     private Double latitude, longitude;
     private BigDecimal bd;
     private List<Double> distancia = new ArrayList<>();
+    private List<Integer> filtroDistancia = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -76,12 +69,10 @@ public class PesquisaFrament extends Fragment {
         edtPesquisa = root.findViewById(R.id.txt_pesquisa);
 
         escolaRef = firebaseRef.child("Escola");
-        filtrosRef = firebaseRef.child("FiltrosPesquisa");
+        filtrosRef = firebaseRef.child("FiltrosPesquisa").child(idResponsavel);
         responsavelRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
 
-        responsavel = new ResponsavelAluno();
-
-        //recuperarEscolas();
+        recuperarEscolas();
         pesquisa();
         recuperarDadosUser();
 
@@ -96,7 +87,7 @@ public class PesquisaFrament extends Fragment {
         recyclerView.setAdapter(adapter);
 
         //Evento de Click
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
+        /*recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -119,7 +110,7 @@ public class PesquisaFrament extends Fragment {
                     public void onLongItemClick(View view, int position) {
 
                     }
-                }));
+                }));*/
 
         return root;
     }
@@ -133,7 +124,7 @@ public class PesquisaFrament extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        recuperarEscolas();
+        //recuperarEscolas();
     }
 
     public void recuperarEscolas(){
@@ -163,7 +154,7 @@ public class PesquisaFrament extends Fragment {
     }
 
     public void escolasFiltros(){
-        List<Escola> listaEscolasFiltro = new ArrayList<>();
+        final List<Escola> listaEscolasFiltro = new ArrayList<>();
 
         try{
             for(Escola escola : listaEscolas){
@@ -177,14 +168,11 @@ public class PesquisaFrament extends Fragment {
                 Double km = CalcularDistancia.CalcularDistancia(latitude, longitude, escola.getLatitude(), escola.getLongitude());
 
                 bd = new BigDecimal(km).setScale(2, RoundingMode.HALF_EVEN);
-                //distancia.add(bd.doubleValue());
 
                 escola.setDistancia(bd.doubleValue());
 
                 listaEscolasFiltro.add(escola);
                 distancia.add(escola.getDistancia());
-
-                //Log.d("teste", "Escola: "+escola.getNome()+ " Distancia: " +escola.getDistancia());
             }
             Collections.sort(listaEscolasFiltro);
             Collections.sort(distancia);
@@ -192,6 +180,34 @@ public class PesquisaFrament extends Fragment {
             adapter = new Adapter(listaEscolasFiltro, distancia);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+
+            //Evento de Click
+            recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
+                    new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        }
+
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //Recuperando escola selecionada
+                            escolaSelecionada = listaEscolasFiltro.get(position);
+
+                            //Envia a escola para a tela de perfil da escola
+                            Intent intent = new Intent(getActivity(), PerfilEscolaActivity.class);
+                            intent.putExtra("escolaSelecionada", escolaSelecionada);
+
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onLongItemClick(View view, int position) {
+
+                        }
+                    }));
+
+            filtroDistancia();
         } catch (Exception e) {
 
         }
@@ -236,11 +252,6 @@ public class PesquisaFrament extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try {
-                    responsavel.setNome((String) dataSnapshot.child("nome").getValue());
-                    responsavel.setTelefone((String) dataSnapshot.child("telefone").getValue());
-                    responsavel.setCpf((String) dataSnapshot.child("cpf").getValue());
-                    responsavel.setRg((String) dataSnapshot.child("rg").getValue());
-
                     latitude = (Double) dataSnapshot.child("latitude").getValue();
                     longitude = (Double) dataSnapshot.child("longitude").getValue();
                 } catch (Exception e) {
@@ -279,5 +290,72 @@ public class PesquisaFrament extends Fragment {
 
         AlertDialog alert = alertDialog.create();
         alert.show();
+    }
+
+    public void filtroDistancia(){
+        final List<Escola> escolasFiltroDistancia = new ArrayList<>();
+
+        //Log.i("teste", "CHEGUEI");
+
+        filtrosRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String distanciaFire = (String) dataSnapshot.child("Distancia").getValue();
+
+                String[] distanciaQuebrada = distanciaFire.split(" ");
+
+                try {
+                    filtroDistancia.add(Integer.parseInt(distanciaQuebrada[1]));
+
+                    if(filtroDistancia.get(0) != 0) {
+                        if(filtroDistancia.get(0) == 5){
+                            for(Escola escola : listaEscolas){
+                                if(escola.getDistancia() <= 5.0){
+                                    escolasFiltroDistancia.add(escola);
+                                }
+                            }
+                        }
+                        else if(filtroDistancia.get(0) == 10){
+                            for(Escola escola : listaEscolas){
+                                if(escola.getDistancia() <= 10.0){
+                                    escolasFiltroDistancia.add(escola);
+                                }
+                            }
+                        }
+                        else if(filtroDistancia.get(0) == 15){
+                            for(Escola escola : listaEscolas){
+                                if(escola.getDistancia() <= 15.0){
+                                    escolasFiltroDistancia.add(escola);
+                                }
+                            }
+                        }
+                        else{
+
+                        }
+                        //Log.i("teste", "filtro: " +filtroDistancia.get(0));
+                    }
+                    Collections.sort(escolasFiltroDistancia);
+                    Collections.sort(distancia);
+
+                    adapter = new Adapter(escolasFiltroDistancia, distancia);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+                catch (Exception e){
+                    filtroDistancia.add(Integer.parseInt(distanciaQuebrada[0]));
+
+                    if(filtroDistancia.get(0) != 0) {
+                        //Log.i("teste", "filtro: " +filtroDistancia.get(0));
+
+                        escolasFiltroDistancia.addAll(listaEscolas);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
