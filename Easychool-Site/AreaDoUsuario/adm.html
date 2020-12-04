@@ -29,6 +29,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
   <script src="../js/firebase.js"></script>
   <script src="../js/funcionario_database.js"></script>
+  <script src="turmas_firebase.js"></script>
   <div class="container">
     <header>
       <div class="logo">
@@ -447,8 +448,8 @@
                 </li>
               </ul>
             </div>
-            <div class="table_body">
-              <ul>
+            <div class="table_body" id="div_lista">
+              <ul><!--Aqui é que começa a fazer a listagem-->
                 <li>
                   <div class="item">
                     <div class="name">
@@ -471,7 +472,7 @@
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
-                </li>
+                </li><!--Aqui é onde termina uma linha-->
                 <li>
                   <div class="item">
                     <div class="name">
