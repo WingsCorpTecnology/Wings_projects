@@ -1,109 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.PerfilEscolaActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:background="#54D869"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".activity.PerfilEscolaActivity">-->
 
-    <ImageView
-        android:id="@+id/img_perfil_escola"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/school" />
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">-->
 
-    <TextView
-        android:id="@+id/txt_nome_escola"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:gravity="center"
-        android:text="Nome Escola"
-        android:textColor="@color/text"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_perfil_escola"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            android:background="#54D869"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_rua_escola"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Rua: ..........."
-        android:textColor="@color/text"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/txt_nome_escola"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txt_nome_escola"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nome_escola" />
+        <ImageView
+            android:id="@+id/img_perfil_escola"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/school" />
 
-    <TextView
-        android:id="@+id/txt_cidade_estado_escola"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Cidade e Estado"
-        android:textColor="@color/text"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/txt_rua_escola"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txt_rua_escola"
-        app:layout_constraintTop_toBottomOf="@+id/txt_rua_escola" />
+        <TextView
+            android:id="@+id/txt_nome_escola"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:text="Nome Escola"
+            android:textColor="@color/text"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_perfil_escola"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <TextView
-        android:id="@+id/txt_email_escola"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Email"
-        android:textColor="@color/text"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/txt_cidade_estado_escola"
-        app:layout_constraintStart_toStartOf="@+id/txt_cidade_estado_escola"
-        app:layout_constraintTop_toBottomOf="@+id/txt_cidade_estado_escola" />
+        <TextView
+            android:id="@+id/txt_rua_escola"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Rua: ..........."
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_nome_escola"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_nome_escola"
+            app:layout_constraintTop_toBottomOf="@+id/txt_nome_escola" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Telefones para contato"
-        android:textColor="@color/text"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/txt_email_escola"
-        app:layout_constraintStart_toStartOf="@+id/txt_email_escola"
-        app:layout_constraintTop_toBottomOf="@+id/txt_email_escola" />
+        <TextView
+            android:id="@+id/txt_cidade_estado_escola"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Cidade e Estado"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_rua_escola"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_rua_escola"
+            app:layout_constraintTop_toBottomOf="@+id/txt_rua_escola" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerTelefone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        <TextView
+            android:id="@+id/txt_email_escola"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Email"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_cidade_estado_escola"
+            app:layout_constraintStart_toStartOf="@+id/txt_cidade_estado_escola"
+            app:layout_constraintTop_toBottomOf="@+id/txt_cidade_estado_escola" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Telefones para contato"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_email_escola"
+            app:layout_constraintStart_toStartOf="@+id/txt_email_escola"
+            app:layout_constraintTop_toBottomOf="@+id/txt_email_escola" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Vagas disponíveis nesta instituição"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerTelefone"
+            app:layout_constraintStart_toStartOf="@+id/recyclerTelefone"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerTelefone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerTelefone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerTurmas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView13"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--</ScrollView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

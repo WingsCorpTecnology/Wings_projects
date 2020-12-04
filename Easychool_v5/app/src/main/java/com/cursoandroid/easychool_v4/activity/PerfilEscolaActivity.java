@@ -37,16 +37,11 @@ public class PerfilEscolaActivity extends AppCompatActivity {
     private AdapterTelefones adapter;
     private RecyclerView recyclerView;
     private List<Long> listaTelefone = new ArrayList<Long>();
-    private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private DatabaseReference telefoneRef;
-    private DatabaseReference escolaRef;
-    private String emailEscola = autenticacao.getCurrentUser().getEmail();
-    private String idEscola = Base64Custom.codificarBase64(emailEscola);
     private ValueEventListener valueEventListenerTelefone;
     private Escola escolaAtual;
     private TextView txtNome, txtEndereco, txtEstadoCidade, txtEmail;
-    private Button ligar;
     private Long telefoneSelecionado;
 
     @SuppressLint("WrongViewCast")
@@ -61,7 +56,6 @@ public class PerfilEscolaActivity extends AppCompatActivity {
         txtEndereco = findViewById(R.id.txt_rua_escola);
         txtEstadoCidade = findViewById(R.id.txt_cidade_estado_escola);
         txtEmail = findViewById(R.id.txt_email_escola);
-        ligar = findViewById(R.id.btn_ligar);
 
         //Configurar escola (mostrar os dados)
         preencherCampos();
@@ -131,7 +125,7 @@ public class PerfilEscolaActivity extends AppCompatActivity {
 
                     listaTelefone.add(telefone);
 
-                    Log.i("teste", "telefone: "+telefone);
+                    //Log.i("teste", "telefone: "+telefone);
                 }
 
                 adapter.notifyDataSetChanged();
