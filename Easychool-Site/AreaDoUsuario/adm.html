@@ -965,8 +965,133 @@
       </section>
       <section class="tabs">
         <h1>Perfil da Escola</h1>
-        <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Corporis eligendi excepturi vitae delectus ut! Doloremque perspiciatis </p>
+        <div class="container3">
+          <div class="wrapper7">
+            <div class="image2">
+              <img src="" alt="" class="imgd" onclick="defaultBtnActive2()">
+
+            </div>
+            <div class="content2">
+              <div class="icon2"><i class="fas fa-cloud-upload-alt"></i></div>
+              <br>
+              <br>
+              <br>
+              <center>
+                <div class="text2">Selecione uma foto de perfil para a escola</div>
+              </center>
+            </div>
+            <div id="cancel-btn2"><i class="fas fa-times"></i></div>
+            <div class="file-name2">File name here</div>
+          </div>
+          <button onclick="enviar_foto()" id="custom-btn2">Salvar</button>
+          <input id="default-btn2" type="file" hidden>
+          <script>
+            function enviar_foto() {
+              const ref = firebase.storage().ref();
+
+              const file = document.querySelector('#default-btn').files[0];
+
+              var email_funcionario = localStorage.getItem("email_funci");
+
+              var email_funci64 = btoa(email_funcionario);
+
+              const name = email_funci64;
+
+              const metadata = {
+                contentType: file.type
+              };
+
+              const task = ref.child(name).put(file, metadata);
+
+              task
+                .then(snapshot => snapshot.ref.getDownloadURL())
+                .then(url => {
+                  console.log(url)
+                  const image = document.querySelector('#imagem_perfil')
+                  image.src = url
+                })
+            }
+
+          </script>
+
+          <div class="wrapper3">
+            <!-- <form action="#"> -->
+            <div class="input-data">
+              <input type="text" id="nome_editar" required>
+              <div class="underline"></div>
+              <label>Nome</label>
+            </div>
+            <br><br>
+            <div class="input-data">
+              <input type="text" id="cpf_editar" class="form-control" onkeypress="$(this).mask('000.000.000-00');" required>
+              <div class="underline"></div>
+              <label>CPF</label>
+            </div>
+            <br><br>
+            <div class="input-data">
+              <input type="password" id="senha_editar" required>
+              <div class="underline"></div>
+              <label>Senha</label>
+            </div>
+            <br>
+            <button type="submit" class="form__button" onclick="editar()"><i class="fa fa-pencil" aria-hidden="true"></i><i> Editar</i></button>
+            <script>
+              async function editar() {
+                var nome = $('#nome_editar').val(); 
+                var cpf = $('#cpf_editar').val();
+                var nova_senha = $('#senha_editar').val();
+                var senha = localStorage.getItem("senha_funci");
+
+                var user = firebase.auth().currentUser;
+                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
+
+                // Prompt the user to re-provide their sign-in credentials
+
+                user.reauthenticateWithCredential(credential).then(function() {
+                  user.updatePassword(nova_senha).then(function() {
+                    // Update successful.
+                  }).catch(function(error) {
+                    // An error happened.
+                    console.log(error);
+                  });
+                  // User re-authenticated.
+                }).catch(function(error) {
+                  // An error happened.
+                }); 
+                var cpf = $('#cpf_editar').val();
+                var nova_senha = $('#senha_editar').val();
+                var senha = localStorage.getItem("senha_funci");
+
+                var user = firebase.auth().currentUser;
+                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
+
+                const atualiza = await funcionario_database.new(
+                  nome,
+                  user.email,
+                  cpf
+                );
+
+                // Prompt the user to re-provide their sign-in credentials
+
+                user.reauthenticateWithCredential(credential).then(function() {
+                  user.updatePassword(nova_senha).then(function() {
+                    // Update successful.
+                  }).catch(function(error) {
+                    // An error happened.
+                    console.log(error);
+                  });
+                  // User re-authenticated.
+                }).catch(function(error) {
+                  // An error happened.
+                }); 
+
+              }
+
+            </script>
+
+            <!-- </form> -->
+          </div>
+        </div>
       </section>
     </div>
 
@@ -1047,6 +1172,40 @@
       if (this.value) {
         let valueStore = this.value.match(regExp);
         fileName.textContent = valueStore;
+      }
+    });
+
+  </script>
+  <script>
+    const wrapper7 = document.querySelector(".wrapper7");
+    const fileName2 = document.querySelector(".file-name2");
+    const defaultBtn2 = document.querySelector("#default-btn2");
+    const customBtn2 = document.querySelector("#custom-btn2");
+    const cancelBtn2 = document.querySelector("#cancel-btn2 i");
+    const img2 = document.querySelector(".imgd");
+    let regExp2 = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+
+    function defaultBtnActive2() {
+      defaultBtn2.click();
+    }
+    defaultBtn2.addEventListener("change", function() {
+      const file2 = this.files[0];
+      if (file2) {
+        const reader2 = new FileReader();
+        reader2.onload = function() {
+          const result2 = reader2.result;
+          img2.src = result2;
+          wrapper7.classList.add("active");
+        }
+        cancelBtn2.addEventListener("click", function() {
+          img2.src = "";
+          wrapper7.classList.remove("active");
+        })
+        reader2.readAsDataURL(file2);
+      }
+      if (this.value) {
+        let valueStore = this.value.match(regExp2);
+        fileName2.textContent = valueStore;
       }
     });
 
