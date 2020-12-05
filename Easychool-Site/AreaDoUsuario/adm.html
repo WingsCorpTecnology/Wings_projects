@@ -371,7 +371,7 @@
               </div>
               <div class="wrapper5">
                 <div class="input-data">
-                  <input type="number" required>
+                  <input type="number" id="total_vagas" required>
                   <div class="underline"></div>
                   <label>Total de Vagas</label>
                 </div>
@@ -408,7 +408,7 @@
                   </div>
                   <div class="wrapper6">
                     <div class="input-data">
-                      <input type="number" required>
+                      <input type="number" id="vagas_ocupadas" required>
                       <div class="underline"></div>
                       <label>Vagas Ocupadas</label>
                     </div>
@@ -420,11 +420,24 @@
             <a class="popup-close2" href="#">X</a>
           </div>
           <script>
-            function cadastrar_turma() {
+            async function cadastrar_turma() {
               var turma = document.getElementById('valor_turma').innerText;
               var periodo = document.getElementById('valor_periodo').innerText;
-              alert(turma);
-              alert(periodo);
+              var total_vagas = $('#total_vagas').val();
+              var vagas_ocupadas = $('#vagas_ocupadas').val();
+              var date = new Date();
+              var data = date.getDay() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+              var hora = date.getHours() + ":" + date.getMinutes();
+              var data_hora = data + " | " + hora;
+              
+              const insertTurma = await turma_database.new(
+                turma,
+                periodo,
+                total_vagas,
+                vagas_ocupadas,
+                data_hora
+              );
+
             }
 
           </script>

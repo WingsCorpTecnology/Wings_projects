@@ -13,9 +13,11 @@ const turma_database = {};
       periodo: periodo,
       data_hora: data_hora
     };
+    
+    var idEscola = localStorage.getItem("escola_id");
 
     //if (!escola_id)
-    //escola_id = firebase.database().ref().child('escolas').push().key;
+    turma_id = firebase.database().ref().child('Turmas').push().key;
 
     //escola_database.new('gustavo', 'gustavo@gmail.com', '03570-120', 'são paulo', 'são paulo', 'parque savoy city', 'monesia', '34', 'a', '767868957896');
 
@@ -26,15 +28,8 @@ const turma_database = {};
 
     //var escola64 = decodeURIComponent(escape(window.atob(escola)));
 
-    var emailKey = email;
-    emailKey.toString();
-
-    var emailBase64 = btoa(emailKey);
-
-    console.log(emailBase64);
-
     let updates = {};
-    updates['/Turmas/' + emailBase64] = turma_data;
+    updates['/Turmas/' + idEscola + '/' + turma_id + "/"] = turma_data;
 
     let turma_ref = firebase.database().ref();
 
