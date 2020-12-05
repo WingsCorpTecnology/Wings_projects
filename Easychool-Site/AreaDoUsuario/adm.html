@@ -18,6 +18,7 @@
 </head>
 
 <body>
+  <script src="../js/escola_database.js"></script>
   <div class="container">
     <header>
       <div class="logo">
@@ -99,7 +100,8 @@
                 // https://firebase.google.com/docs/storage/web/handle-errors
 
               });
-
+              
+              mandar_valores();
 
               return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
                 var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
@@ -112,7 +114,41 @@
                 localStorage.setItem("escola_id", escola);
                 // ...
               });
+
             }
+
+            function mandar_valores() {
+              var escola = localStorage.getItem("escola_id");
+
+              return firebase.database().ref('/Escola/' + escola + "/").once('value').then(function(snapshot) {
+                var nome_escola = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
+                var email = (snapshot.val() && snapshot.val().email) || 'Anonymous';
+                var cep = (snapshot.val() && snapshot.val().cep) || 'Anonymous';
+                var estado = (snapshot.val() && snapshot.val().uf) || 'Anonymous';
+                var cidade = (snapshot.val() && snapshot.val().cidade) || 'Anonymous';
+                var bairro = (snapshot.val() && snapshot.val().bairro) || 'Anonymous';
+                var rua = (snapshot.val() && snapshot.val().rua) || 'Anonymous';
+                var numero = (snapshot.val() && snapshot.val().numero) || 'Anonymous';
+                var complemento = (snapshot.val() && snapshot.val().complemento) || 'Anonymous';
+                var cnpj = (snapshot.val() && snapshot.val().cnpj) || 'Anonymous';
+                
+                localStorage.setItem("email", email);
+                localStorage.setItem("cep", cep);
+                localStorage.setItem("estado", estado);
+                localStorage.setItem("cidade", cidade);
+                localStorage.setItem("bairro", bairro);
+                localStorage.setItem("rua", rua);
+                localStorage.setItem("numero", numero);
+                localStorage.setItem("complemento", complemento);
+
+                document.getElementById("nome_escola_editar").value = nome_escola;
+                document.getElementById("cnpj_editar").value = cnpj;
+                alert(nome_escola);
+                alert(cnpj);
+
+              })
+            }
+
           </script>
         </div>
       </div>
@@ -129,7 +165,9 @@
               <h3>Turmas</h3>
             </li>
             <!--<li onclick="show(2)">
-              <span><i class="far fa-clock"></i>--><!-- <i class="fas fa-user-clock"></i> --><!--</span>
+              <span><i class="far fa-clock"></i>-->
+            <!-- <i class="fas fa-user-clock"></i> -->
+            <!--</span>
               <h3>Fila de Espera</h3>
             </li>-->
             <li onclick="show(3)">
@@ -380,16 +418,16 @@
               var data = date.getDay() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
               var hora = date.getHours() + ":" + date.getMinutes();
               var data_hora = data + " | " + hora;
-              
+
               const insertTurma = await turma_database.new(
                 turma,
-                periodo,
                 total_vagas,
                 vagas_ocupadas,
+                periodo,
                 data_hora
               );
-              
-              alert("Turma cadastrada")
+
+              alert("Turma cadastrada");
 
             }
 
@@ -423,7 +461,8 @@
               </ul>
             </div>
             <div class="table_body" id="div_lista">
-              <ul><!--Aqui é que começa a fazer a listagem-->
+              <ul>
+                <!--Aqui é que começa a fazer a listagem-->
                 <li>
                   <div class="item">
                     <div class="name">
@@ -446,7 +485,8 @@
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
                     </div>
                   </div>
-                </li><!--Aqui é onde termina uma linha-->
+                </li>
+                <!--Aqui é onde termina uma linha-->
                 <li>
                   <div class="item">
                     <div class="name">
@@ -958,19 +998,19 @@
             <div id="cancel-btn2"><i class="fas fa-times"></i></div>
             <div class="file-name2">File name here</div>
           </div>
-          <button onclick="enviar_foto()" id="custom-btn2">Salvar</button>
+          <button onclick="enviar_foto_escola()" id="custom-btn2">Salvar</button>
           <input id="default-btn2" type="file" hidden>
           <script>
-            function enviar_foto() {
+            function enviar_foto_escola() {
               const ref = firebase.storage().ref();
 
-              const file = document.querySelector('#default-btn').files[0];
+              const file = document.querySelector('#default-btn2').files[0];
 
-              var email_funcionario = localStorage.getItem("email_funci");
+              var email_escola = localStorage.getItem("escola_id");
 
-              var email_funci64 = btoa(email_funcionario);
+              var email_escola64 = btoa(email_escola);
 
-              const name = email_funci64;
+              const name = email_escola;
 
               const metadata = {
                 contentType: file.type
@@ -982,7 +1022,7 @@
                 .then(snapshot => snapshot.ref.getDownloadURL())
                 .then(url => {
                   console.log(url)
-                  const image = document.querySelector('#imagem_perfil')
+                  const image = document.querySelector('#imagem_perfil_escola')
                   image.src = url
                 })
             }
@@ -992,7 +1032,7 @@
           <div class="wrapper3">
             <!-- <form action="#"> -->
             <div class="input-data">
-              <input type="text" id="nome_editar" required>
+              <input type="text" id="nome_escola_editar" required>
               <div class="underline"></div>
               <label>Nome</label>
             </div>
@@ -1009,57 +1049,32 @@
               <label>CEP</label>
             </div>-->
             <br>
-            <button type="submit" class="form__button" onclick="editar()"><i class="fas fa-pen" aria-hidden="true"></i><i> Editar</i></button>
+            <button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Editar</i></button>
             <script>
-              async function editar() {
-                var nome = $('#nome_editar').val(); 
-                var cpf = $('#cpf_editar').val();
-                var nova_senha = $('#senha_editar').val();
-                var senha = localStorage.getItem("senha_funci");
+              async function editar_escola() {
+                var nome = $('#nome_escola_editar').val();
+                var cnpj = $('#cnpj_editar').val();
 
-                var user = firebase.auth().currentUser;
-                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
+               
 
                 // Prompt the user to re-provide their sign-in credentials
 
-                user.reauthenticateWithCredential(credential).then(function() {
-                  user.updatePassword(nova_senha).then(function() {
-                    // Update successful.
-                  }).catch(function(error) {
-                    // An error happened.
-                    console.log(error);
-                  });
-                  // User re-authenticated.
-                }).catch(function(error) {
-                  // An error happened.
-                }); 
-                var cpf = $('#cpf_editar').val();
-                var nova_senha = $('#senha_editar').val();
-                var senha = localStorage.getItem("senha_funci");
-
-                var user = firebase.auth().currentUser;
-                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
-
-                const atualiza = await funcionario_database.new(
+                const atualiza = await escola_database.new(
                   nome,
-                  user.email,
-                  cpf
+                  localStorage.getItem("email"),
+                  localStorage.getItem("cep"),
+                  localStorage.getItem("estado"),
+                  localStorage.getItem("cidade"),
+                  localStorage.getItem("bairro"),
+                  localStorage.getItem("rua"),
+                  localStorage.getItem("numero"),
+                  localStorage.getItem("complemento"),
+                  cnpj
                 );
 
                 // Prompt the user to re-provide their sign-in credentials
 
-                user.reauthenticateWithCredential(credential).then(function() {
-                  user.updatePassword(nova_senha).then(function() {
-                    // Update successful.
-                  }).catch(function(error) {
-                    // An error happened.
-                    console.log(error);
-                  });
-                  // User re-authenticated.
-                }).catch(function(error) {
-                  // An error happened.
-                }); 
-
+            
               }
 
             </script>
@@ -1221,7 +1236,7 @@
     });
 
   </script>
-  
+
   <!--Outros links-->
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
