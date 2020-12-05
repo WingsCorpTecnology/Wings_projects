@@ -7,29 +7,17 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Tela do Usuario</title>
   <link rel="stylesheet" href="file:///E:/fontawesome/css/all.css">
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <link rel="stylesheet" href="style/style.css">
   <link rel="stylesheet" href="fontawesome/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
   <!-- Favicons -->
   <link href="../assets/img/logoEasy.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
 </head>
 
 <body>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
-  <script src="../js/firebase.js"></script>
-  <script src="../js/funcionario_database.js"></script>
-  <script src="../js/turma_database.js"></script>
   <div class="container">
     <header>
       <div class="logo">
@@ -46,9 +34,6 @@
           <li>
             <h3>Sobre</h3>
           </li>
-          <!-- <li>
-            <h3>Contate-nos</h3>
-          </li> -->
           <li class="active">
             <h3><i class="fas fa-sign-out-alt"></i>Sair</h3>
           </li>
@@ -65,19 +50,15 @@
             }
 
           </script>
-          <h3>Home</h3>
+          <h3>Wings</h3>
         </li>
         <li>
           <span><i class="fa fa-address-card" aria-hidden="true"></i></span>
-          <h3>About</h3>
-        </li>
-        <li>
-          <span><i class="fa fa-phone-square" aria-hidden="true"></i></span>
-          <h3>Contact</h3>
+          <h3>Sobre</h3>
         </li>
         <li class="active">
-          <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
-          <h3>Account</h3>
+          <span><i class="fas fa-sign-out-alt" aria-hidden="true"></i></span>
+          <h3>Sair</h3>
         </li>
       </ul>
     </div>
@@ -131,27 +112,10 @@
                 localStorage.setItem("escola_id", escola);
                 // ...
               });
-
-
-
-
-
-              //var email_funci64 = btoa(email_funcionario);
-
-
             }
-
           </script>
         </div>
       </div>
-      <!-- <div class="search">
-        <form>
-          <div class="row">
-            <input type="text" placeholder="Search Profile...">
-            <button type="submit"><span><i class="fa fa-search"></i></span></button>
-          </div>
-        </form>
-      </div> -->
       <div class="side-nav">
         <h2>Geral</h2>
         <nav>
@@ -164,10 +128,10 @@
               <span><i class="fas fa-users"></i></span>
               <h3>Turmas</h3>
             </li>
-            <li onclick="show(2)">
-              <span><i class="far fa-clock"></i><!-- <i class="fas fa-user-clock"></i> --></span>
+            <!--<li onclick="show(2)">
+              <span><i class="far fa-clock"></i>--><!-- <i class="fas fa-user-clock"></i> --><!--</span>
               <h3>Fila de Espera</h3>
-            </li>
+            </li>-->
             <li onclick="show(3)">
               <span><i class="fas fa-cog"></i></span>
               <h3>Configurações</h3>
@@ -178,19 +142,6 @@
             </li>
           </ul>
         </nav>
-      </div>
-      <div class="bt-nav">
-        <ul>
-          <!-- <li class="alert" title="Alert">
-            <span><i class="fa fa-bell"></i></span>
-          </li>
-          <li class="message" title="Message">
-            <span><i class="fa fa-envelope"></i></span>
-          </li>
-          <li class="set" title="Settings">
-            <span><i class="fa fa-cog"></i></span>
-          </li> -->
-        </ul>
       </div>
     </aside>
     <div class="main">
@@ -474,7 +425,7 @@
                     </div>
                     <div class="status">
                       <!-- o unico botão que tem o ink pro modal -->
-                      <span><a href="#popup2"><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></a></span>
+                      <span><a href="#popup2"><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></a></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -496,7 +447,7 @@
                       <span class="canceled">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -518,7 +469,7 @@
                       <span class="hold">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -540,7 +491,7 @@
                       <span class="fixed">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -562,7 +513,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -584,7 +535,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -606,7 +557,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -628,7 +579,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -650,7 +601,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -672,7 +623,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -694,7 +645,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -716,7 +667,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -738,7 +689,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -760,7 +711,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -782,7 +733,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -804,7 +755,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -826,7 +777,7 @@
                       <span class="reopened">Manhã</span>
                     </div>
                     <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fa fa-pencil" aria-hidden="true"></i></i></i></button></span>
+                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
                     </div>
                     <div class="status">
                       <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
@@ -913,7 +864,7 @@
               <label>Senha</label>
             </div>
             <br>
-            <button type="submit" class="form__button" onclick="editar()"><i class="fa fa-pencil" aria-hidden="true"></i><i> Editar</i></button>
+            <button type="submit" class="form__button" onclick="editar()"><i class="fas fa-pen" aria-hidden="true"></i><i> Editar</i></button>
             <script>
               async function editar() {
                 var nome = $('#nome_editar').val();
@@ -1032,18 +983,18 @@
             </div>
             <br><br>
             <div class="input-data">
-              <input type="text" id="cpf_editar" class="form-control" onkeypress="$(this).mask('000.000.000-00');" required>
+              <input type="text" id="cnpj_editar" class="form-control" onkeypress="$(this).mask('00.000.000/0000-00');" required>
               <div class="underline"></div>
-              <label>CPF</label>
+              <label>CNPJ</label>
             </div>
-            <br><br>
+            <!--<br><br>
             <div class="input-data">
-              <input type="password" id="senha_editar" required>
+              <input type="text" id="senha_editar" required>
               <div class="underline"></div>
-              <label>Senha</label>
-            </div>
+              <label>CEP</label>
+            </div>-->
             <br>
-            <button type="submit" class="form__button" onclick="editar()"><i class="fa fa-pencil" aria-hidden="true"></i><i> Editar</i></button>
+            <button type="submit" class="form__button" onclick="editar()"><i class="fas fa-pen" aria-hidden="true"></i><i> Editar</i></button>
             <script>
               async function editar() {
                 var nome = $('#nome_editar').val(); 
@@ -1255,6 +1206,19 @@
     });
 
   </script>
+  
+  <!--Outros links-->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+  <script src="../js/firebase.js"></script>
+  <script src="../js/funcionario_database.js"></script>
+  <script src="../js/turma_database.js"></script>
 </body>
 
 </html>
