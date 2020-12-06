@@ -29,10 +29,10 @@
       </div>
       <div class="nav">
         <ul>
-          <li>
+          <li onclick="wings()">
             <h3>Wings</h3>
           </li>
-          <li>
+          <li onclick="sobre()">
             <h3>Sobre</h3>
           </li>
           <li class="active" onclick="sair()">
@@ -43,11 +43,11 @@
     </header>
     <div class="nav-mobile">
       <ul>
-        <li>
+        <li onclick="wings()">
           <span><i class="fa fa-home" aria-hidden="true"></i></span>
           <h3>Wings</h3>
         </li>
-        <li>
+        <li onclick="sobre()">
           <span><i class="fa fa-address-card" aria-hidden="true"></i></span>
           <h3>Sobre</h3>
         </li>
@@ -66,7 +66,16 @@
             alert(error);
           });
         }
-
+      </script>
+      <script>
+        function sobre(){
+          $(location).attr('href', '../index.html');
+        }
+      </script>
+      <script>
+        function wings(){
+          $(location).attr('href', '../../Wings/index.html');
+        }
       </script>
     </div>
     <div class="m-bar">
