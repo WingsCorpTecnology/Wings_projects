@@ -26,8 +26,14 @@ ul, li{
     list-style: none;
 
 }
-a{
-    text-decoration: none;
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #fff;
+  text-decoration: none;
 }
 header{
     display: flex;

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <link href="../assets/img/logoEasy.png" rel="icon">
+        <title>Entre ou cadastre-se</title>
+</head>
+
+<body>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+        <script src="../js/funcionario_database.js"></script>
+        <script src="../js/firebase.js"></script>
+        <!--Importando Script Jquery-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+        <div class="container">
+                <div class="forms-container">
+                        <div class="signin-signup">
+                                <form class="sign-in-form" method="post">
+                                        <h2 class="title">Cadastre um funcionário</h2>
+                                        <div class="input-field">
+                                                <i class="fa fa-user"></i>
+                                                <input id="nome" type="text" placeholder="Nome" />
+                                        </div>
+                                        <div class="input-field">
+                                                <i class="fa fa-address-book" aria-hidden="true"></i>
+                                                <input id="cpf" type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00');" placeholder="Cpf">
+                                        </div>
+                                        <div class="input-field">
+                                                <i class="fa fa-envelope"></i>
+                                                <input id="email" type="email" placeholder="Email" />
+                                        </div>
+                                        <div class="input-field">
+                                                <i class="fas fa-eye" onclick="show()"></i>
+                                                <input id="senha" type="password" placeholder="Senha" minlength="6" />
+                                        </div>
+                                        <p>É administrador?</p>
+                                        <br><br><br><br>
+                                        <div class="yaoi">
+                                                <input id="adm" type="radio" name="size" id="small" checked="checked" value="true">
+                                                <label for="small">Sim</label>
+                                        </div>
+                                        <div class="yuri">
+                                                <input id="nadm" type="radio" name="size" id="large" value="false">
+                                                <label for="large">Não</label>
+                                        </div>
+                                        <button type="submit" id="button" onclick="cadastrar()" class="btn">Cadastrar</button>
+                                </form>
+
+                                <script>
+                                        async function cadastrar() {
+                                                event.preventDefault();
+                                                console.log("submit");
+
+                                                const insertSucess = await funcionario_database.insert_auth(
+                                                        $('#email').val(),
+                                                        $('#senha').val(),
+                                                );
+
+                                                if (insertSucess.cadastro) {
+                                                        console.log('antes');
+                                                        
+                                                        const cadSucess = await funcionario_database.new(
+                                                                $('#nome').val(),
+                                                                $('#email').val(),
+                                                                $('#cpf').val(),
+                                                        );
+                                                        console.log('depois');
+                                                        $(location).attr('href', '../LoginEasychool/login.html');
+                                                } else {
+                                                        alert(`Erro ao cadastrar funcionario: ${insertSucess.message}`);
+                                                        $(location).attr('href', 'cadastroFuncionario.html');
+                                                }
+
+                                                
+                                        }
+
+                                </script>
+                        </div>
+                </div>
+
+                <div class="panels-container">
+                        <div class="panel left-panel">
+                                <div class="content">
+                                        <h3>Cadastre novos funcionários</h3>
+                                        <p>
+                                                Aproveite nossa plataforma cadastrando novos funcionarios a sua escola já cadastrada!
+                                        </p>
+                                </div>
+                                <img src="img/picture.svg" class="image" alt="" />
+                        </div>
+                </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <script>
+                function show() {
+                        var senha = document.getElementById('senha');
+                        var icon = document.querySelector('.fas');
+                        if (senha.type === "password") {
+                                senha.type = "text";
+                                icon.style.color = "#30F926";
+                        } else {
+                                senha.type = "password";
+                                icon.style.color = "grey";
+                        }
+                }
+
+                function show2() {
+                        var senha2 = document.getElementById('senha2');
+                        var icon2 = document.getElementById('top');
+                        if (senha2.type === "password") {
+                                senha2.type = "text";
+                                icon2.style.color = "#30F926";
+                        } else {
+                                senha2.type = "password";
+                                icon2.style.color = "grey";
+                        }
+                }
+
+        </script>
+        <script src="app.js"></script>
+
+</body>
+
+</html>
