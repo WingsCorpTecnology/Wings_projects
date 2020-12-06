@@ -35,7 +35,7 @@
           <li>
             <h3>Sobre</h3>
           </li>
-          <li class="active">
+          <li class="active" onclick="sair()">
             <h3><i class="fas fa-sign-out-alt"></i>Sair</h3>
           </li>
         </ul>
@@ -45,23 +45,29 @@
       <ul>
         <li>
           <span><i class="fa fa-home" aria-hidden="true"></i></span>
-          <script>
-            function apresentar() {
-              alert("Home");
-            }
-
-          </script>
           <h3>Wings</h3>
         </li>
         <li>
           <span><i class="fa fa-address-card" aria-hidden="true"></i></span>
           <h3>Sobre</h3>
         </li>
-        <li class="active">
+        <li class="active" onclick="sair()">
           <span><i class="fas fa-sign-out-alt" aria-hidden="true"></i></span>
           <h3>Sair</h3>
         </li>
       </ul>
+      <script>
+        async function sair() {
+          const desconectar = await firebase.auth().signOut().then(function() {
+            $(location).attr('href', '../LoginEasychool/login.html');
+            // Sign-out successful.
+          }).catch(function(error) {
+            // An error happened.
+            alert(error);
+          });
+        }
+
+      </script>
     </div>
     <div class="m-bar">
       <span><i class="fa fa-ellipsis-v"></i></span>
@@ -100,7 +106,7 @@
                 // https://firebase.google.com/docs/storage/web/handle-errors
 
               });
-              
+
               mandar_valores();
 
               return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
@@ -131,7 +137,7 @@
                 var numero = (snapshot.val() && snapshot.val().numero) || 'Anonymous';
                 var complemento = (snapshot.val() && snapshot.val().complemento) || 'Anonymous';
                 var cnpj = (snapshot.val() && snapshot.val().cnpj) || 'Anonymous';
-                
+
                 localStorage.setItem("email", email);
                 localStorage.setItem("cep", cep);
                 localStorage.setItem("estado", estado);
@@ -143,9 +149,6 @@
 
                 document.getElementById("nome_escola_editar").value = nome_escola;
                 document.getElementById("cnpj_editar").value = cnpj;
-                alert(nome_escola);
-                alert(cnpj);
-
               })
             }
 
@@ -419,16 +422,59 @@
               var hora = date.getHours() + ":" + date.getMinutes();
               var data_hora = data + " | " + hora;
 
-              const insertTurma = await turma_database.new(
+              /*const insertTurma = await turma_database.new(
                 turma,
                 total_vagas,
                 vagas_ocupadas,
                 periodo,
                 data_hora
-              );
+              );*/
 
               alert("Turma cadastrada");
+              inserir_item_lista();
 
+            }
+
+            function inserir_item_lista() {
+              //const minhaTurma = new turma('9ano', '80', '40', 'tarde');
+              
+              const lista = document.getElementById('lista');
+              
+              var linha = "<li>" +
+                                   "<div class="item">" +
+                                     "<div class="name">"+
+                                      "<span>10° Ano</span>"+
+                                     "</div>"+
+                                     "<div class="phone">"+
+                                      "<span>100</span>"+
+                                     "</div>"+
+                                     "<div class="phone">"+
+                                      "<span>50</span>"+
+                                     "</div>"+
+                                     "<div class="status">"+
+                                      "<span class="open">Todo dia</span>"+
+                                     "</div>"+
+                                     "<div class="status">"+
+                                      "<span><a href="#popup2"><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></a></span>"+
+                                     "</div>"+
+                                     "<div class="status">"+
+                                      "<span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true">"+
+                                     "</i></i></i></button> </span>"+
+                                     "</div>"+
+                                   "</div>"+
+                                 "</li>";
+              
+              const item = document.createElement(linha);
+              
+              lista.appendChild(item);
+              
+            }
+            
+            function turma(serie, total_vagas, vagas_ocupadas, periodo){
+              this.serie = serie;
+              this.total_vagas = total_vagas;
+              this.vagas_ocupadas = vagas_ocupadas;
+              this.periodo = periodo;
             }
 
           </script>
@@ -461,7 +507,7 @@
               </ul>
             </div>
             <div class="table_body" id="div_lista">
-              <ul>
+              <ul id="lista">
                 <!--Aqui é que começa a fazer a listagem-->
                 <li>
                   <div class="item">
@@ -1055,7 +1101,7 @@
                 var nome = $('#nome_escola_editar').val();
                 var cnpj = $('#cnpj_editar').val();
 
-               
+
 
                 // Prompt the user to re-provide their sign-in credentials
 
@@ -1074,7 +1120,7 @@
 
                 // Prompt the user to re-provide their sign-in credentials
 
-            
+
               }
 
             </script>
