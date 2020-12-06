@@ -524,7 +524,7 @@
                       <span class="open">Tarde</span>
                     </div>
                     <div class="status">
-                      <!-- o unico botão que tem o ink pro modal -->
+                      <!-- o unico botão que tem o link pro modal -->
                       <span><a href="#popup2"><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></a></span>
                     </div>
                     <div class="status">
@@ -1075,7 +1075,7 @@
 
           </script>
 
-          <div class="wrapper3">
+          <div class="wrapper8">
             <!-- <form action="#"> -->
             <div class="input-data">
               <input type="text" id="nome_escola_editar" required>
@@ -1088,6 +1088,171 @@
               <div class="underline"></div>
               <label>CNPJ</label>
             </div>
+            <br><br>
+            <div class="input-data">
+              <input type="text" id="cep_editar" class="form-control" onkeypress="$(this).mask('00.000-000')" required>
+              <div class="underline"></div>
+              <label>CEP</label>
+            </div>
+            <br><br>
+            <div class="input-data">
+              <input type="number" id="numero_editar" class="form-control" required>
+              <div class="underline"></div>
+              <label>Número</label>
+            </div>
+            <br><br>
+            <div class="input-data">
+              <input type="text" id="comple_editar" class="form-control" required>
+              <div class="underline"></div>
+              <label>Complemento</label>
+            </div>
+
+            <div class="popup3" id="popup3">
+              <div class="popup-inner3">
+                <div class="popup-photo3">
+                  <div class="container6">
+                    <h2>Série</h2>
+  
+                    <div class="select-box">
+                      <div class="options-container">
+                        <div class="option">
+                          <input type="radio" class="radio" id="automobiles" name="category" />
+                          <label for="automobiles">Berçario 1</label>
+                        </div>
+  
+                        <div class="option">
+                          <input type="radio" class="radio" id="film" name="category" />
+                          <label for="film">Berçario 2</label>
+                        </div>
+  
+                        <div class="option">
+                          <input type="radio" class="radio" id="science" name="category" />
+                          <label for="science">Maternal 1</label>
+                        </div>
+  
+                        <div class="option">
+                          <input type="radio" class="radio" id="art" name="category" />
+                          <label for="art">Maternal 2</label>
+                        </div>
+  
+                        <div class="option">
+                          <input type="radio" class="radio" id="music" name="category" />
+                          <label for="music">Pré 1</label>
+                        </div>
+  
+                        <div class="option">
+                          <input type="radio" class="radio" id="travel" name="category" />
+                          <label for="travel">Pré 2</label>
+                        </div>
+  
+                        <div class="option">
+                          <input type="radio" class="radio" id="sports" name="category" />
+                          <label for="sports">1°Ano</label>
+                        </div>
+  
+                        <div class="option">
+                          <input type="radio" class="radio" id="news" name="category" />
+                          <label for="news">2°Ano</label>
+                        </div>
+  
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">3°Ano</label>
+                        </div>
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">4°Ano</label>
+                        </div>
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">5°Ano</label>
+                        </div>
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">6°Ano</label>
+                        </div>
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">7°Ano</label>
+                        </div>
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">8°Ano</label>
+                        </div>
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">9°Ano</label>
+                        </div>
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">1°Médio</label>
+                        </div>
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">2°Médio</label>
+                        </div>
+                        <div class="option">
+                          <input type="radio" class="radio" id="tutorials" name="category" />
+                          <label for="tutorials">3°Médio</label>
+                        </div>
+                      </div>
+  
+                      <div class="selected" id="valor_turma">
+                        Selecione a série&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrapper5">
+                  <div class="input-data">
+                    <input type="number" id="total_vagas" required>
+                    <div class="underline"></div>
+                    <label>Total de Vagas</label>
+                  </div>
+                </div>
+                <div class="popup-photo4">
+                  <div class="container7">
+                    <h2>Período</h2>
+  
+                    <div class="select-box2">
+                      <div class="options-container2">
+                        <div class="option2">
+                          <input type="radio" class="radio2" id="automobiles2" name="category2" />
+                          <label for="automobiles2">Manhã</label>
+                        </div>
+  
+                        <div class="option2">
+                          <input type="radio" class="radio2" id="film2" name="category2" />
+                          <label for="film">Tarde</label>
+                        </div>
+  
+                        <div class="option2">
+                          <input type="radio" class="radio2" id="science2" name="category2" />
+                          <label for="science">Noite</label>
+                        </div>
+  
+                        <div class="option2">
+                          <input type="radio" class="radio2" id="art2" name="category2" />
+                          <label for="art">Integral</label>
+                        </div>
+                      </div>
+  
+                      <div class="selected2" id="valor_periodo">Selecione o período&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+                      </div>
+                    </div>
+                    <div class="wrapper6">
+                      <div class="input-data">
+                        <input type="number" id="vagas_ocupadas" required>
+                        <div class="underline"></div>
+                        <label>Vagas Ocupadas</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="form__button4" onclick="cadastrar_turma()"><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
+              </div>
+              <a class="popup-close3" href="#">X</a>
+            </div>
             <!--<br><br>
             <div class="input-data">
               <input type="text" id="senha_editar" required>
@@ -1095,7 +1260,7 @@
               <label>CEP</label>
             </div>-->
             <br>
-            <button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Editar</i></button>
+            <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
             <script>
               async function editar_escola() {
                 var nome = $('#nome_escola_editar').val();
@@ -1127,6 +1292,7 @@
 
             <!-- </form> -->
           </div>
+          
         </div>
       </section>
     </div>

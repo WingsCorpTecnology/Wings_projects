@@ -678,6 +678,116 @@ aside .search button{
   .form__button3:hover{
     box-shadow: 0 10px 36px rgba(0,0,0,.15);
   }
+  /* Inputs do perfil da escola  */
+  .wrapper8{
+    position: absolute;
+    left: 120%;
+    top: -1%;
+    width: 450px;
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  }
+  .wrapper8 .input-data{
+    height: 40px;
+    width: 100%;
+    position: relative;
+  }
+  .wrapper8 .input-data input{
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 17px;
+    border-bottom: 2px solid silver;
+  }
+  .input-data input:focus ~ label,
+  .input-data input:valid ~ label{
+    transform: translateY(-20px);
+    font-size: 15px;
+    color: #FF7C00;
+  }
+  .wrapper8 .input-data label{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    color: grey;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  .input-data .underline{
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    bottom: 0;
+  }
+  .input-data .underline:before{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: #FF7C00;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+  }
+  .input-data input:focus ~ .underline:before,
+  .input-data input:valid ~ .underline:before{
+    transform: scaleX(1);
+  }
+  .form__button{
+    display: block;
+    margin-left: auto;
+    padding: .75rem 2rem;
+    outline: none;
+    border: none;
+    background-color: #5CD83E ;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .3s;
+  }
+  .form__button:hover{
+    box-shadow: 0 10px 36px rgba(0,0,0,.15);
+  }
+  /* parte das turmas botoes de editar e cadastro */
+  .form__button2{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    padding: .3rem 1rem;
+    outline: none;
+    border: none;
+    background-color: #5CD83E ;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .3s;
+    top: 100%;
+    left: 25%;
+  }
+  .form__button2:hover{
+    box-shadow: 0 10px 36px rgba(0,0,0,.15);
+  }
+  .form__button3{
+    position: relative;
+    display: block;
+    margin-left: 80%;
+    padding: .75rem 2rem;
+    outline: none;
+    border: none;
+    background-color: #FF7C00/* #e92c2c */ ;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: .6rem;
+    cursor: pointer;
+    transition: .3s;
+    
+  }
+  .form__button3:hover{
+    box-shadow: 0 10px 36px rgba(0,0,0,.15);
+  }
 
   /* BARRA DE PESQUISA FUNCIONARIOS */
   ::selection{
@@ -1473,6 +1583,101 @@ aside .search button{
   text-transform: uppercase;
   cursor: pointer;
   background: linear-gradient(135deg,#5CD83E  0%,#FF7C00 100%);
+}
+
+/* modal cadastro turmas */
+
+.popup3{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 85vw;
+  height: 90vh;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .80);
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  transition: 0.74s ease-in-out;
+}
+.popup-inner3{
+  position: relative;
+  bottom: -100vw;
+  right: -100vh;
+  display: flex;
+  align-items:center;
+  max-width: 800px;
+  max-height: 599px;
+  width: 59%;
+  height: 80%;
+  background-color: white;
+  transform: rotate(32deg);
+  transition: 0.74s ease-in-out;
+}
+.popup-photo3{
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+  width: 40%;
+  height: 100%;
+  overflow: hidden;
+}
+.popup-photo4{
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+  width: 40%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  top: -40px;
+  right: -100px;
+}
+.popup-photo3 img{
+  width: auto;
+  height: 100%;
+
+}
+.popup-text3{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 59%;
+  height: 100%;
+  padding: 4rem;
+  position: relative;
+  top: -30%;
+}
+
+.popup3:target{
+  visibility: visible;
+  opacity: 1;
+}
+.popup3:target .popup-inner3{
+  bottom: 0;
+  right: 0;
+  transform: rotate(0);
+
+}
+.popup-close3{
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 3rem;
+  height: 3rem;
+  font-size: 0.875rem;
+  font-size: 400;
+  border-radius: 100%;
+  background-color: #0a0a0a;
+  z-index: 4;
+  color: white;
+  line-height: 3rem;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 
