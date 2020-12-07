@@ -1,5 +1,6 @@
 package com.cursoandroid.easychool_v4.adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,19 @@ import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.model.Escola;
 
 import java.math.BigDecimal;
+import java.net.URI;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     private List<Escola> escolas;
     private List<Double> distancia;
+    //private List<Uri> perfil;
 
-    public Adapter(List<Escola> escolas, List<Double> distancia) {
+    public Adapter(List<Escola> escolas, List<Double> distancia/*, List<Uri> perfil*/) {
         this.escolas = escolas;
         this.distancia = distancia;
+        //this.perfil = perfil;
     }
 
     @Override

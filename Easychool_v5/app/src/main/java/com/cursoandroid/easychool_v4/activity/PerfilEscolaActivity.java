@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.cursoandroid.easychool_v4.Base64Custom;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.adapter.AdapterTelefones;
@@ -28,11 +30,18 @@ import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.config.RecyclerItemClickListener;
 import com.cursoandroid.easychool_v4.model.Escola;
 import com.cursoandroid.easychool_v4.model.Turma;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +62,7 @@ public class PerfilEscolaActivity extends AppCompatActivity {
     private TextView txtNome, txtEndereco, txtEstadoCidade, txtEmail;
     private Long telefoneSelecionado;
     private List<Turma> listaTurmas = new ArrayList<>();
+    private ImageView imgEscola;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -66,6 +76,7 @@ public class PerfilEscolaActivity extends AppCompatActivity {
         txtEndereco = findViewById(R.id.txt_rua_escola);
         txtEstadoCidade = findViewById(R.id.txt_cidade_estado_escola);
         txtEmail = findViewById(R.id.txt_email_escola);
+        imgEscola = findViewById(R.id.img_perfil_escola);
 
         //Configurar escola (mostrar os dados)
         preencherCampos();
@@ -129,13 +140,30 @@ public class PerfilEscolaActivity extends AppCompatActivity {
         finish();
     }
 
+    @SuppressLint("SetTextI18n")
     private void preencherCampos() {
         txtNome.setText(escolaAtual.getNome());
         txtEndereco.setText(escolaAtual.getRua()+ ", " +escolaAtual.getNumero()+ " - " +escolaAtual.getBairro());
         txtEstadoCidade.setText(escolaAtual.getCidade()+ " - " +escolaAtual.getUf());
         txtEmail.setText(Base64Custom.decodificarBase64(escolaAtual.getId()));
 
-        Log.i("Email", txtEmail.getText().toString());
+        //Log.i("Email", txtEmail.getText().toString());
+        StorageReference storageRef = ConfiguracaoFirebase.getStorage();
+        StorageReference storageEscolarRef = storageRef.child(escolaAtual.getId());
+
+        storageEscolarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getApplicationContext()).load(uri).into(imgEscola);
+
+                Log.i("teste", "cheguei");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("teste", "deu ruim");
+            }
+        });
     }
 
     public void recuperarTelefones(){

@@ -3,14 +3,17 @@ package com.cursoandroid.easychool_v4.fragments;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -21,6 +24,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.cursoandroid.easychool_v4.R;
 import com.cursoandroid.easychool_v4.activity.PerfilEscolaActivity;
 import com.cursoandroid.easychool_v4.adapter.Adapter;
@@ -30,11 +34,14 @@ import com.cursoandroid.easychool_v4.helper.Base64Custom;
 import com.cursoandroid.easychool_v4.helper.CalcularDistancia;
 import com.cursoandroid.easychool_v4.helper.Geocoding;
 import com.cursoandroid.easychool_v4.model.Escola;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -61,6 +68,7 @@ public class PesquisaFrament extends Fragment {
     private BigDecimal bd;
     private List<Double> distancia = new ArrayList<>();
     private List<Integer> filtroDistancia = new ArrayList<>();
+    private List<ImageView> perfilEscola = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
