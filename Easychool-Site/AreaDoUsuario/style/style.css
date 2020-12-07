@@ -1758,10 +1758,11 @@ input:checked[type="checkbox"]::before{
   margin-top: 10%;
   padding: 10px;
   position: absolute;
-  right: -10%;
+  right: -3%;
 }
 .container8 h2{
   margin: 16px;
+  font-size: 20px;
 }
 
 .select-box3 {
@@ -1809,7 +1810,7 @@ input:checked[type="checkbox"]::before{
 }
 
 .select-box3 .options-container3.active {
-  max-height: 80px;
+  max-height: 65px;
   opacity: 1;
   overflow-y: scroll;
 }
@@ -1834,6 +1835,7 @@ input:checked[type="checkbox"]::before{
 .selected3 {
   padding: 12px 24px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .select-box3 .option3:hover {
@@ -1920,6 +1922,56 @@ input:checked[type="checkbox"]::before{
 .box ul li:hover span{
   background: #fff;
   color:#FE8C3D;
+}
+
+/* inpput dos telefones */
+ .input-data2{
+  height: 40px;
+  width: 90%;
+  position: absolute;
+  top: 47%;
+  border-radius: 12px;
+}
+.input-data2 input{
+  height: 100%;
+  width: 90%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid silver;
+}
+.input-data2 input:focus ~ label,
+.input-data2 input:valid ~ label{
+  transform: translateY(-20px);
+  font-size: 15px;
+  color: #FF7C00;
+}
+.input-data2 label{
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  color: grey;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.input-data2 .underline{
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  bottom: 0;
+}
+.input-data2 .underline:before{
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: #FF7C00;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.input-data2 input:focus ~ .underline:before,
+.input-data2 input:valid ~ .underline:before{
+  transform: scaleX(1);
 }
 
 
