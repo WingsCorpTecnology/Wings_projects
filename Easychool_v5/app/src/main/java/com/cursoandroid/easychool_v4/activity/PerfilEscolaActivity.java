@@ -168,7 +168,7 @@ public class PerfilEscolaActivity extends AppCompatActivity {
 
     public void recuperarTurmas(){
         turmaRef = firebaseRef.child("Turmas").child(Base64Custom.codificarBase64(txtEmail.getText().toString()));
-        Log.i("teste", Base64Custom.codificarBase64(txtEmail.getText().toString()));
+        //Log.i("teste", Base64Custom.codificarBase64(txtEmail.getText().toString()));
 
         turmaRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -184,9 +184,7 @@ public class PerfilEscolaActivity extends AppCompatActivity {
                     turma.setVagasTotal(Integer.parseInt((String) Objects.requireNonNull(dados.child("total_vagas").getValue())));
                     turma.setVagasOcupadas(Integer.parseInt((String) Objects.requireNonNull(dados.child("vagas_ocupadas").getValue())));
                     turma.setUltimaAlteracao((String) Objects.requireNonNull(dados.child("data_hora").getValue()));
-                    //turma.set
 
-                    //Log.i("teste", "Vagas: " +turma.getUltimaAlteracao());
                     listaTurmas.add(turma);
                 }
 

@@ -1,5 +1,6 @@
 package com.cursoandroid.easychool_v4.adapter;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,18 +31,18 @@ public class AdapterTurmas extends RecyclerView.Adapter<AdapterTurmas.MyViewHold
         return new MyViewHolder(itemLista);
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Turma turma = turmas.get(position);
 
-        Log.i("teste", "ultima alteração: "+turma.getUltimaAlteracao());
+        //Log.i("teste", "ultima alteração: "+turma.getUltimaAlteracao());
 
         holder.turma.setText(turma.getSerie());
-        holder.vagas.setText(String.valueOf(turma.getVagasTotal() - turma.getVagasOcupadas()));
+        holder.vagas.setText(turma.getVagasTotal() - turma.getVagasOcupadas()+ " vagas de " +turma.getVagasTotal());
         holder.ultimaAlteracao.setText(turma.getUltimaAlteracao());
         holder.periodo.setText(turma.getPeriodo());
-        holder.nivel.setText(turma.getNivelEducacao());
 
         if(turma.getPeriodo().equals("Noite")){
             holder.periodo.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_brightness_3_24, 0);
@@ -54,7 +55,7 @@ public class AdapterTurmas extends RecyclerView.Adapter<AdapterTurmas.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView turma, vagas, ultimaAlteracao, periodo, nivel;
+        TextView turma, vagas, ultimaAlteracao, periodo;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,7 +64,6 @@ public class AdapterTurmas extends RecyclerView.Adapter<AdapterTurmas.MyViewHold
             vagas = itemView.findViewById(R.id.txt_qtd_vagas);
             ultimaAlteracao = itemView.findViewById(R.id.txt_data_hora_ultima_alteracao);
             periodo = itemView.findViewById(R.id.txt_periodo);
-            nivel = itemView.findViewById(R.id.txt_nivel_educacao);
         }
     }
 }

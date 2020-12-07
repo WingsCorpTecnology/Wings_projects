@@ -68,7 +68,7 @@ public class Turma implements Serializable {
         return nivelEducacao;
     }
 
-    private void setNivelEducacao() {
+    public void setNivelEducacao() {
         NivelEducacao nivel = new NivelEducacao();
         AnosEscolares anos = new AnosEscolares();
 
@@ -93,12 +93,24 @@ public class Turma implements Serializable {
         }
     }
 
-    private void setNivelEducacao(String nivel){
+    public void setNivelEducacao(String nivel){
         NivelEducacao niveis = new NivelEducacao();
         List<String> nivelEd = niveis.getNiveis();
 
         for(int i = 0; i < nivelEd.size(); i++) {
             if (nivel.equals(nivelEd.get(i))){
+                if(i < 6){
+                    nivelEducacao = nivelEd.get(0);
+                }
+                else if(i < 11){
+                    nivelEducacao = nivelEd.get(1);
+                }
+                else if(i < 15){
+                    nivelEducacao = nivelEd.get(2);
+                }
+                else{
+                    nivelEducacao = nivelEd.get(3);
+                }
                 if(i == 4){
                     nivelEducacao = nivelEd.get(4);
                 }
