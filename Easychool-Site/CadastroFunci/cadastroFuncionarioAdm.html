@@ -81,7 +81,7 @@
                                                                 $('#cpf').val(),
                                                         );
                                                         console.log('depois');
-                                                        $(location).attr('href', '../LoginEasychool/login.html');
+                                                        window.close();
                                                 } else {
                                                         alert(`Erro ao cadastrar funcionario: ${insertSucess.message}`);
                                                         $(location).attr('href', 'cadastroFuncionario.html');
