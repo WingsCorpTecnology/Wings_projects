@@ -96,8 +96,8 @@
                             var email_perfil = localStorage.getItem("email_funci");
                             var email_perfil64 = btoa(email_perfil);
                             var userId = email_perfil64;
-                            console.log(email_perfil);
-                            console.log(userId);
+                            //console.log(email_perfil);
+                            //console.log(userId);
 
                             var storageRef = firebase.storage();
 
@@ -170,12 +170,23 @@
                             return await firebase.database().ref('/Funcionario/').once('value').then(function(snapshot) {
                                 var id_func = [snapshot.val()];
                                 var nome_func;
+                                var email_perfil = localStorage.getItem("email_funci");
+                                var email_perfil64 = btoa(email_perfil);
+                                //var userId = email_perfil64;
+                                var storageRef = firebase.storage();
+                                //var starsRef = storageRef.ref(userId);
+
+                                // Get the download URL
+                                
 
                                 var funcionario = Object.values(id_func[0]);
 
                                 for(var i = 0; i < funcionario.length; i++){
-                                    if(funcionario[i].escola == localStorage.getItem("escola_id")){
+                                    if(funcionario[i].escola == localStorage.getItem("escola_id") && funcionario[i].email != email_perfil){
                                         nome_func = funcionario[i].nome;
+                                        var email_func = funcionario[i].email;
+                                        var func_id = btoa(email_func);
+                                        var starsRef = storageRef.ref(func_id);
 
                                         console.log(nome_func);
 
@@ -186,7 +197,7 @@
                                         var elemento_pai = document.createElement('div');
 
                                         //criar elemento filho imagem
-                                        var elemento_filho_imagem = document.createElement('img', 'Kant.jpg');
+                                        var elemento_filho_imagem;
 
                                         //criar elemento filho texto
                                         var elemento_filho_texto = document.createElement('p');
@@ -194,35 +205,23 @@
                                         //criar texto
                                         elemento_filho_texto.textContent = nome_func;
 
+                                        //recuperando a imagem do funcionario
+                                        starsRef.getDownloadURL().then(function(url) {
+                                        // Insert url into an <img> tag to "download"
+                                        const image = document.querySelector('#img_funcionario')
+                                        image.src = url
+                                        }).catch(function(error) {
+                                            console.log(error)
+                                        });
+
                                         //colocar a imagem no elemento pai
-                                        elemento_pai.innerHTML = '<img width="200" src="img/Kant.jpg" alt="">';
+                                        elemento_pai.innerHTML = '<img width="200" src="img/profile-default.png" alt="" id="img_funcionario">';
                                         elemento_pai.appendChild(elemento_filho_texto);
 
                                         //colocar o elemento pai no elemento avo
                                         elemento_avo.appendChild(elemento_pai);
                                     }
-
-                                    //console.log(funcionario[i].nome);
                                 }
-
-                                //alert(nome_func);
-
-                                var teste = document.getElementById("nome_teste");
-                                teste.innerText = nome_func;
-                                //id_func[0]
-                                
-                                //var nome_func = (snapshot.val && snapshot.val().nome);
-                                //var email_func = (snapshot.val && snapshot.val().email);
-                                //var func_adm = (snapshot.val && snapshot.val().adm) || 'Esse funcionario não é um admistrador';
-
-                                /*<div class="posts">
-                                    <img width="200" src="img/Kant.jpg" alt="">
-                                    <p id="nome_teste"></p>
-                                </div>*/
-                                //console.log(id_func.length);
-                                //console.log(id_func);
-                                //console.log("teste");
-                                //document.getElementById("nome_funcionario");
                             })
                         }
                     </script>
@@ -1135,7 +1134,6 @@
                             <div class="underline"></div>
                             <label>CEP</label>
                         </div>
-<<<<<<< HEAD
                         <br><br>
                         <div class="input-data">
                             <input type="number" id="numero_editar" class="form-control" required>
@@ -1189,13 +1187,19 @@
                                                     <label for="science">Federal</label>
                                                 </div>
                                             </div>
-
+                
                                             <div class="selected3" id="valor_periodo">Selecione a instituição&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="box">
+                                    <br><br>
+                                        <div class="input-data2">
+                                            <input type="text" id="phone_editar" required>
+                                                <div class="underline2"></div>
+                                            <label>Telefone:</label>
+                                        </div>
+                                    </div>
+                                    <div class="box">
                                     <h2 class="h2">Telefones</h2>
                                     <ul>
                                         <li><span>1</span>2555255363</li>
@@ -1204,96 +1208,44 @@
                                         <li><span>4</span>7426467426674</li>
                                         <li><span>5</span>7646426747</li>
                                     </ul>
+                                    </div>
+                                    <button type="submit" class="form__button6" onclick=""><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
                                 </div>
-                                <button type="submit" class="form__button6" onclick=""><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
+                                <a class="popup-close3" href="#">X</a>
+                                </div>
+                            
+                                <br>
+                                <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
+                                <script>
+                                    async function editar_escola() {
+                                        var nome = $('#nome_escola_editar').val();
+                                        var cnpj = $('#cnpj_editar').val();
+                                        var cep = $('cep_editar').val();
+                                        var numero = $('numero_editar').val();
+                                        var complemento = $('comple_editar').val();
+
+
+                                        // Prompt the user to re-provide their sign-in credentials
+
+                                        const atualiza = await escola_database.new(
+                                            nome,
+                                            localStorage.getItem("email"),
+                                            localStorage.getItem("cep"),
+                                            localStorage.getItem("estado"),
+                                            localStorage.getItem("cidade"),
+                                            localStorage.getItem("bairro"),
+                                            localStorage.getItem("rua"),
+                                            localStorage.getItem("numero"),
+                                            localStorage.getItem("complemento"),
+                                            cnpj
+                                        );
+                                    }
+                                </script>
                             </div>
-                            <a class="popup-close3" href="#">X</a>
                         </div>
-                        <!--<br><br>
-            <div class="input-data">
-              <input type="text" id="senha_editar" required>
-              <div class="underline"></div>
-              <label>CEP</label>
-            </div>-->
-                        <br>
-                        <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
-                        <script>
-                            async function editar_escola() {
-                                var nome = $('#nome_escola_editar').val();
-                                var cnpj = $('#cnpj_editar').val();
-                                var cep = $('cep_editar').val();
-                                var numero = $('numero_editar').val();
-                                var complemento = $('comple_editar').val();
-=======
-                      </div>
-  
-                      <div class="selected3" id="valor_periodo">Selecione a instituição&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
-                      </div>
                     </div>
-                  </div>
-                  <br><br>
-                      <div class="input-data2">
-                          <input type="text" id="phone_editar" required>
-                            <div class="underline2"></div>
-                        <label>Telefone:</label>
-                    </div>
-                </div>
-                <div class="box">
-                  <h2 class="h2">Telefones</h2>
-                  <ul>
-                    <li><span>1</span>2555255363</li>
-                    <li><span>2</span>336763673673</li>
-                    <li><span>3</span>66267264</li>
-                    <li><span>4</span>7426467426674</li>
-                    <li><span>5</span>7646426747</li>
-                  </ul>
-                </div>
-                <button type="submit" class="form__button6" onclick=""><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
-              </div>
-              <a class="popup-close3" href="#">X</a>
-            </div>
-           
-            <br>
-            <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
-            <script>
-              async function editar_escola() {
-                var nome = $('#nome_escola_editar').val();
-                var cnpj = $('#cnpj_editar').val();
-                var cep = $('cep_editar').val();
-                var numero = $('numero_editar').val();
-                var complemento = $('comple_editar').val();
->>>>>>> 6055d8fcc123e47c48f35f8e33f518caa1e592ff
-
-
-                                // Prompt the user to re-provide their sign-in credentials
-
-                                const atualiza = await escola_database.new(
-                                    nome,
-                                    localStorage.getItem("email"),
-                                    localStorage.getItem("cep"),
-                                    localStorage.getItem("estado"),
-                                    localStorage.getItem("cidade"),
-                                    localStorage.getItem("bairro"),
-                                    localStorage.getItem("rua"),
-                                    localStorage.getItem("numero"),
-                                    localStorage.getItem("complemento"),
-                                    cnpj
-                                );
-
-                                // Prompt the user to re-provide their sign-in credentials
-
-
-                            }
-                        </script>
-
-                        <!-- </form> -->
-                    </div>
-
                 </div>
             </section>
-            </div>
-
-        </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="js/scriptFunc.js"></script>
