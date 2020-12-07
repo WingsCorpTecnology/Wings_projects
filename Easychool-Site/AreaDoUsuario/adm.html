@@ -145,7 +145,7 @@
                 var bairro = (snapshot.val() && snapshot.val().bairro) || 'Anonymous';
                 var rua = (snapshot.val() && snapshot.val().rua) || 'Anonymous';
                 var numero = (snapshot.val() && snapshot.val().numero) || 'Anonymous';
-                var complemento = (snapshot.val() && snapshot.val().complemento) || 'Anonymous';
+                var complemento = (snapshot.val() && snapshot.val().complemento) || '';
                 var cnpj = (snapshot.val() && snapshot.val().cnpj) || 'Anonymous';
 
                 localStorage.setItem("email", email);
@@ -159,6 +159,9 @@
 
                 document.getElementById("nome_escola_editar").value = nome_escola;
                 document.getElementById("cnpj_editar").value = cnpj;
+                document.getElementById("cep_editar").value = cep;
+                document.getElementById("numero_editar").value = numero;
+                document.getElementById("comple_editar").value = complemento;
               })
             }
 
@@ -210,17 +213,6 @@
             </a>
           </div>
         </div>
-        <!-- <div class="modal" id="modal">
-          <div class="modal__content">
-            <a href="#" class="modal__close">&times;</a>
-            <h2 class="modal__heading">Desi Developer</h2>
-            <p class="modal__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis possimus inventore suscipit mollitia, odit aliquam laudantium praesentium porro hic asperiores expedita obcaecati earum ullam, nisi laborum accusamus, id placeat tenetur?
-            Consequatur, neque. Explicabo, reiciendis quia distinctio eius facere pariatur expedita, amet hic alias illum harum inventore, ullam tempore quos. Quod, repellat ratione culpa qui harum blanditiis atque voluptatem iste id.
-            Rerum veniam ipsum quisquam mollitia vel fuga dicta tempora. Magni, labore beatae eaque suscipit mollitia pariatur impedit accusantium explicabo aspernatur adipisci sapiente eveniet qui facilis in voluptas nisi! Ipsum, praesentium!
-            Quos, ex. Ipsum asperiores quasi, nam atque voluptatibus reprehenderit repellat fuga pariatur consequatur quae hic, numquam commodi illo aut. Laborum et natus magni illum tenetur est, minus eligendi quisquam facilis.
-            Quis enim sit facilis, dolor, ab quas sint sapiente ut voluptatibus excepturi dolorum, consequuntur doloremque error facere? Nisi vel placeat magni asperiores, id, aliquid quisquam eos et eum repellat molestiae.</p>
-          </div>
-       </div> -->
         <div class="popup" id="popup">
           <div class="popup-inner">
             <div class="popup-photo">
@@ -1183,7 +1175,7 @@
                     <li><span>5</span>7646426747</li>
                   </ul>
                 </div>
-                <button type="submit" class="form__button4" onclick="cadastrar_turma()"><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
+                <button type="submit" class="form__button6" onclick="cadastrar_turma()"><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
               </div>
               <a class="popup-close3" href="#">X</a>
             </div>
@@ -1199,7 +1191,9 @@
               async function editar_escola() {
                 var nome = $('#nome_escola_editar').val();
                 var cnpj = $('#cnpj_editar').val();
-
+                var cep = $('cep_editar').val();
+                var numero = $('numero_editar').val();
+                var complemento = $('comple_editar').val();
 
 
                 // Prompt the user to re-provide their sign-in credentials
