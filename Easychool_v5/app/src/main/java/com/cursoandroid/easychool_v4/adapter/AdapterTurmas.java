@@ -1,6 +1,7 @@
 package com.cursoandroid.easychool_v4.adapter;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +35,15 @@ public class AdapterTurmas extends RecyclerView.Adapter<AdapterTurmas.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Turma turma = turmas.get(position);
 
+        Log.i("teste", "ultima alteração: "+turma.getUltimaAlteracao());
+
         holder.turma.setText(turma.getSerie());
-        holder.vagas.setText(turma.getVagasDisponiveis());
+        holder.vagas.setText(String.valueOf(turma.getVagasTotal() - turma.getVagasOcupadas()));
         holder.ultimaAlteracao.setText(turma.getUltimaAlteracao());
         holder.periodo.setText(turma.getPeriodo());
         holder.nivel.setText(turma.getNivelEducacao());
 
-        if(turma.getPeriodo().equals("Noturno")){
+        if(turma.getPeriodo().equals("Noite")){
             holder.periodo.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_brightness_3_24, 0);
         }
     }
@@ -58,7 +61,7 @@ public class AdapterTurmas extends RecyclerView.Adapter<AdapterTurmas.MyViewHold
 
             turma = itemView.findViewById(R.id.txt_ano_turma);
             vagas = itemView.findViewById(R.id.txt_qtd_vagas);
-            ultimaAlteracao = itemView.findViewById(R.id.txt_periodo);
+            ultimaAlteracao = itemView.findViewById(R.id.txt_data_hora_ultima_alteracao);
             periodo = itemView.findViewById(R.id.txt_periodo);
             nivel = itemView.findViewById(R.id.txt_nivel_educacao);
         }
