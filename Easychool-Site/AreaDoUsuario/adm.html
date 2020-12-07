@@ -2,1403 +2,1430 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Tela do Usuario</title>
-  <link rel="stylesheet" href="file:///E:/fontawesome/css/all.css">
-  <link rel="stylesheet" href="style/style.css">
-  <link rel="stylesheet" href="fontawesome/css/all.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tela do Usuario</title>
+    <link rel="stylesheet" href="file:///E:/fontawesome/css/all.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-  <!-- Favicons -->
-  <link href="../assets/img/logoEasy.png" rel="icon">
+    <!-- Favicons -->
+    <link href="../assets/img/logoEasy.png" rel="icon">
 
 </head>
 
 <body>
-  <script src="../js/escola_database.js"></script>
-  <div class="container">
-    <header>
-      <div class="logo">
-        <h1>Easychool</h1>
-      </div>
-      <div class="bars">
-        <span><i class="fa fa-bars"></i></span>
-      </div>
-      <div class="nav">
-        <ul>
-          <li onclick="wings()">
-            <h3>Wings</h3>
-          </li>
-          <li onclick="sobre()">
-            <h3>Sobre</h3>
-          </li>
-          <li class="active" onclick="sair()">
-            <h3><i class="fas fa-sign-out-alt"></i>Sair</h3>
-          </li>
-        </ul>
-      </div>
-    </header>
-    <div class="nav-mobile">
-      <ul>
-        <li onclick="wings()">
-          <span><i class="fa fa-home" aria-hidden="true"></i></span>
-          <h3>Wings</h3>
-        </li>
-        <li onclick="sobre()">
-          <span><i class="fa fa-address-card" aria-hidden="true"></i></span>
-          <h3>Sobre</h3>
-        </li>
-        <li class="active" onclick="sair()">
-          <span><i class="fas fa-sign-out-alt" aria-hidden="true"></i></span>
-          <h3>Sair</h3>
-        </li>
-      </ul>
-      <script>
-        async function sair() {
-          const desconectar = await firebase.auth().signOut().then(function() {
-            $(location).attr('href', '../LoginEasychool/login.html');
-            // Sign-out successful.
-          }).catch(function(error) {
-            // An error happened.
-            alert(error);
-          });
-        }
-      </script>
-      <script>
-        function sobre(){
-          $(location).attr('href', '../index.html');
-        }
-      </script>
-      <script>
-        function wings(){
-          $(location).attr('href', '../../Wings/index.html');
-        }
-      </script>
-    </div>
-    <div class="m-bar">
-      <span><i class="fa fa-ellipsis-v"></i></span>
-    </div>
-    <aside class="sidebar">
-      <h1>Perfil <span class="close"><i class="fa fa-times"></i></span></h1>
-      <div class="user-side">
-        <div class="user-pic">
-          <img width="100" src="img/userp.png" alt="" id="imagem_perfil">
+    <script src="../js/escola_database.js"></script>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Easychool</h1>
+            </div>
+            <div class="bars">
+                <span><i class="fa fa-bars"></i></span>
+            </div>
+            <div class="nav">
+                <ul>
+                    <li onclick="wings()">
+                        <h3>Wings</h3>
+                    </li>
+                    <li onclick="sobre()">
+                        <h3>Sobre</h3>
+                    </li>
+                    <li class="active" onclick="sair()">
+                        <h3><i class="fas fa-sign-out-alt"></i>Sair</h3>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <div class="nav-mobile">
+            <ul>
+                <li onclick="wings()">
+                    <span><i class="fa fa-home" aria-hidden="true"></i></span>
+                    <h3>Wings</h3>
+                </li>
+                <li onclick="sobre()">
+                    <span><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                    <h3>Sobre</h3>
+                </li>
+                <li class="active" onclick="sair()">
+                    <span><i class="fas fa-sign-out-alt" aria-hidden="true"></i></span>
+                    <h3>Sair</h3>
+                </li>
+            </ul>
+            <script>
+                async function sair() {
+                    const desconectar = await firebase.auth().signOut().then(function() {
+                        $(location).attr('href', '../LoginEasychool/login.html');
+                        // Sign-out successful.
+                    }).catch(function(error) {
+                        // An error happened.
+                        alert(error);
+                    });
+                }
+            </script>
+            <script>
+                function sobre() {
+                    $(location).attr('href', '../index.html');
+                }
+            </script>
+            <script>
+                function wings() {
+                    $(location).attr('href', '../../Wings/index.html');
+                }
+            </script>
         </div>
-        <div class="user-info">
-          <label class="name" id="nome_perfil" for="nome_perfil">Nome</label>
-          <label class="mail" id="email_perfil" for="email_perfil">Email</label>
-          <span class="status">Online</span>
-          <script>
-            window.onload = function alteraLabel() {
-              var email_perfil = localStorage.getItem("email_funci");
-              var email_perfil64 = btoa(email_perfil);
-              var userId = email_perfil64;
-              console.log(email_perfil);
-              console.log(userId);
-
-              var storageRef = firebase.storage();
-
-              var starsRef = storageRef.ref(userId);
-
-              // Get the download URL
-              starsRef.getDownloadURL().then(function(url) {
-                // Insert url into an <img> tag to "download"
-                const image = document.querySelector('#imagem_perfil')
-                image.src = url
-              }).catch(function(error) {
-                console.log(error)
-
-                // A full list of error codes is available at
-                // https://firebase.google.com/docs/storage/web/handle-errors
-
-              });
-
-
-              return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
-                var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
-                var cpf = (snapshot.val() && snapshot.val().cpf) || 'Anonymous';
-                var escola = (snapshot.val() && snapshot.val().escola) || 'Anonymous';
-                document.getElementById("nome_perfil").innerHTML = username;
-                document.getElementById("nome_editar").value = username;
-                document.getElementById("cpf_editar").value = cpf;
-                document.getElementById("email_perfil").innerHTML = email_perfil;
-                localStorage.setItem("escola_id", escola);
-                mandar_valores();
-                // ...
-              });
-
-
-            }
-
-            function mandar_valores() {
-              var escola = localStorage.getItem("escola_id");
-
-              return firebase.database().ref('/Escola/' + escola + "/").once('value').then(function(snapshot) {
-                var nome_escola = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
-                var email = (snapshot.val() && snapshot.val().email) || 'Anonymous';
-                var cep = (snapshot.val() && snapshot.val().cep) || 'Anonymous';
-                var estado = (snapshot.val() && snapshot.val().uf) || 'Anonymous';
-                var cidade = (snapshot.val() && snapshot.val().cidade) || 'Anonymous';
-                var bairro = (snapshot.val() && snapshot.val().bairro) || 'Anonymous';
-                var rua = (snapshot.val() && snapshot.val().rua) || 'Anonymous';
-                var numero = (snapshot.val() && snapshot.val().numero) || 'Anonymous';
-                var complemento = (snapshot.val() && snapshot.val().complemento) || '';
-                var cnpj = (snapshot.val() && snapshot.val().cnpj) || 'Anonymous';
-
-                localStorage.setItem("email", email);
-                localStorage.setItem("cep", cep);
-                localStorage.setItem("estado", estado);
-                localStorage.setItem("cidade", cidade);
-                localStorage.setItem("bairro", bairro);
-                localStorage.setItem("rua", rua);
-                localStorage.setItem("numero", numero);
-                localStorage.setItem("complemento", complemento);
-
-                document.getElementById("nome_escola_editar").value = nome_escola;
-                document.getElementById("cnpj_editar").value = cnpj;
-                document.getElementById("cep_editar").value = cep;
-                document.getElementById("numero_editar").value = numero;
-                document.getElementById("comple_editar").value = complemento;
-              })
-            }
-
-          </script>
+        <div class="m-bar">
+            <span><i class="fa fa-ellipsis-v"></i></span>
         </div>
-      </div>
-      <div class="side-nav">
-        <h2>Geral</h2>
-        <nav>
-          <ul>
-            <li class="active" onclick="show(0)">
-              <span><i class="fas fa-user"></i></span>
-              <h3>Funcionários</h3>
-            </li>
-            <li onclick="show(1)">
-              <span><i class="fas fa-users"></i></span>
-              <h3>Turmas</h3>
-            </li>
-            <!--<li onclick="show(2)">
+        <aside class="sidebar">
+            <h1>Perfil <span class="close"><i class="fa fa-times"></i></span></h1>
+            <div class="user-side">
+                <div class="user-pic">
+                    <img width="100" src="img/userp.png" alt="" id="imagem_perfil">
+                </div>
+                <div class="user-info">
+                    <label class="name" id="nome_perfil" for="nome_perfil">Nome</label>
+                    <label class="mail" id="email_perfil" for="email_perfil">Email</label>
+                    <span class="status">Online</span>
+                    <script>
+                        window.onload = function alteraLabel() {
+                            var email_perfil = localStorage.getItem("email_funci");
+                            var email_perfil64 = btoa(email_perfil);
+                            var userId = email_perfil64;
+                            console.log(email_perfil);
+                            console.log(userId);
+
+                            var storageRef = firebase.storage();
+
+                            var starsRef = storageRef.ref(userId);
+
+                            // Get the download URL
+                            starsRef.getDownloadURL().then(function(url) {
+                                // Insert url into an <img> tag to "download"
+                                const image = document.querySelector('#imagem_perfil')
+                                image.src = url
+                            }).catch(function(error) {
+                                console.log(error)
+
+                                // A full list of error codes is available at
+                                // https://firebase.google.com/docs/storage/web/handle-errors
+
+                            });
+
+
+                            return firebase.database().ref('/Funcionario/' + userId + "/").once('value').then(function(snapshot) {
+                                var username = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
+                                var cpf = (snapshot.val() && snapshot.val().cpf) || 'Anonymous';
+                                var escola = (snapshot.val() && snapshot.val().escola) || 'Anonymous';
+                                document.getElementById("nome_perfil").innerHTML = username;
+                                document.getElementById("nome_editar").value = username;
+                                document.getElementById("cpf_editar").value = cpf;
+                                document.getElementById("email_perfil").innerHTML = email_perfil;
+                                localStorage.setItem("escola_id", escola);
+                                mandar_valores();
+                                pegar_funcionarios();
+                                // ...
+                            });
+
+
+                        }
+
+                        function mandar_valores() {
+                            var escola = localStorage.getItem("escola_id");
+
+                            return firebase.database().ref('/Escola/' + escola + "/").once('value').then(function(snapshot) {
+                                var nome_escola = (snapshot.val() && snapshot.val().nome) || 'Anonymous';
+                                var email = (snapshot.val() && snapshot.val().email) || 'Anonymous';
+                                var cep = (snapshot.val() && snapshot.val().cep) || 'Anonymous';
+                                var estado = (snapshot.val() && snapshot.val().uf) || 'Anonymous';
+                                var cidade = (snapshot.val() && snapshot.val().cidade) || 'Anonymous';
+                                var bairro = (snapshot.val() && snapshot.val().bairro) || 'Anonymous';
+                                var rua = (snapshot.val() && snapshot.val().rua) || 'Anonymous';
+                                var numero = (snapshot.val() && snapshot.val().numero) || 'Anonymous';
+                                var complemento = (snapshot.val() && snapshot.val().complemento) || '';
+                                var cnpj = (snapshot.val() && snapshot.val().cnpj) || 'Anonymous';
+
+                                localStorage.setItem("email", email);
+                                localStorage.setItem("cep", cep);
+                                localStorage.setItem("estado", estado);
+                                localStorage.setItem("cidade", cidade);
+                                localStorage.setItem("bairro", bairro);
+                                localStorage.setItem("rua", rua);
+                                localStorage.setItem("numero", numero);
+                                localStorage.setItem("complemento", complemento);
+
+                                document.getElementById("nome_escola_editar").value = nome_escola;
+                                document.getElementById("cnpj_editar").value = cnpj;
+                                document.getElementById("cep_editar").value = cep;
+                                document.getElementById("numero_editar").value = numero;
+                                document.getElementById("comple_editar").value = complemento;
+                            })
+                        }
+
+                        async function pegar_funcionarios() {
+                            return await firebase.database().ref('/Funcionario/').once('value').then(function(snapshot) {
+                                var id_func = [snapshot.val()];
+                                var nome_func;
+
+                                var funcionario = Object.values(id_func[0]);
+
+                                for(var i = 0; i < funcionario.length; i++){
+                                    if(funcionario[i].escola == localStorage.getItem("escola_id")){
+                                        nome_func = funcionario[i].nome;
+
+                                        console.log(nome_func);
+
+                                        //buscar elemento avô
+                                        var elemento_avo = document.getElementById("userpost");
+
+                                        //criar elemento pai
+                                        var elemento_pai = document.createElement('div');
+
+                                        //criar elemento filho imagem
+                                        var elemento_filho_imagem = document.createElement('img', 'Kant.jpg');
+
+                                        //criar elemento filho texto
+                                        var elemento_filho_texto = document.createElement('p');
+
+                                        //criar texto
+                                        elemento_filho_texto.textContent = nome_func;
+
+                                        //colocar a imagem no elemento pai
+                                        elemento_pai.innerHTML = '<img width="200" src="img/Kant.jpg" alt="">';
+                                        elemento_pai.appendChild(elemento_filho_texto);
+
+                                        //colocar o elemento pai no elemento avo
+                                        elemento_avo.appendChild(elemento_pai);
+                                    }
+
+                                    //console.log(funcionario[i].nome);
+                                }
+
+                                //alert(nome_func);
+
+                                var teste = document.getElementById("nome_teste");
+                                teste.innerText = nome_func;
+                                //id_func[0]
+                                
+                                //var nome_func = (snapshot.val && snapshot.val().nome);
+                                //var email_func = (snapshot.val && snapshot.val().email);
+                                //var func_adm = (snapshot.val && snapshot.val().adm) || 'Esse funcionario não é um admistrador';
+
+                                /*<div class="posts">
+                                    <img width="200" src="img/Kant.jpg" alt="">
+                                    <p id="nome_teste"></p>
+                                </div>*/
+                                //console.log(id_func.length);
+                                //console.log(id_func);
+                                //console.log("teste");
+                                //document.getElementById("nome_funcionario");
+                            })
+                        }
+                    </script>
+                </div>
+            </div>
+            <div class="side-nav">
+                <h2>Geral</h2>
+                <nav>
+                    <ul>
+                        <li class="active" onclick="show(0)">
+                            <span><i class="fas fa-user"></i></span>
+                            <h3>Funcionários</h3>
+                        </li>
+                        <li onclick="show(1)">
+                            <span><i class="fas fa-users"></i></span>
+                            <h3>Turmas</h3>
+                        </li>
+                        <!--<li onclick="show(2)">
               <span><i class="far fa-clock"></i>-->
-            <!-- <i class="fas fa-user-clock"></i> -->
-            <!--</span>
+                        <!-- <i class="fas fa-user-clock"></i> -->
+                        <!--</span>
               <h3>Fila de Espera</h3>
             </li>-->
-            <li onclick="show(3)">
-              <span><i class="fas fa-cog"></i></span>
-              <h3>Configurações</h3>
-            </li>
-            <li onclick="show(4)">
-              <span><i class="fas fa-school"></i></span>
-              <h3>Perfil da Escola</h3>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </aside>
-    <div class="main">
-      <section class="profile tabs">
-        <h1>Funcionários</h1>
-        <div class="wrapper4">
-          <div class="search-input">
-            <a href="" target="_blank" hidden></a>
-            <input type="text" placeholder="Pesquisar Funcionários..">
-            <div class="autocom-box">
-              <!-- here list are inserted from javascript -->
+                        <li onclick="show(3)">
+                            <span><i class="fas fa-cog"></i></span>
+                            <h3>Configurações</h3>
+                        </li>
+                        <li onclick="show(4)">
+                            <span><i class="fas fa-school"></i></span>
+                            <h3>Perfil da Escola</h3>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <a href="#popup">
-              <div class="icon"><i class="fas fa-search"></i></div>
-            </a>
-          </div>
-        </div>
-        <div class="popup" id="popup">
-          <div class="popup-inner">
-            <div class="popup-photo">
-              <img src="img/userp.png" alt="">
-            </div>
-            <div class="popup-text">
-              <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Iste culpa sint arcshitecto tempora porro quidem corporis
-                asperiores accusantium ea similique pariatur, quisquam expedita,
-                neque ullam? Eos laborum omnis facere aspernatur!
-              </p>
-            </div>
-            <button type="submit" class="form__button4"><i class="fa fa-trash" aria-hidden="true"></i></i>&nbsp;Excluir</i></button>
-          </div>
-          <a class="popup-close" href="#">X</a>
-        </div>
-        <div class="userpost">
-          <div class="posts">
-            <span><a href="../CadastroFunci/cadastroFuncionarioAdm.html" target="_blank"><i class="fa fa-plus"></i></a></span>
-          </div>
-          <div class="posts">
-            <img width="200" src="img/Kant.jpg" alt="">
-            <p>Immanuel Kant</p>
-          </div>
-          <div class="posts">
-            <img width="200" src="img/karl_marx.jpg" alt="">
-            <p>Karl Marx</p>
-          </div>
-          <div class="posts">
-            <img width="200" src="img/Nietzsche.jpg" alt="">
-            <p>Friedrich Nietzsche</p>
-          </div>
-          <div class="posts">
-            <img width="200" src="img/Albert.jpg" alt="">
-            <p>Albert Einstein</p>
-          </div>
-        </div>
-      </section>
-      <section class="tabs">
-        <!-- <h1>Cadastrar Turmas</h1> -->
-        <div class="wrapper2">
-          <div class="header2">
-            <div class="title">
-              Turmas
-            </div>
-
-            <div class="search_box">
-              <input type="text" id="search_input" placeholder="Procurar turmas...">
-              <br><br>
-              <a href="#popup2"><button type="submit" class="form__button3"><i class="fa fa-plus" aria-hidden="true"></i></i>&nbsp;Cadastrar</i></button></a>
-            </div>
-          </div>
-          <div class="popup2" id="popup2">
-            <div class="popup-inner2">
-              <div class="popup-photo2">
-                <div class="container6">
-                  <h2>Série</h2>
-
-                  <div class="select-box">
-                    <div class="options-container">
-                      <div class="option">
-                        <input type="radio" class="radio" id="automobiles" name="category" />
-                        <label for="automobiles">Berçario 1</label>
-                      </div>
-
-                      <div class="option">
-                        <input type="radio" class="radio" id="film" name="category" />
-                        <label for="film">Berçario 2</label>
-                      </div>
-
-                      <div class="option">
-                        <input type="radio" class="radio" id="science" name="category" />
-                        <label for="science">Maternal 1</label>
-                      </div>
-
-                      <div class="option">
-                        <input type="radio" class="radio" id="art" name="category" />
-                        <label for="art">Maternal 2</label>
-                      </div>
-
-                      <div class="option">
-                        <input type="radio" class="radio" id="music" name="category" />
-                        <label for="music">Pré 1</label>
-                      </div>
-
-                      <div class="option">
-                        <input type="radio" class="radio" id="travel" name="category" />
-                        <label for="travel">Pré 2</label>
-                      </div>
-
-                      <div class="option">
-                        <input type="radio" class="radio" id="sports" name="category" />
-                        <label for="sports">1°Ano</label>
-                      </div>
-
-                      <div class="option">
-                        <input type="radio" class="radio" id="news" name="category" />
-                        <label for="news">2°Ano</label>
-                      </div>
-
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">3°Ano</label>
-                      </div>
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">4°Ano</label>
-                      </div>
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">5°Ano</label>
-                      </div>
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">6°Ano</label>
-                      </div>
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">7°Ano</label>
-                      </div>
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">8°Ano</label>
-                      </div>
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">9°Ano</label>
-                      </div>
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">1°Médio</label>
-                      </div>
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">2°Médio</label>
-                      </div>
-                      <div class="option">
-                        <input type="radio" class="radio" id="tutorials" name="category" />
-                        <label for="tutorials">3°Médio</label>
-                      </div>
-                    </div>
-
-                    <div class="selected" id="valor_turma">
-                      Selecione a série&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="wrapper5">
-                <div class="input-data">
-                  <input type="number" id="total_vagas" required>
-                  <div class="underline"></div>
-                  <label>Total de Vagas</label>
-                </div>
-              </div>
-              <div class="popup-photo4">
-                <div class="container7">
-                  <h2>Período</h2>
-
-                  <div class="select-box2">
-                    <div class="options-container2">
-                      <div class="option2">
-                        <input type="radio" class="radio2" id="automobiles2" name="category2" />
-                        <label for="automobiles2">Manhã</label>
-                      </div>
-
-                      <div class="option2">
-                        <input type="radio" class="radio2" id="film2" name="category2" />
-                        <label for="film">Tarde</label>
-                      </div>
-
-                      <div class="option2">
-                        <input type="radio" class="radio2" id="science2" name="category2" />
-                        <label for="science">Noite</label>
-                      </div>
-
-                      <div class="option2">
-                        <input type="radio" class="radio2" id="art2" name="category2" />
-                        <label for="art">Integral</label>
-                      </div>
-                    </div>
-
-                    <div class="selected2" id="valor_periodo">Selecione o período&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
-                    </div>
-                  </div>
-                  <div class="wrapper6">
-                    <div class="input-data">
-                      <input type="number" id="vagas_ocupadas" required>
-                      <div class="underline"></div>
-                      <label>Vagas Ocupadas</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button type="submit" class="form__button4" onclick="cadastrar_turma()"><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
-            </div>
-            <a class="popup-close2" href="#">X</a>
-          </div>
-          <script>
-            async function cadastrar_turma() {
-              var turma = document.getElementById('valor_turma').innerText;
-              var periodo = document.getElementById('valor_periodo').innerText;
-              var total_vagas = $('#total_vagas').val();
-              var vagas_ocupadas = $('#vagas_ocupadas').val();
-              var date = new Date();
-              var data = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-              var hora = date.getHours() + ":" + date.getMinutes();
-              var data_hora = data + " | " + hora;
-
-              const insertTurma = await turma_database.new(
-                turma,
-                total_vagas,
-                vagas_ocupadas,
-                periodo,
-                data_hora
-              );
-
-              alert("Turma cadastrada");
-              inserir_item_lista();
-
-            }
-
-            function inserir_item_lista() {
-              //const minhaTurma = new turma('9ano', '80', '40', 'tarde');
-              
-              const lista = document.getElementById('lista');
-              
-              var linha = "<li>" +
-                                   "<div class='item'>" +
-                                     "<div class='name'>"+
-                                      "<span>10° Ano</span>"+
-                                     "</div>"+
-                                     "<div class='phone'>"+
-                                      "<span>100</span>"+
-                                     "</div>"+
-                                     "<div class='phone'>"+
-                                      "<span>50</span>"+
-                                     "</div>"+
-                                     "<div class='status'>"+
-                                      "<span class='open'>Todo dia</span>"+
-                                     "</div>"+
-                                     "<div class='status'>"+
-                                      "<span><a href='#popup2'><button type='submit' class='form__button2'><i class='fas fa-pen' aria-hidden='true'></i></i></i></button></a></span>"+
-                                     "</div>"+
-                                     "<div class='status'>"+
-                                      "<span><button type='submit' class='form__button5'><i class='fa fa-trash' aria-hidden='true'>"+
-                                     "</i></i></i></button> </span>"+
-                                     "</div>"+
-                                   "</div>"+
-                                 "</li>";
-              
-              const item = document.createElement(linha);
-              
-              lista.appendChild(item);
-              
-            }
-            
-            function turma(serie, total_vagas, vagas_ocupadas, periodo){
-              this.serie = serie;
-              this.total_vagas = total_vagas;
-              this.vagas_ocupadas = vagas_ocupadas;
-              this.periodo = periodo;
-            }
-
-          </script>
-
-          <div class="table_wrap">
-            <div class="table_header">
-              <ul>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>Série</span>
-                    </div>
-                    <div class="phone">
-                      <span>Total de vagas</span>
-                    </div>
-                    <div class="phone">
-                      <span>Vagas ocupadas</span>
-                    </div>
-                    <div class="status">
-                      <span>Período</span>
-                    </div>
-                    <div class="status">
-                      <span>Editar</span>
-                    </div>
-                    <div class="status">
-                      <span>Excluir</span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="table_body" id="div_lista">
-              <ul id="lista">
-                <!--Aqui é que começa a fazer a listagem-->
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>9° Ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>50</span>
-                    </div>
-                    <div class="status">
-                      <span class="open">Tarde</span>
-                    </div>
-                    <div class="status">
-                      <!-- o unico botão que tem o link pro modal -->
-                      <span><a href="#popup2"><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></a></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <!--Aqui é onde termina uma linha-->
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="canceled">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="hold">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="fixed">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="item">
-                    <div class="name">
-                      <span>8°ano</span>
-                    </div>
-                    <div class="phone">
-                      <span>80</span>
-                    </div>
-                    <div class="phone">
-                      <span>40</span>
-                    </div>
-                    <div class="status">
-                      <span class="reopened">Manhã</span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                    <div class="status">
-                      <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-      </section>
-      <section class="tabs">
-        <h1>Lista de Espera</h1>
-        <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Corporis eligendi excepturi vitae delectus ut! Doloremque perspiciatis </p>
-      </section>
-      <section class="tabs">
-        <h1>Meu Perfil</h1>
-        <div class="container2">
-          <div class="wrapper">
-            <div class="image">
-              <img src="" alt="" class="imgt" onclick="defaultBtnActive()">
-
-            </div>
-            <div class="content">
-              <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-              <br>
-              <br>
-              <br>
-              <center>
-                <div class="text">Clique aqui para selecionar uma foto de perfil</div>
-              </center>
-            </div>
-            <div id="cancel-btn"><i class="fas fa-times"></i></div>
-            <div class="file-name">File name here</div>
-          </div>
-          <button onclick="enviar_foto()" id="custom-btn">Salvar</button>
-          <input id="default-btn" type="file" hidden>
-          <script>
-            function enviar_foto() {
-              const ref = firebase.storage().ref();
-
-              const file = document.querySelector('#default-btn').files[0];
-
-              var email_funcionario = localStorage.getItem("email_funci");
-
-              var email_funci64 = btoa(email_funcionario);
-
-              const name = email_funci64;
-
-              const metadata = {
-                contentType: file.type
-              };
-
-              const task = ref.child(name).put(file, metadata);
-
-              task
-                .then(snapshot => snapshot.ref.getDownloadURL())
-                .then(url => {
-                  console.log(url)
-                  const image = document.querySelector('#imagem_perfil')
-                  image.src = url
-                })
-            }
-
-          </script>
-
-          <div class="wrapper3">
-            <!-- <form action="#"> -->
-            <div class="input-data">
-              <input type="text" id="nome_editar" required>
-              <div class="underline"></div>
-              <label>Nome</label>
-            </div>
-            <br><br>
-            <div class="input-data">
-              <input type="text" id="cpf_editar" class="form-control" onkeypress="$(this).mask('000.000.000-00');" required>
-              <div class="underline"></div>
-              <label>CPF</label>
-            </div>
-            <br><br>
-            <div class="input-data">
-              <input type="password" id="senha_editar" required>
-              <div class="underline"></div>
-              <label>Senha</label>
-            </div>
-            <br>
-            <button type="submit" class="form__button" onclick="editar()"><i class="fas fa-pen" aria-hidden="true"></i><i> Editar</i></button>
-            <script>
-              async function editar() {
-                var nome = $('#nome_editar').val();
-                var cpf = $('#cpf_editar').val();
-                var nova_senha = $('#senha_editar').val();
-                var senha = localStorage.getItem("senha_funci");
-
-                var user = firebase.auth().currentUser;
-                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
-
-                // Prompt the user to re-provide their sign-in credentials
-
-                user.reauthenticateWithCredential(credential).then(function() {
-                  user.updatePassword(nova_senha).then(function() {
-                    // Update successful.
-                  }).catch(function(error) {
-                    // An error happened.
-                    console.log(error);
-                  });
-                  // User re-authenticated.
-                }).catch(function(error) {
-                  // An error happened.
-                });
-                var cpf = $('#cpf_editar').val();
-                var nova_senha = $('#senha_editar').val();
-                var senha = localStorage.getItem("senha_funci");
-
-                var user = firebase.auth().currentUser;
-                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
-
-                const atualiza = await funcionario_database.update(
-                  nome,
-                  user.email,
-                  cpf
-                );
-
-                // Prompt the user to re-provide their sign-in credentials
-
-                user.reauthenticateWithCredential(credential).then(function() {
-                  user.updatePassword(nova_senha).then(function() {
-                    // Update successful.
-                  }).catch(function(error) {
-                    // An error happened.
-                    console.log(error);
-                  });
-                  // User re-authenticated.
-                }).catch(function(error) {
-                  // An error happened.
-                });
-
-                window.location.reload();
-
-              }
-
-            </script>
-
-            <!-- </form> -->
-          </div>
-        </div>
-      </section>
-      <section class="tabs">
-        <h1>Perfil da Escola</h1>
-        <div class="container3">
-          <div class="wrapper7">
-            <div class="image2">
-              <img src="" alt="" class="imgd" onclick="defaultBtnActive2()">
-
-            </div>
-            <div class="content2">
-              <div class="icon2"><i class="fas fa-cloud-upload-alt"></i></div>
-              <br>
-              <br>
-              <br>
-              <center>
-                <div class="text2">Selecione uma foto de perfil para a escola</div>
-              </center>
-            </div>
-            <div id="cancel-btn2"><i class="fas fa-times"></i></div>
-            <div class="file-name2">File name here</div>
-          </div>
-          <button onclick="enviar_foto_escola()" id="custom-btn2">Salvar</button>
-          <input id="default-btn2" type="file" hidden>
-          <script>
-            function enviar_foto_escola() {
-              const ref = firebase.storage().ref();
-
-              const file = document.querySelector('#default-btn2').files[0];
-
-              var email_escola = localStorage.getItem("escola_id");
-
-              var email_escola64 = btoa(email_escola);
-
-              const name = email_escola;
-
-              const metadata = {
-                contentType: file.type
-              };
-
-              const task = ref.child(name).put(file, metadata);
-
-              task
-                .then(snapshot => snapshot.ref.getDownloadURL())
-                .then(url => {
-                  console.log(url)
-                  const image = document.querySelector('#imagem_perfil_escola')
-                  image.src = url
-                })
-            }
-
-          </script>
-
-          <div class="wrapper8">
-            <!-- <form action="#"> -->
-            <div class="input-data">
-              <input type="text" id="nome_escola_editar" required>
-              <div class="underline"></div>
-              <label>Nome</label>
-            </div>
-            <br><br>
-            <div class="input-data">
-              <input type="text" id="cnpj_editar" class="form-control" onkeypress="$(this).mask('00.000.000/0000-00');" required>
-              <div class="underline"></div>
-              <label>CNPJ</label>
-            </div>
-            <br><br>
-            <div class="input-data">
-              <input type="text" id="cep_editar" class="form-control" onkeypress="$(this).mask('00.000-000')" required>
-              <div class="underline"></div>
-              <label>CEP</label>
-            </div>
-            <br><br>
-            <div class="input-data">
-              <input type="number" id="numero_editar" class="form-control" required>
-              <div class="underline"></div>
-              <label>Número</label>
-            </div>
-            <br><br>
-            <div class="input-data">
-              <input type="text" id="comple_editar" class="form-control" required>
-              <div class="underline"></div>
-              <label>Complemento</label>
-            </div>
-
-            <div class="popup3" id="popup3">
-              <div class="popup-inner3">
-                <div class="popup-photo3">
-                  <div class="center">
-                    <h2>Nivel Educacional</h2>
-                    <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Educação Infantil</label>
-                    <br><br>
-                    <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Ensino Fundamental 1</label>
-                    <br><br>
-                    <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Ensino Fundamental 2</label>
-                    <br><br>
-                    <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Ensino Médio</label>
-                    <br><br>
-                    <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Educação Especial</label>
-                    <br><br>
-                    <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;EJA</label>
-                  </div>
-                </div>
-                
-                <div class="popup-photo4">
-                  <div class="container8">
-                    <h2>Outras Configurações</h2>
-  
-                    <div class="select-box3">
-                      <div class="options-container3">
-                        <div class="option3">
-                          <input type="radio" class="radio3" id="automobiles3" name="category3" />
-                          <label for="automobiles3">Municipal</label>
+        </aside>
+        <div class="main">
+            <section class="profile tabs">
+                <h1>Funcionários</h1>
+                <div class="wrapper4">
+                    <div class="search-input">
+                        <a href="" target="_blank" hidden></a>
+                        <input type="text" placeholder="Pesquisar Funcionários..">
+                        <div class="autocom-box">
+                            <!-- here list are inserted from javascript -->
                         </div>
-  
-                        <div class="option3">
-                          <input type="radio" class="radio3" id="film3" name="category3" />
-                          <label for="film">Estadual</label>
-                        </div>
-  
-                        <div class="option3">
-                          <input type="radio" class="radio3" id="science3" name="category3" />
-                          <label for="science">Federal</label>
-                        </div>
-                      </div>
-  
-                      <div class="selected3" id="valor_periodo">Selecione a instituição&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
-                      </div>
+                        <a href="#popup" onclick="pegar_funcionarios()">
+                            <div class="icon"><i class="fas fa-search"></i></div>
+                        </a>
                     </div>
-                  </div>
                 </div>
-                <div class="box">
-                  <h2 class="h2">Telefones</h2>
-                  <ul>
-                    <li><span>1</span>2555255363</li>
-                    <li><span>2</span>336763673673</li>
-                    <li><span>3</span>66267264</li>
-                    <li><span>4</span>7426467426674</li>
-                    <li><span>5</span>7646426747</li>
-                  </ul>
+                <div class="popup" id="popup">
+                    <div class="popup-inner">
+                        <div class="popup-photo">
+                            <img src="img/userp.png" alt="" id="img_funcionarios">
+                        </div>
+                        <div class="popup-text">
+                            <h1 id="nome_funcionario">Nome funcionário</h1>
+                            <p id="email_funcionario">Email funcionário</p>
+                            <p id="cpf_funcionario">CPF funcionário</p>
+                            <p id="adm">Administrador</p>
+                        </div>
+                        <button type="submit" class="form__button4"><i class="fa fa-trash" aria-hidden="true"></i></i>&nbsp;Excluir</i></button>
+                    </div>
+                    <a class="popup-close" href="#">X</a>
                 </div>
-                <button type="submit" class="form__button6" onclick=""><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
-              </div>
-              <a class="popup-close3" href="#">X</a>
-            </div>
-            <!--<br><br>
+                <div class="userpost" id="userpost">
+                    <div class="posts">
+                        <span><a href="../CadastroFunci/cadastroFuncionarioAdm.html" target="_blank"><i class="fa fa-plus"></i></a></span>
+                    </div>
+                    
+                </div>
+            </section>
+            <section class="tabs">
+                <!-- <h1>Cadastrar Turmas</h1> -->
+                <div class="wrapper2">
+                    <div class="header2">
+                        <div class="title">
+                            Turmas
+                        </div>
+
+                        <div class="search_box">
+                            <input type="text" id="search_input" placeholder="Procurar turmas...">
+                            <br><br>
+                            <a href="#popup2"><button type="submit" class="form__button3"><i class="fa fa-plus" aria-hidden="true"></i></i>&nbsp;Cadastrar</i></button></a>
+                        </div>
+                    </div>
+                    <div class="popup2" id="popup2">
+                        <div class="popup-inner2">
+                            <div class="popup-photo2">
+                                <div class="container6">
+                                    <h2>Série</h2>
+
+                                    <div class="select-box">
+                                        <div class="options-container">
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="automobiles" name="category" />
+                                                <label for="automobiles">Berçario 1</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="film" name="category" />
+                                                <label for="film">Berçario 2</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="science" name="category" />
+                                                <label for="science">Maternal 1</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="art" name="category" />
+                                                <label for="art">Maternal 2</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="music" name="category" />
+                                                <label for="music">Pré 1</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="travel" name="category" />
+                                                <label for="travel">Pré 2</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="sports" name="category" />
+                                                <label for="sports">1°Ano</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="news" name="category" />
+                                                <label for="news">2°Ano</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">3°Ano</label>
+                                            </div>
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">4°Ano</label>
+                                            </div>
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">5°Ano</label>
+                                            </div>
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">6°Ano</label>
+                                            </div>
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">7°Ano</label>
+                                            </div>
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">8°Ano</label>
+                                            </div>
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">9°Ano</label>
+                                            </div>
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">1°Médio</label>
+                                            </div>
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">2°Médio</label>
+                                            </div>
+                                            <div class="option">
+                                                <input type="radio" class="radio" id="tutorials" name="category" />
+                                                <label for="tutorials">3°Médio</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="selected" id="valor_turma">
+                                            Selecione a série&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper5">
+                                <div class="input-data">
+                                    <input type="number" id="total_vagas" required>
+                                    <div class="underline"></div>
+                                    <label>Total de Vagas</label>
+                                </div>
+                            </div>
+                            <div class="popup-photo4">
+                                <div class="container7">
+                                    <h2>Período</h2>
+
+                                    <div class="select-box2">
+                                        <div class="options-container2">
+                                            <div class="option2">
+                                                <input type="radio" class="radio2" id="automobiles2" name="category2" />
+                                                <label for="automobiles2">Manhã</label>
+                                            </div>
+
+                                            <div class="option2">
+                                                <input type="radio" class="radio2" id="film2" name="category2" />
+                                                <label for="film">Tarde</label>
+                                            </div>
+
+                                            <div class="option2">
+                                                <input type="radio" class="radio2" id="science2" name="category2" />
+                                                <label for="science">Noite</label>
+                                            </div>
+
+                                            <div class="option2">
+                                                <input type="radio" class="radio2" id="art2" name="category2" />
+                                                <label for="art">Integral</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="selected2" id="valor_periodo">Selecione o período&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper6">
+                                        <div class="input-data">
+                                            <input type="number" id="vagas_ocupadas" required>
+                                            <div class="underline"></div>
+                                            <label>Vagas Ocupadas</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="form__button4" onclick="cadastrar_turma()"><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
+                        </div>
+                        <a class="popup-close2" href="#">X</a>
+                    </div>
+                    <script>
+                        async function cadastrar_turma() {
+                            var turma = document.getElementById('valor_turma').innerText;
+                            var periodo = document.getElementById('valor_periodo').innerText;
+                            var total_vagas = $('#total_vagas').val();
+                            var vagas_ocupadas = $('#vagas_ocupadas').val();
+                            var date = new Date();
+                            var data = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+                            var hora = date.getHours() + ":" + date.getMinutes();
+                            var data_hora = data + " | " + hora;
+
+                            const insertTurma = await turma_database.new(
+                                turma,
+                                total_vagas,
+                                vagas_ocupadas,
+                                periodo,
+                                data_hora
+                            );
+
+                            alert("Turma cadastrada");
+                            inserir_item_lista();
+
+                        }
+
+                        function inserir_item_lista() {
+                            //const minhaTurma = new turma('9ano', '80', '40', 'tarde');
+
+                            const lista = document.getElementById('lista');
+
+                            var linha = "<li>" +
+                                "<div class='item'>" +
+                                "<div class='name'>" +
+                                "<span>10° Ano</span>" +
+                                "</div>" +
+                                "<div class='phone'>" +
+                                "<span>100</span>" +
+                                "</div>" +
+                                "<div class='phone'>" +
+                                "<span>50</span>" +
+                                "</div>" +
+                                "<div class='status'>" +
+                                "<span class='open'>Todo dia</span>" +
+                                "</div>" +
+                                "<div class='status'>" +
+                                "<span><a href='#popup2'><button type='submit' class='form__button2'><i class='fas fa-pen' aria-hidden='true'></i></i></i></button></a></span>" +
+                                "</div>" +
+                                "<div class='status'>" +
+                                "<span><button type='submit' class='form__button5'><i class='fa fa-trash' aria-hidden='true'>" +
+                                "</i></i></i></button> </span>" +
+                                "</div>" +
+                                "</div>" +
+                                "</li>";
+
+                            const item = document.createElement(linha);
+
+                            lista.appendChild(item);
+
+                        }
+
+                        function turma(serie, total_vagas, vagas_ocupadas, periodo) {
+                            this.serie = serie;
+                            this.total_vagas = total_vagas;
+                            this.vagas_ocupadas = vagas_ocupadas;
+                            this.periodo = periodo;
+                        }
+                    </script>
+
+                    <div class="table_wrap">
+                        <div class="table_header">
+                            <ul>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>Série</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>Total de vagas</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>Vagas ocupadas</span>
+                                        </div>
+                                        <div class="status">
+                                            <span>Período</span>
+                                        </div>
+                                        <div class="status">
+                                            <span>Editar</span>
+                                        </div>
+                                        <div class="status">
+                                            <span>Excluir</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="table_body" id="div_lista">
+                            <ul id="lista">
+                                <!--Aqui é que começa a fazer a listagem-->
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>9° Ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>50</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="open">Tarde</span>
+                                        </div>
+                                        <div class="status">
+                                            <!-- o unico botão que tem o link pro modal -->
+                                            <span><a href="#popup2"><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></a></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!--Aqui é onde termina uma linha-->
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="canceled">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="hold">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="fixed">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item">
+                                        <div class="name">
+                                            <span>8°ano</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>80</span>
+                                        </div>
+                                        <div class="phone">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="status">
+                                            <span class="reopened">Manhã</span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                        <div class="status">
+                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+            </section>
+            <section class="tabs">
+                <h1>Lista de Espera</h1>
+                <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis eligendi excepturi vitae delectus ut! Doloremque perspiciatis </p>
+            </section>
+            <section class="tabs">
+                <h1>Meu Perfil</h1>
+                <div class="container2">
+                    <div class="wrapper">
+                        <div class="image">
+                            <img src="" alt="" class="imgt" onclick="defaultBtnActive()">
+
+                        </div>
+                        <div class="content">
+                            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <br>
+                            <br>
+                            <br>
+                            <center>
+                                <div class="text">Clique aqui para selecionar uma foto de perfil</div>
+                            </center>
+                        </div>
+                        <div id="cancel-btn"><i class="fas fa-times"></i></div>
+                        <div class="file-name">File name here</div>
+                    </div>
+                    <button onclick="enviar_foto()" id="custom-btn">Salvar</button>
+                    <input id="default-btn" type="file" hidden>
+                    <script>
+                        function enviar_foto() {
+                            const ref = firebase.storage().ref();
+
+                            const file = document.querySelector('#default-btn').files[0];
+
+                            var email_funcionario = localStorage.getItem("email_funci");
+
+                            var email_funci64 = btoa(email_funcionario);
+
+                            const name = email_funci64;
+
+                            const metadata = {
+                                contentType: file.type
+                            };
+
+                            const task = ref.child(name).put(file, metadata);
+
+                            task
+                                .then(snapshot => snapshot.ref.getDownloadURL())
+                                .then(url => {
+                                    console.log(url)
+                                    const image = document.querySelector('#imagem_perfil')
+                                    image.src = url
+                                })
+                        }
+                    </script>
+
+                    <div class="wrapper3">
+                        <!-- <form action="#"> -->
+                        <div class="input-data">
+                            <input type="text" id="nome_editar" required>
+                            <div class="underline"></div>
+                            <label>Nome</label>
+                        </div>
+                        <br><br>
+                        <div class="input-data">
+                            <input type="text" id="cpf_editar" class="form-control" onkeypress="$(this).mask('000.000.000-00');" required>
+                            <div class="underline"></div>
+                            <label>CPF</label>
+                        </div>
+                        <br><br>
+                        <div class="input-data">
+                            <input type="password" id="senha_editar" required>
+                            <div class="underline"></div>
+                            <label>Senha</label>
+                        </div>
+                        <br>
+                        <button type="submit" class="form__button" onclick="editar()"><i class="fas fa-pen" aria-hidden="true"></i><i> Editar</i></button>
+                        <script>
+                            async function editar() {
+                                var nome = $('#nome_editar').val();
+                                var cpf = $('#cpf_editar').val();
+                                var nova_senha = $('#senha_editar').val();
+                                var senha = localStorage.getItem("senha_funci");
+
+                                var user = firebase.auth().currentUser;
+                                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
+
+                                // Prompt the user to re-provide their sign-in credentials
+
+                                user.reauthenticateWithCredential(credential).then(function() {
+                                    user.updatePassword(nova_senha).then(function() {
+                                        // Update successful.
+                                    }).catch(function(error) {
+                                        // An error happened.
+                                        console.log(error);
+                                    });
+                                    // User re-authenticated.
+                                }).catch(function(error) {
+                                    // An error happened.
+                                });
+                                var cpf = $('#cpf_editar').val();
+                                var nova_senha = $('#senha_editar').val();
+                                var senha = localStorage.getItem("senha_funci");
+
+                                var user = firebase.auth().currentUser;
+                                var credential = firebase.auth.EmailAuthProvider.credential(user.email, senha);
+
+                                const atualiza = await funcionario_database.update(
+                                    nome,
+                                    user.email,
+                                    cpf
+                                );
+
+                                // Prompt the user to re-provide their sign-in credentials
+
+                                user.reauthenticateWithCredential(credential).then(function() {
+                                    user.updatePassword(nova_senha).then(function() {
+                                        // Update successful.
+                                    }).catch(function(error) {
+                                        // An error happened.
+                                        console.log(error);
+                                    });
+                                    // User re-authenticated.
+                                }).catch(function(error) {
+                                    // An error happened.
+                                });
+
+                                window.location.reload();
+
+                            }
+                        </script>
+
+                        <!-- </form> -->
+                    </div>
+                </div>
+            </section>
+            <section class="tabs">
+                <h1>Perfil da Escola</h1>
+                <div class="container3">
+                    <div class="wrapper7">
+                        <div class="image2">
+                            <img src="" alt="" class="imgd" onclick="defaultBtnActive2()">
+
+                        </div>
+                        <div class="content2">
+                            <div class="icon2"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <br>
+                            <br>
+                            <br>
+                            <center>
+                                <div class="text2">Selecione uma foto de perfil para a escola</div>
+                            </center>
+                        </div>
+                        <div id="cancel-btn2"><i class="fas fa-times"></i></div>
+                        <div class="file-name2">File name here</div>
+                    </div>
+                    <button onclick="enviar_foto_escola()" id="custom-btn2">Salvar</button>
+                    <input id="default-btn2" type="file" hidden>
+                    <script>
+                        function enviar_foto_escola() {
+                            const ref = firebase.storage().ref();
+
+                            const file = document.querySelector('#default-btn2').files[0];
+
+                            var email_escola = localStorage.getItem("escola_id");
+
+                            var email_escola64 = btoa(email_escola);
+
+                            const name = email_escola;
+
+                            const metadata = {
+                                contentType: file.type
+                            };
+
+                            const task = ref.child(name).put(file, metadata);
+
+                            task
+                                .then(snapshot => snapshot.ref.getDownloadURL())
+                                .then(url => {
+                                    console.log(url)
+                                    const image = document.querySelector('#imagem_perfil_escola')
+                                    image.src = url
+                                })
+                        }
+                    </script>
+
+                    <div class="wrapper8">
+                        <!-- <form action="#"> -->
+                        <div class="input-data">
+                            <input type="text" id="nome_escola_editar" required>
+                            <div class="underline"></div>
+                            <label>Nome</label>
+                        </div>
+                        <br><br>
+                        <div class="input-data">
+                            <input type="text" id="cnpj_editar" class="form-control" onkeypress="$(this).mask('00.000.000/0000-00');" required>
+                            <div class="underline"></div>
+                            <label>CNPJ</label>
+                        </div>
+                        <br><br>
+                        <div class="input-data">
+                            <input type="text" id="cep_editar" class="form-control" onkeypress="$(this).mask('00.000-000')" required>
+                            <div class="underline"></div>
+                            <label>CEP</label>
+                        </div>
+                        <br><br>
+                        <div class="input-data">
+                            <input type="number" id="numero_editar" class="form-control" required>
+                            <div class="underline"></div>
+                            <label>Número</label>
+                        </div>
+                        <br><br>
+                        <div class="input-data">
+                            <input type="text" id="comple_editar" class="form-control" required>
+                            <div class="underline"></div>
+                            <label>Complemento</label>
+                        </div>
+
+                        <div class="popup3" id="popup3">
+                            <div class="popup-inner3">
+                                <div class="popup-photo3">
+                                    <div class="center">
+                                        <h2>Nivel Educacional</h2>
+                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Educação Infantil</label>
+                                        <br><br>
+                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Ensino Fundamental 1</label>
+                                        <br><br>
+                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Ensino Fundamental 2</label>
+                                        <br><br>
+                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Ensino Médio</label>
+                                        <br><br>
+                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Educação Especial</label>
+                                        <br><br>
+                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;EJA</label>
+                                    </div>
+                                </div>
+
+                                <div class="popup-photo4">
+                                    <div class="container8">
+                                        <h2>Outras Configurações</h2>
+
+                                        <div class="select-box3">
+                                            <div class="options-container3">
+                                                <div class="option3">
+                                                    <input type="radio" class="radio3" id="automobiles3" name="category3" />
+                                                    <label for="automobiles3">Municipal</label>
+                                                </div>
+
+                                                <div class="option3">
+                                                    <input type="radio" class="radio3" id="film3" name="category3" />
+                                                    <label for="film">Estadual</label>
+                                                </div>
+
+                                                <div class="option3">
+                                                    <input type="radio" class="radio3" id="science3" name="category3" />
+                                                    <label for="science">Federal</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="selected3" id="valor_periodo">Selecione a instituição&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <h2 class="h2">Telefones</h2>
+                                    <ul>
+                                        <li><span>1</span>2555255363</li>
+                                        <li><span>2</span>336763673673</li>
+                                        <li><span>3</span>66267264</li>
+                                        <li><span>4</span>7426467426674</li>
+                                        <li><span>5</span>7646426747</li>
+                                    </ul>
+                                </div>
+                                <button type="submit" class="form__button6" onclick=""><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
+                            </div>
+                            <a class="popup-close3" href="#">X</a>
+                        </div>
+                        <!--<br><br>
             <div class="input-data">
               <input type="text" id="senha_editar" required>
               <div class="underline"></div>
               <label>CEP</label>
             </div>-->
-            <br>
-            <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
-            <script>
-              async function editar_escola() {
-                var nome = $('#nome_escola_editar').val();
-                var cnpj = $('#cnpj_editar').val();
-                var cep = $('cep_editar').val();
-                var numero = $('numero_editar').val();
-                var complemento = $('comple_editar').val();
+                        <br>
+                        <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
+                        <script>
+                            async function editar_escola() {
+                                var nome = $('#nome_escola_editar').val();
+                                var cnpj = $('#cnpj_editar').val();
+                                var cep = $('cep_editar').val();
+                                var numero = $('numero_editar').val();
+                                var complemento = $('comple_editar').val();
 
 
-                // Prompt the user to re-provide their sign-in credentials
+                                // Prompt the user to re-provide their sign-in credentials
 
-                const atualiza = await escola_database.new(
-                  nome,
-                  localStorage.getItem("email"),
-                  localStorage.getItem("cep"),
-                  localStorage.getItem("estado"),
-                  localStorage.getItem("cidade"),
-                  localStorage.getItem("bairro"),
-                  localStorage.getItem("rua"),
-                  localStorage.getItem("numero"),
-                  localStorage.getItem("complemento"),
-                  cnpj
-                );
+                                const atualiza = await escola_database.new(
+                                    nome,
+                                    localStorage.getItem("email"),
+                                    localStorage.getItem("cep"),
+                                    localStorage.getItem("estado"),
+                                    localStorage.getItem("cidade"),
+                                    localStorage.getItem("bairro"),
+                                    localStorage.getItem("rua"),
+                                    localStorage.getItem("numero"),
+                                    localStorage.getItem("complemento"),
+                                    cnpj
+                                );
 
-                // Prompt the user to re-provide their sign-in credentials
+                                // Prompt the user to re-provide their sign-in credentials
 
 
-              }
+                            }
+                        </script>
 
-            </script>
+                        <!-- </form> -->
+                    </div>
 
-            <!-- </form> -->
-          </div>
-          
+                </div>
+            </section>
+            </div>
+
         </div>
-      </section>
-    </div>
 
-  </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="js/scriptFunc.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="js/suggestions.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="js/scriptFunc.js"></script>
-  <script src="js/scripts.js"></script>
-  <script src="js/suggestions.js"></script>
+        <script>
+            const tbtn = document.querySelectorAll(".side-nav ul li");
+            const tab = document.querySelectorAll(".tabs");
 
-  <script>
-    const tbtn = document.querySelectorAll(".side-nav ul li");
-    const tab = document.querySelectorAll(".tabs");
+            function show(panelIndex) {
+                tab.forEach(function(node) {
+                    node.style.display = "none";
+                })
+                tab[panelIndex].style.display = "block";
+            }
+            show(0)
+        </script>
 
-    function show(panelIndex) {
-      tab.forEach(function(node) {
-        node.style.display = "none";
-      })
-      tab[panelIndex].style.display = "block";
-    }
-    show(0)
+        <script>
+            $(".side-nav ul li").click(function() {
+                $(this).addClass("active").siblings().removeClass("active");
+            });
+        </script>
+        <script>
+            const bar = document.querySelector(".bars");
+            const navM = document.querySelector(".nav-mobile");
+            bar.addEventListener("click", (nav) => {
+                navM.classList.toggle("show");
+            })
+        </script>
+        <script>
+            const Mbar = document.querySelector(".m-bar");
+            const aside = document.querySelector(".sidebar");
+            const close = document.querySelector(".close");
+            Mbar.addEventListener("click", () => {
+                aside.classList.add("show");
+            })
+            close.addEventListener("click", () => {
+                aside.classList.remove("show");
+            })
+        </script>
+        <script>
+            const wrapper = document.querySelector(".wrapper");
+            const fileName = document.querySelector(".file-name");
+            const defaultBtn = document.querySelector("#default-btn");
+            const customBtn = document.querySelector("#custom-btn");
+            const cancelBtn = document.querySelector("#cancel-btn i");
+            const img = document.querySelector(".imgt");
+            let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
 
-  </script>
+            function defaultBtnActive() {
+                defaultBtn.click();
+            }
+            defaultBtn.addEventListener("change", function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        const result = reader.result;
+                        img.src = result;
+                        wrapper.classList.add("active");
+                    }
+                    cancelBtn.addEventListener("click", function() {
+                        img.src = "";
+                        wrapper.classList.remove("active");
+                    })
+                    reader.readAsDataURL(file);
+                }
+                if (this.value) {
+                    let valueStore = this.value.match(regExp);
+                    fileName.textContent = valueStore;
+                }
+            });
+        </script>
+        <script>
+            const wrapper7 = document.querySelector(".wrapper7");
+            const fileName2 = document.querySelector(".file-name2");
+            const defaultBtn2 = document.querySelector("#default-btn2");
+            const customBtn2 = document.querySelector("#custom-btn2");
+            const cancelBtn2 = document.querySelector("#cancel-btn2 i");
+            const img2 = document.querySelector(".imgd");
+            let regExp2 = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
 
-  <script>
-    $(".side-nav ul li").click(function() {
-      $(this).addClass("active").siblings().removeClass("active");
-    });
+            function defaultBtnActive2() {
+                defaultBtn2.click();
+            }
+            defaultBtn2.addEventListener("change", function() {
+                const file2 = this.files[0];
+                if (file2) {
+                    const reader2 = new FileReader();
+                    reader2.onload = function() {
+                        const result2 = reader2.result;
+                        img2.src = result2;
+                        wrapper7.classList.add("active");
+                    }
+                    cancelBtn2.addEventListener("click", function() {
+                        img2.src = "";
+                        wrapper7.classList.remove("active");
+                    })
+                    reader2.readAsDataURL(file2);
+                }
+                if (this.value) {
+                    let valueStore = this.value.match(regExp2);
+                    fileName2.textContent = valueStore;
+                }
+            });
+        </script>
+        <script>
+            const selected = document.querySelector(".selected");
+            const optionsContainer = document.querySelector(".options-container");
 
-  </script>
-  <script>
-    const bar = document.querySelector(".bars");
-    const navM = document.querySelector(".nav-mobile");
-    bar.addEventListener("click", (nav) => {
-      navM.classList.toggle("show");
-    })
+            const optionsList = document.querySelectorAll(".option");
 
-  </script>
-  <script>
-    const Mbar = document.querySelector(".m-bar");
-    const aside = document.querySelector(".sidebar");
-    const close = document.querySelector(".close");
-    Mbar.addEventListener("click", () => {
-      aside.classList.add("show");
-    })
-    close.addEventListener("click", () => {
-      aside.classList.remove("show");
-    })
+            selected.addEventListener("click", () => {
+                optionsContainer.classList.toggle("active");
+            });
 
-  </script>
-  <script>
-    const wrapper = document.querySelector(".wrapper");
-    const fileName = document.querySelector(".file-name");
-    const defaultBtn = document.querySelector("#default-btn");
-    const customBtn = document.querySelector("#custom-btn");
-    const cancelBtn = document.querySelector("#cancel-btn i");
-    const img = document.querySelector(".imgt");
-    let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+            optionsList.forEach(o => {
+                o.addEventListener("click", () => {
+                    selected.innerHTML = o.querySelector("label").innerHTML;
+                    optionsContainer.classList.remove("active");
+                });
+            });
+        </script>
+        <script>
+            const selected2 = document.querySelector(".selected2");
+            const optionsContainer2 = document.querySelector(".options-container2");
 
-    function defaultBtnActive() {
-      defaultBtn.click();
-    }
-    defaultBtn.addEventListener("change", function() {
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function() {
-          const result = reader.result;
-          img.src = result;
-          wrapper.classList.add("active");
-        }
-        cancelBtn.addEventListener("click", function() {
-          img.src = "";
-          wrapper.classList.remove("active");
-        })
-        reader.readAsDataURL(file);
-      }
-      if (this.value) {
-        let valueStore = this.value.match(regExp);
-        fileName.textContent = valueStore;
-      }
-    });
+            const optionsList2 = document.querySelectorAll(".option2");
 
-  </script>
-  <script>
-    const wrapper7 = document.querySelector(".wrapper7");
-    const fileName2 = document.querySelector(".file-name2");
-    const defaultBtn2 = document.querySelector("#default-btn2");
-    const customBtn2 = document.querySelector("#custom-btn2");
-    const cancelBtn2 = document.querySelector("#cancel-btn2 i");
-    const img2 = document.querySelector(".imgd");
-    let regExp2 = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+            selected2.addEventListener("click", () => {
+                optionsContainer2.classList.toggle("active");
+            });
 
-    function defaultBtnActive2() {
-      defaultBtn2.click();
-    }
-    defaultBtn2.addEventListener("change", function() {
-      const file2 = this.files[0];
-      if (file2) {
-        const reader2 = new FileReader();
-        reader2.onload = function() {
-          const result2 = reader2.result;
-          img2.src = result2;
-          wrapper7.classList.add("active");
-        }
-        cancelBtn2.addEventListener("click", function() {
-          img2.src = "";
-          wrapper7.classList.remove("active");
-        })
-        reader2.readAsDataURL(file2);
-      }
-      if (this.value) {
-        let valueStore = this.value.match(regExp2);
-        fileName2.textContent = valueStore;
-      }
-    });
+            optionsList2.forEach(o => {
+                o.addEventListener("click", () => {
+                    selected2.innerHTML = o.querySelector("label").innerHTML;
+                    optionsContainer2.classList.remove("active");
+                });
+            });
+        </script>
+        <script>
+            const selected3 = document.querySelector(".selected3");
+            const optionsContainer3 = document.querySelector(".options-container3");
 
-  </script>
-  <script>
-    const selected = document.querySelector(".selected");
-    const optionsContainer = document.querySelector(".options-container");
+            const optionsList3 = document.querySelectorAll(".option3");
 
-    const optionsList = document.querySelectorAll(".option");
+            selected3.addEventListener("click", () => {
+                optionsContainer3.classList.toggle("active");
+            });
 
-    selected.addEventListener("click", () => {
-      optionsContainer.classList.toggle("active");
-    });
+            optionsList3.forEach(o => {
+                o.addEventListener("click", () => {
+                    selected3.innerHTML = o.querySelector("label").innerHTML;
+                    optionsContainer3.classList.remove("active");
+                });
+            });
+        </script>
 
-    optionsList.forEach(o => {
-      o.addEventListener("click", () => {
-        selected.innerHTML = o.querySelector("label").innerHTML;
-        optionsContainer.classList.remove("active");
-      });
-    });
-
-  </script>
-  <script>
-    const selected2 = document.querySelector(".selected2");
-    const optionsContainer2 = document.querySelector(".options-container2");
-
-    const optionsList2 = document.querySelectorAll(".option2");
-
-    selected2.addEventListener("click", () => {
-      optionsContainer2.classList.toggle("active");
-    });
-
-    optionsList2.forEach(o => {
-      o.addEventListener("click", () => {
-        selected2.innerHTML = o.querySelector("label").innerHTML;
-        optionsContainer2.classList.remove("active");
-      });
-    });
-
-  </script>
-   <script>
-    const selected3 = document.querySelector(".selected3");
-    const optionsContainer3 = document.querySelector(".options-container3");
-
-    const optionsList3 = document.querySelectorAll(".option3");
-
-    selected3.addEventListener("click", () => {
-      optionsContainer3.classList.toggle("active");
-    });
-
-    optionsList3.forEach(o => {
-      o.addEventListener("click", () => {
-        selected3.innerHTML = o.querySelector("label").innerHTML;
-        optionsContainer3.classList.remove("active");
-      });
-    });
-
-  </script>
-
-  <!--Outros links-->
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
-  <script src="../js/firebase.js"></script>
-  <script src="../js/funcionario_database.js"></script>
-  <script src="../js/turma_database.js"></script>
+        <!--Outros links-->
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+        <script src="../js/firebase.js"></script>
+        <script src="../js/funcionario_database.js"></script>
+        <script src="../js/turma_database.js"></script>
 </body>
 
 </html>

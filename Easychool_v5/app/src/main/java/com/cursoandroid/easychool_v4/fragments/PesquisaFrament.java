@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -48,6 +50,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class PesquisaFrament extends Fragment {
     private Adapter adapter;
@@ -97,7 +100,7 @@ public class PesquisaFrament extends Fragment {
         recyclerView.setAdapter(adapter);
 
         //Evento de Click
-        /*recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -120,7 +123,7 @@ public class PesquisaFrament extends Fragment {
                     public void onLongItemClick(View view, int position) {
 
                     }
-                }));*/
+                }));
 
         return root;
     }
@@ -340,9 +343,6 @@ public class PesquisaFrament extends Fragment {
                                     }
                                 }
                             }
-                            else{
-
-                            }
                             //Log.i("teste", "filtro: " +filtroDistancia.get(0));
                         }
                         Collections.sort(escolasFiltroDistancia);
@@ -361,6 +361,39 @@ public class PesquisaFrament extends Fragment {
                             escolasFiltroDistancia.addAll(listaEscolas);
                         }
                     }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void filtroTipoEscola(final List<Escola> escolas){
+        final List<Escola> escolasFiltroTipo = new ArrayList<>();
+
+        filtrosRef.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<String> tipoFire = new ArrayList<>();
+
+                for(DataSnapshot data : dataSnapshot.getChildren()){
+                    if(Objects.equals(data.child("Escolas Estaduais").getValue(), true)){
+                        tipoFire.add("Escola Estadual");
+                    }
+                    if(Objects.equals(data.child("Escolas Federais").getValue(), true)){
+                        tipoFire.add("Escola Federal");
+                    }
+                    if(Objects.equals(data.child("Escolas Municipais").getValue(), true)){
+                        tipoFire.add("Escola Municipal");
+                    }
+                }
+
+                for(int i = 0; i < escolas.size(); i++){
+                    //Fazer um if, se o perfil da escola for igual aos tipos selecionados pelo usuario listar e colocar no recycleView
                 }
             }
 
