@@ -312,52 +312,54 @@ public class PesquisaFrament extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String distanciaFire = (String) dataSnapshot.child("Distancia").getValue();
 
-                String[] distanciaQuebrada = distanciaFire.split(" ");
+                if(distanciaFire != null) {
+                    String[] distanciaQuebrada = distanciaFire.split(" ");
 
-                try {
-                    filtroDistancia.add(Integer.parseInt(distanciaQuebrada[1]));
+                    try {
+                        filtroDistancia.add(Integer.parseInt(distanciaQuebrada[1]));
 
-                    if(filtroDistancia.get(0) != 0) {
-                        if(filtroDistancia.get(0) == 5){
-                            for(Escola escola : listaEscolas){
-                                if(escola.getDistancia() <= 5.0){
-                                    escolasFiltroDistancia.add(escola);
+                        if(filtroDistancia.get(0) != 0) {
+                            if(filtroDistancia.get(0) == 5){
+                                for(Escola escola : listaEscolas){
+                                    if(escola.getDistancia() <= 5.0){
+                                        escolasFiltroDistancia.add(escola);
+                                    }
                                 }
                             }
-                        }
-                        else if(filtroDistancia.get(0) == 10){
-                            for(Escola escola : listaEscolas){
-                                if(escola.getDistancia() <= 10.0){
-                                    escolasFiltroDistancia.add(escola);
+                            else if(filtroDistancia.get(0) == 10){
+                                for(Escola escola : listaEscolas){
+                                    if(escola.getDistancia() <= 10.0){
+                                        escolasFiltroDistancia.add(escola);
+                                    }
                                 }
                             }
-                        }
-                        else if(filtroDistancia.get(0) == 15){
-                            for(Escola escola : listaEscolas){
-                                if(escola.getDistancia() <= 15.0){
-                                    escolasFiltroDistancia.add(escola);
+                            else if(filtroDistancia.get(0) == 15){
+                                for(Escola escola : listaEscolas){
+                                    if(escola.getDistancia() <= 15.0){
+                                        escolasFiltroDistancia.add(escola);
+                                    }
                                 }
                             }
-                        }
-                        else{
+                            else{
 
+                            }
+                            //Log.i("teste", "filtro: " +filtroDistancia.get(0));
                         }
-                        //Log.i("teste", "filtro: " +filtroDistancia.get(0));
+                        Collections.sort(escolasFiltroDistancia);
+                        Collections.sort(distancia);
+
+                        adapter = new Adapter(escolasFiltroDistancia, distancia);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                     }
-                    Collections.sort(escolasFiltroDistancia);
-                    Collections.sort(distancia);
+                    catch (Exception e){
+                        filtroDistancia.add(Integer.parseInt(distanciaQuebrada[0]));
 
-                    adapter = new Adapter(escolasFiltroDistancia, distancia);
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
-                catch (Exception e){
-                    filtroDistancia.add(Integer.parseInt(distanciaQuebrada[0]));
+                        if(filtroDistancia.get(0) != 0) {
+                            //Log.i("teste", "filtro: " +filtroDistancia.get(0));
 
-                    if(filtroDistancia.get(0) != 0) {
-                        //Log.i("teste", "filtro: " +filtroDistancia.get(0));
-
-                        escolasFiltroDistancia.addAll(listaEscolas);
+                            escolasFiltroDistancia.addAll(listaEscolas);
+                        }
                     }
                 }
             }

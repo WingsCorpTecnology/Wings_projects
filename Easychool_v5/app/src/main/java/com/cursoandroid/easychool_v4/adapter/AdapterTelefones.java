@@ -30,7 +30,12 @@ public class AdapterTelefones extends RecyclerView.Adapter<AdapterTelefones.MyVi
     public void onBindViewHolder(AdapterTelefones.MyViewHolder holder, int position) {
         Long telefoneEscola = telefones.get(position);
 
-        holder.telefone.setText(String.valueOf(telefoneEscola));
+        if(telefoneEscola != 0) {
+            holder.telefone.setText(String.valueOf(telefoneEscola));
+        }
+        else{
+            holder.telefone.setText("Nenhum telefone cadastrado");
+        }
     }
 
 
