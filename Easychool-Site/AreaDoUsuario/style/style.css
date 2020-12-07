@@ -1630,6 +1630,7 @@ aside .search button{
   width: 40%;
   height: 100%;
   overflow: hidden;
+  left:5%;
 }
 .popup-photo4{
   display: flex;
@@ -1641,11 +1642,6 @@ aside .search button{
   position: relative;
   top: -40px;
   right: -100px;
-}
-.popup-photo3 img{
-  width: auto;
-  height: 100%;
-
 }
 .popup-text3{
   display: flex;
@@ -1685,6 +1681,227 @@ aside .search button{
   cursor: pointer;
   text-decoration: none;
 }
+/* Checkbox */
+.center{
+  position: relative;
+  top: 60%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%,-50%);
+  text-align: left;
+}
+.center h2 {
+  margin: 16px 0;
+  border-left: 5px solid #FC8A3B;
+  padding-left: 16px;
+  font-size: 25px;
+  
+}
+input[type="checkbox"]{
+  position: relative;
+  top: 10px;
+  width: 25px;
+  height: 25px;
+  -webkit-appearance: none;
+  outline: none;
+  transition: .5s;
+
+}
+input[type="checkbox"]::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 4px solid #262626;
+  box-sizing: border-box;
+  transition: .5s;
+
+}
+input:checked[type="checkbox"]::before{
+  border-left: none;
+  border-top: none;
+  width: 13px;
+  border-color: #0f0;
+  transform: rotate(45deg) translate(5px, -10px);
+
+}
+.labelCheck{
+  font-size: 18px;
+  font-family: sans-serif;
+}
+/* Combo box escola */
+
+.container8 {
+  margin-top: 10%;
+  padding: 10px;
+  position: absolute;
+  right: -10%;
+}
+.container8 h2{
+  margin: 16px;
+}
+
+.select-box3 {
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+}
+
+.select-box3 .options-container3 {
+  background: #2f3640;
+  color: #f5f6fa;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+
+  order: 1;
+}
+
+.selected3 {
+  background: #2f3640;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #f5f6fa;
+  position: relative;
+
+  order: 0;
+}
+
+.selected3::after {
+  content: "";
+  background: url("img/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: 5px;
+
+  transition: all 0.4s;
+}
+
+.select-box3 .options-container3.active {
+  max-height: 80px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.select-box3 .options-container3.active + .selected3::after {
+  transform: rotateX(180deg);
+  top: -6px;
+}
+
+.select-box3 .options-container3::-webkit-scrollbar {
+  width: 8px;
+  background: #0d141f;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box3 .options-container3::-webkit-scrollbar-thumb {
+  background: #525861;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box3 .option3,
+.selected3 {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.select-box3 .option3:hover {
+  background: #414b57;
+}
+
+.select-box3 label {
+  cursor: pointer;
+}
+
+.select-box3 .option3 .radio3 {
+  display: none;
+}
+
+/* Lista de telefone */
+.box{
+  width: 250px;
+  border-bottom: 10px solid#5CD83E ;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+  top: 50%;
+  right: 7%;
+}
+.box .h2{
+  color: #fff;
+  background:#5CD83E ;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 700;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* ::-webkit-scrollbar{
+  width: 25px;
+}
+::-webkit-scrollbar-track{
+  border: 7px solid #232943;
+  box-shadow: inset 0 0 2.5px 2px rgba(0, 0, 0, .5);
+}
+::-webkit-scrollbar-thumb{
+  background-color: red;
+  
+} */
+.box ul{
+  position: relative;
+  background: #fff;
+  width: 250px;
+  height: 85px;
+  overflow-y: scroll;
+}
+.box ul li{
+  list-style: none;
+  padding: 10px;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, .1);
+  transition: transform 0.5s;
+}
+
+.box ul li:hover{
+  z-index: 100;
+  background: #FE8C3D;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, .2);
+  color: #fff;
+  transition: 0.4s ease;
+  cursor: pointer;
+}
+.box ul li span{
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  background: #FE8C3D;
+  color: #fff;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  transform: translateY(-2px);
+}
+.box ul li:hover span{
+  background: #fff;
+  color:#FE8C3D;
+}
+
+
 
 
 @media (max-width: 900px){
