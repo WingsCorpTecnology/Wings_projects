@@ -6,13 +6,10 @@ const funcionario_database = {};
   async function new_funcionario(nome, email, cpf) {
     var teste = localStorage.getItem("id_item");
     var teste64 = btoa(teste);
-    
-    var escola_id = localStorage.getItem("escola_id");
-    
+
     var escola_certa;
-    
-    if(teste64 == escola_id) escola_certa = teste64;
-    else escola_certa = escola_id;
+
+    escola_certa = teste64;
 
     const funcionario_data = {
       email: email,
@@ -62,7 +59,59 @@ const funcionario_database = {};
 
   function remove_funcionario() {}
 
-  function update_funcionario() {}
+  async function update_funcionario(nome, email, cpf) {
+
+    var escola_id = localStorage.getItem("escola_id");
+
+    var escola_certa;
+
+    escola_certa = escola_id;
+
+    const funcionario_data = {
+      email: email,
+      nome: nome,
+      cpf: cpf,
+      escola: escola_certa
+    };
+
+    //if (!escola_id)
+    //escola_id = firebase.database().ref().child('escolas').push().key;
+
+    //escola_database.new('gustavo', 'gustavo@gmail.com', '03570-120', 'são paulo', 'são paulo', 'parque savoy city', 'monesia', '34', 'a', '767868957896');
+
+    //../CadastroFunci/cadastroFuncionario.html
+
+
+    // var escola64 = btoa(unescape(encodeURIComponent(escola)));
+
+    //var escola64 = decodeURIComponent(escape(window.atob(escola)));
+
+    var emailKey = email;
+    emailKey.toString();
+
+    var emailBase64 = btoa(emailKey);
+
+    console.log(emailBase64);
+
+    let updates = {};
+    updates['/Funcionario/' + emailBase64] = funcionario_data;
+
+    let funcionario_ref = firebase.database().ref();
+
+    await funcionario_ref.update(updates)
+      .then(function () {
+        return {
+          sucesso: true,
+          message: 'Funcionario cadastrado'
+        };
+      })
+      .catch(function (error) {
+        return {
+          sucesso: false,
+          message: 'Falha ao cadastrar o funcionario: ${error.message}'
+        };
+      })
+  }
 
   async function cadastrar_funcionario_auth(email, senha) {
 

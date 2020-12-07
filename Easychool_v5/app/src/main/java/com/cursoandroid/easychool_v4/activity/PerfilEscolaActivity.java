@@ -3,6 +3,7 @@ package com.cursoandroid.easychool_v4.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PerfilEscolaActivity extends AppCompatActivity {
     private AdapterTelefones adapter;
@@ -44,6 +47,8 @@ public class PerfilEscolaActivity extends AppCompatActivity {
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private DatabaseReference telefoneRef;
     private ValueEventListener valueEventListenerTelefone;
+    private DatabaseReference turmaRef;
+    private String idEscola;
     private Escola escolaAtual;
     private TextView txtNome, txtEndereco, txtEstadoCidade, txtEmail;
     private Long telefoneSelecionado;
@@ -106,16 +111,22 @@ public class PerfilEscolaActivity extends AppCompatActivity {
             }
         }));
 
-        /*recuperarTurmas();
+        recuperarTurmas();
 
         //Configurar Adapter
         adapterTurmas = new AdapterTurmas(listaTurmas);
 
         //Configurar RecyclerView
-        recyclerTurmas.setLayoutManager(layoutManager);
+        RecyclerView.LayoutManager layoutManagerTurmas = new LinearLayoutManager(this);
+        recyclerTurmas.setLayoutManager(layoutManagerTurmas);
         recyclerTurmas.setHasFixedSize(true);
         recyclerTurmas.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
-        recyclerTurmas.setAdapter(adapterTurmas);*/
+        recyclerTurmas.setAdapter(adapterTurmas);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     private void preencherCampos() {
@@ -156,6 +167,36 @@ public class PerfilEscolaActivity extends AppCompatActivity {
     }
 
     public void recuperarTurmas(){
+        turmaRef = firebaseRef.child("Turmas").child(Base64Custom.codificarBase64(txtEmail.getText().toString()));
+        Log.i("teste", Base64Custom.codificarBase64(txtEmail.getText().toString()));
 
+        turmaRef.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaTurmas.clear();
+                //Log.i("teste", "Série: ");
+
+                for(DataSnapshot dados : dataSnapshot.getChildren()){
+                    Turma turma = dados.getValue(Turma.class);
+
+                    turma.setId(dados.getKey());
+                    turma.setVagasTotal(Integer.parseInt((String) Objects.requireNonNull(dados.child("total_vagas").getValue())));
+                    turma.setVagasOcupadas(Integer.parseInt((String) Objects.requireNonNull(dados.child("vagas_ocupadas").getValue())));
+                    turma.setUltimaAlteracao((String) Objects.requireNonNull(dados.child("data_hora").getValue()));
+                    //turma.set
+
+                    //Log.i("teste", "Vagas: " +turma.getUltimaAlteracao());
+                    listaTurmas.add(turma);
+                }
+
+                adapterTurmas.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

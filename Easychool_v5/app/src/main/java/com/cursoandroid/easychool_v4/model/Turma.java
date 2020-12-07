@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Turma implements Serializable {
+    private String id;
     private String serie;
     private int vagasDisponiveis;
     private int vagasTotal;
@@ -13,6 +14,14 @@ public class Turma implements Serializable {
     private String ultimaAlteracao;
 
     public Turma() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getSerie() {

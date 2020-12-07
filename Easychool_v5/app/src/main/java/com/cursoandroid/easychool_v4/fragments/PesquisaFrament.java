@@ -50,6 +50,7 @@ public class PesquisaFrament extends Fragment {
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private DatabaseReference escolaRef;
     private DatabaseReference responsavelRef;
+    private DatabaseReference turmaRef;
     private String emailResponsavel = autenticacao.getCurrentUser().getEmail();
     private String idResponsavel = Base64Custom.codificarBase64(emailResponsavel);
     private DatabaseReference filtrosRef;
@@ -71,6 +72,7 @@ public class PesquisaFrament extends Fragment {
         escolaRef = firebaseRef.child("Escola");
         filtrosRef = firebaseRef.child("FiltrosPesquisa").child(idResponsavel);
         responsavelRef = firebaseRef.child("ResponsavelAluno").child(idResponsavel);
+        //turmaRef = firebaseRef.child("Turmas").child()
 
         recuperarEscolas();
         pesquisa();
