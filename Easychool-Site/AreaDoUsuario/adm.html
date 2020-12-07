@@ -1135,6 +1135,7 @@
                             <div class="underline"></div>
                             <label>CEP</label>
                         </div>
+<<<<<<< HEAD
                         <br><br>
                         <div class="input-data">
                             <input type="number" id="numero_editar" class="form-control" required>
@@ -1223,6 +1224,45 @@
                                 var cep = $('cep_editar').val();
                                 var numero = $('numero_editar').val();
                                 var complemento = $('comple_editar').val();
+=======
+                      </div>
+  
+                      <div class="selected3" id="valor_periodo">Selecione a instituição&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <br><br>
+                      <div class="input-data2">
+                          <input type="text" id="phone_editar" required>
+                            <div class="underline2"></div>
+                        <label>Telefone:</label>
+                    </div>
+                </div>
+                <div class="box">
+                  <h2 class="h2">Telefones</h2>
+                  <ul>
+                    <li><span>1</span>2555255363</li>
+                    <li><span>2</span>336763673673</li>
+                    <li><span>3</span>66267264</li>
+                    <li><span>4</span>7426467426674</li>
+                    <li><span>5</span>7646426747</li>
+                  </ul>
+                </div>
+                <button type="submit" class="form__button6" onclick=""><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
+              </div>
+              <a class="popup-close3" href="#">X</a>
+            </div>
+           
+            <br>
+            <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
+            <script>
+              async function editar_escola() {
+                var nome = $('#nome_escola_editar').val();
+                var cnpj = $('#cnpj_editar').val();
+                var cep = $('cep_editar').val();
+                var numero = $('numero_editar').val();
+                var complemento = $('comple_editar').val();
+>>>>>>> 6055d8fcc123e47c48f35f8e33f518caa1e592ff
 
 
                                 // Prompt the user to re-provide their sign-in credentials
