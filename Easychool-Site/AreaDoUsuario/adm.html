@@ -66,16 +66,19 @@
                         alert(error);
                     });
                 }
+
             </script>
             <script>
                 function sobre() {
                     $(location).attr('href', '../index.html');
                 }
+
             </script>
             <script>
                 function wings() {
                     $(location).attr('href', '../../Wings/index.html');
                 }
+
             </script>
         </div>
         <div class="m-bar">
@@ -126,8 +129,9 @@
                                 document.getElementById("cpf_editar").value = cpf;
                                 document.getElementById("email_perfil").innerHTML = email_perfil;
                                 localStorage.setItem("escola_id", escola);
-                                mandar_valores();
-                                pegar_funcionarios();
+                                //mandar_valores();
+                                //pegar_funcionarios();
+                                pegar_turmas();
                                 // ...
                             });
 
@@ -177,12 +181,12 @@
                                 //var starsRef = storageRef.ref(userId);
 
                                 // Get the download URL
-                                
+
 
                                 var funcionario = Object.values(id_func[0]);
 
-                                for(var i = 0; i < funcionario.length; i++){
-                                    if(funcionario[i].escola == localStorage.getItem("escola_id") && funcionario[i].email != email_perfil){
+                                for (var i = 0; i < funcionario.length; i++) {
+                                    if (funcionario[i].escola == localStorage.getItem("escola_id") && funcionario[i].email != email_perfil) {
                                         nome_func = funcionario[i].nome;
                                         var email_func = funcionario[i].email;
                                         var func_id = btoa(email_func);
@@ -207,9 +211,9 @@
 
                                         //recuperando a imagem do funcionario
                                         starsRef.getDownloadURL().then(function(url) {
-                                        // Insert url into an <img> tag to "download"
-                                        const image = document.querySelector('#img_funcionario')
-                                        image.src = url
+                                            // Insert url into an <img> tag to "download"
+                                            const image = document.querySelector('#img_funcionario')
+                                            image.src = url
                                         }).catch(function(error) {
                                             console.log(error)
                                         });
@@ -224,6 +228,166 @@
                                 }
                             })
                         }
+
+                        async function pegar_turmas() {
+                            var id_escola = localStorage.getItem("escola_id");
+                            return await firebase.database().ref('/Turmas/' + id_escola + "/").once('value').then(function(snapshot) {
+                                var id_turmas = [snapshot.val()];
+                                var nome_func;
+
+                                // Get the download URL
+
+
+                                var funcionario = Object.values(id_turmas[0]);
+
+                                for (var i = 0; i < funcionario.length; i++) {
+                                    nome_func = funcionario[i].serie;
+                                    var email_func = funcionario[i].total_vagas;
+                                    var vagas_ocupadas = funcionario[i].vagas_ocupadas;
+                                    var periodo = funcionario[i].periodo;
+                                    var func_id = btoa(email_func);
+
+                                    console.log(nome_func);
+                                    console.log(email_func);
+                                    console.log(vagas_ocupadas);
+                                    console.log(periodo);
+
+                                    //buscar elemento avô
+                                    var elemento_avo = document.getElementById("lista");
+
+                                    //criar elemento pai
+                                    var elemento_pai = document.createElement('li');
+                                    
+                                    var li = document.createElement('li');
+                                    var div_item = document.createElement('div');
+                                    div_item.setAttribute("class", "item");
+                                    
+                                    var div_name = document.createElement('div');
+                                    div_name.setAttribute("class", "name");
+                                    var span_serie = document.createElement('span');
+                                    span_serie.textContent = nome_func;
+                                    div_name.appendChild(span_serie);
+                                    
+                                    var div_phone_vagas = document.createElement('div');
+                                    div_phone_vagas.setAttribute("class", "phone");
+                                    var span_vagas = document.createElement('span');
+                                    span_vagas.textContent = email_func;
+                                    div_phone_vagas.appendChild(span_vagas);
+                                    
+                                    var div_phone_restante = document.createElement('div');
+                                    div_phone_restante.setAttribute("class", "phone");
+                                    var span_restante = document.createElement('span');
+                                    span_restante.textContent = vagas_ocupadas;
+                                    div_phone_restante.appendChild(span_restante);
+                                    
+                                    var div_periodo = document.createElement('div');
+                                    div_periodo.setAttribute("class", "status");
+                                    var span_periodo = document.createElement('span');
+                                    span_periodo.textContent = periodo;
+                                    var cor = "";
+                                    switch(periodo){
+                                        case 'Manhã':
+                                            cor = "hold";
+                                            break;
+                                        case'Tarde':
+                                            cor = "fixed";
+                                            break;
+                                        case 'Noite':
+                                            cor = "open";
+                                            break;
+                                        case 'Integral':
+                                            cor = "reopened";
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    span_periodo.setAttribute("class", cor);
+                                    div_periodo.appendChild(span_periodo);
+                                    
+                                    var div_editar = document.createElement('div');
+                                    div_editar.setAttribute("class", "status");
+                                    var span_editar = document.createElement('span');
+                                    var a_href = document.createElement('a');
+                                    a_href.setAttribute("href", "#popup2");
+                                    var bt_editar = document.createElement('button');
+                                    bt_editar.setAttribute("type", "submit");
+                                    bt_editar.setAttribute("class", "form__button2");
+                                    var i_editar = document.createElement('i');
+                                    i_editar.setAttribute("class", "fas fa-pen");
+                                    i_editar.setAttribute("aria_hidden", "true");
+                                    bt_editar.appendChild(i_editar);
+                                    a_href.appendChild(bt_editar);
+                                    span_editar.appendChild(a_href);
+                                    div_editar.appendChild(span_editar);
+                                    
+                                    var div_excluir = document.createElement('div');
+                                    div_excluir.setAttribute("class", "status");
+                                    var span_excluir = document.createElement('span');
+                                    var bt_excluir = document.createElement('button');
+                                    bt_excluir.setAttribute("type", "submit");
+                                    bt_excluir.setAttribute("class", "form__button5");
+                                    var i_excluir = document.createElement('i');
+                                    i_excluir.setAttribute("class", "fa fa-trash");
+                                    i_excluir.setAttribute("aria-hidden", "true");
+                                    bt_excluir.appendChild(i_excluir);
+                                    span_excluir.appendChild(bt_excluir);
+                                    div_excluir.appendChild(span_excluir);
+                                    
+                                    div_item.appendChild(div_name);
+                                    div_item.appendChild(div_phone_vagas);
+                                    div_item.appendChild(div_phone_restante);
+                                    div_item.appendChild(div_periodo);
+                                    div_item.appendChild(div_editar);
+                                    div_item.appendChild(div_excluir);
+                                    li.appendChild(div_item);
+                                    console.log(li);
+                                    elemento_avo.appendChild(li);
+                                    
+
+                                    //criar elemento filho imagem
+                                    var elemento_filho_imagem;
+
+                                    //criar elemento filho texto
+                                    var elemento_filho_texto = document.createElement('li');
+
+                                    //criar texto
+                                    elemento_filho_texto.textContent = nome_func;
+
+                                    var linha = "<li>" +
+                                        "<div class='item'>" +
+                                        "<div class='name'>" +
+                                        "<span>10° Ano</span>" +
+                                        "</div>" +
+                                        "<div class='phone'>" +
+                                        "<span>100</span>" +
+                                        "</div>" +
+                                        "<div class='phone'>" +
+                                        "<span>50</span>" +
+                                        "</div>" +
+                                        "<div class='status'>" +
+                                        "<span class='open'>Todo dia</span>" +
+                                        "</div>" +
+                                        "<div class='status'>" +
+                                        "<span><a href='#popup2'><button type='submit' class='form__button2'><i class='fas fa-pen' aria-hidden='true'></i></i></i></button></a></span>" +
+                                        "</div>" +
+                                        "<div class='status'>" +
+                                        "<span><button type='submit' class='form__button5'><i class='fa fa-trash' aria-hidden='true'>" +
+                                        "</i></i></i></button> </span>" +
+                                        "</div>" +
+                                        "</div>" +
+                                        "</li>";
+
+
+                                    //colocar a imagem no elemento pai
+                                    elemento_pai.innerHTML = linha;
+                                    //elemento_pai.appendChild(elemento_filho_texto);
+
+                                    //colocar o elemento pai no elemento avo
+                                    //elemento_avo.appendChild(elemento_pai);
+                                }
+                            })
+                        }
+
                     </script>
                 </div>
             </div>
@@ -291,7 +455,7 @@
                     <div class="posts">
                         <span><a href="../CadastroFunci/cadastroFuncionarioAdm.html" target="_blank"><i class="fa fa-plus"></i></a></span>
                     </div>
-                    
+
                 </div>
             </section>
             <section class="tabs">
@@ -474,51 +638,9 @@
                             );
 
                             alert("Turma cadastrada");
-                            inserir_item_lista();
 
                         }
 
-                        function inserir_item_lista() {
-                            //const minhaTurma = new turma('9ano', '80', '40', 'tarde');
-
-                            const lista = document.getElementById('lista');
-
-                            var linha = "<li>" +
-                                "<div class='item'>" +
-                                "<div class='name'>" +
-                                "<span>10° Ano</span>" +
-                                "</div>" +
-                                "<div class='phone'>" +
-                                "<span>100</span>" +
-                                "</div>" +
-                                "<div class='phone'>" +
-                                "<span>50</span>" +
-                                "</div>" +
-                                "<div class='status'>" +
-                                "<span class='open'>Todo dia</span>" +
-                                "</div>" +
-                                "<div class='status'>" +
-                                "<span><a href='#popup2'><button type='submit' class='form__button2'><i class='fas fa-pen' aria-hidden='true'></i></i></i></button></a></span>" +
-                                "</div>" +
-                                "<div class='status'>" +
-                                "<span><button type='submit' class='form__button5'><i class='fa fa-trash' aria-hidden='true'>" +
-                                "</i></i></i></button> </span>" +
-                                "</div>" +
-                                "</div>" +
-                                "</li>";
-
-                            const item = document.createElement(linha);
-
-                            lista.appendChild(item);
-
-                        }
-
-                        function turma(serie, total_vagas, vagas_ocupadas, periodo) {
-                            this.serie = serie;
-                            this.total_vagas = total_vagas;
-                            this.vagas_ocupadas = vagas_ocupadas;
-                            this.periodo = periodo;
-                        }
                     </script>
 
                     <div class="table_wrap">
@@ -551,382 +673,7 @@
                         <div class="table_body" id="div_lista">
                             <ul id="lista">
                                 <!--Aqui é que começa a fazer a listagem-->
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>9° Ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>50</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="open">Tarde</span>
-                                        </div>
-                                        <div class="status">
-                                            <!-- o unico botão que tem o link pro modal -->
-                                            <span><a href="#popup2"><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></a></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!--Aqui é onde termina uma linha-->
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="canceled">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="hold">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="fixed">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item">
-                                        <div class="name">
-                                            <span>8°ano</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>80</span>
-                                        </div>
-                                        <div class="phone">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="status">
-                                            <span class="reopened">Manhã</span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button2"><i class="fas fa-pen" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                        <div class="status">
-                                            <span><button type="submit" class="form__button5"><i class="fa fa-trash" aria-hidden="true"></i></i></i></button></span>
-                                        </div>
-                                    </div>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -983,6 +730,7 @@
                                     image.src = url
                                 })
                         }
+
                     </script>
 
                     <div class="wrapper3">
@@ -1059,6 +807,7 @@
                                 window.location.reload();
 
                             }
+
                         </script>
 
                         <!-- </form> -->
@@ -1113,6 +862,7 @@
                                     image.src = url
                                 })
                         }
+
                     </script>
 
                     <div class="wrapper8">
@@ -1187,19 +937,19 @@
                                                     <label for="science">Federal</label>
                                                 </div>
                                             </div>
-                
+
                                             <div class="selected3" id="valor_periodo">Selecione a instituição&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <br><br>
-                                        <div class="input-data2">
-                                            <input type="text" id="phone_editar" required>
-                                                <div class="underline2"></div>
-                                            <label>Telefone:</label>
-                                        </div>
+                                    <div class="input-data2">
+                                        <input type="text" id="phone_editar" required>
+                                        <div class="underline2"></div>
+                                        <label>Telefone:</label>
                                     </div>
-                                    <div class="box">
+                                </div>
+                                <div class="box">
                                     <h2 class="h2">Telefones</h2>
                                     <ul>
                                         <li><span>1</span>2555255363</li>
@@ -1208,216 +958,226 @@
                                         <li><span>4</span>7426467426674</li>
                                         <li><span>5</span>7646426747</li>
                                     </ul>
-                                    </div>
-                                    <button type="submit" class="form__button6" onclick=""><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
                                 </div>
-                                <a class="popup-close3" href="#">X</a>
-                                </div>
-                            
-                                <br>
-                                <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
-                                <script>
-                                    async function editar_escola() {
-                                        var nome = $('#nome_escola_editar').val();
-                                        var cnpj = $('#cnpj_editar').val();
-                                        var cep = $('cep_editar').val();
-                                        var numero = $('numero_editar').val();
-                                        var complemento = $('comple_editar').val();
-
-
-                                        // Prompt the user to re-provide their sign-in credentials
-
-                                        const atualiza = await escola_database.new(
-                                            nome,
-                                            localStorage.getItem("email"),
-                                            localStorage.getItem("cep"),
-                                            localStorage.getItem("estado"),
-                                            localStorage.getItem("cidade"),
-                                            localStorage.getItem("bairro"),
-                                            localStorage.getItem("rua"),
-                                            localStorage.getItem("numero"),
-                                            localStorage.getItem("complemento"),
-                                            cnpj
-                                        );
-                                    }
-                                </script>
+                                <button type="submit" class="form__button6" onclick=""><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
                             </div>
+                            <a class="popup-close3" href="#">X</a>
                         </div>
+
+                        <br>
+                        <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
+                        <script>
+                            async function editar_escola() {
+                                var nome = $('#nome_escola_editar').val();
+                                var cnpj = $('#cnpj_editar').val();
+                                var cep = $('cep_editar').val();
+                                var numero = $('numero_editar').val();
+                                var complemento = $('comple_editar').val();
+
+
+                                // Prompt the user to re-provide their sign-in credentials
+
+                                const atualiza = await escola_database.new(
+                                    nome,
+                                    localStorage.getItem("email"),
+                                    localStorage.getItem("cep"),
+                                    localStorage.getItem("estado"),
+                                    localStorage.getItem("cidade"),
+                                    localStorage.getItem("bairro"),
+                                    localStorage.getItem("rua"),
+                                    localStorage.getItem("numero"),
+                                    localStorage.getItem("complemento"),
+                                    cnpj
+                                );
+                            }
+
+                        </script>
                     </div>
                 </div>
-            </section>
+        </div>
+    </div>
+    </section>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="js/scriptFunc.js"></script>
-        <script src="js/scripts.js"></script>
-        <script src="js/suggestions.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/scriptFunc.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/suggestions.js"></script>
 
-        <script>
-            const tbtn = document.querySelectorAll(".side-nav ul li");
-            const tab = document.querySelectorAll(".tabs");
+    <script>
+        const tbtn = document.querySelectorAll(".side-nav ul li");
+        const tab = document.querySelectorAll(".tabs");
 
-            function show(panelIndex) {
-                tab.forEach(function(node) {
-                    node.style.display = "none";
+        function show(panelIndex) {
+            tab.forEach(function(node) {
+                node.style.display = "none";
+            })
+            tab[panelIndex].style.display = "block";
+        }
+        show(0)
+
+    </script>
+
+    <script>
+        $(".side-nav ul li").click(function() {
+            $(this).addClass("active").siblings().removeClass("active");
+        });
+
+    </script>
+    <script>
+        const bar = document.querySelector(".bars");
+        const navM = document.querySelector(".nav-mobile");
+        bar.addEventListener("click", (nav) => {
+            navM.classList.toggle("show");
+        })
+
+    </script>
+    <script>
+        const Mbar = document.querySelector(".m-bar");
+        const aside = document.querySelector(".sidebar");
+        const close = document.querySelector(".close");
+        Mbar.addEventListener("click", () => {
+            aside.classList.add("show");
+        })
+        close.addEventListener("click", () => {
+            aside.classList.remove("show");
+        })
+
+    </script>
+    <script>
+        const wrapper = document.querySelector(".wrapper");
+        const fileName = document.querySelector(".file-name");
+        const defaultBtn = document.querySelector("#default-btn");
+        const customBtn = document.querySelector("#custom-btn");
+        const cancelBtn = document.querySelector("#cancel-btn i");
+        const img = document.querySelector(".imgt");
+        let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+
+        function defaultBtnActive() {
+            defaultBtn.click();
+        }
+        defaultBtn.addEventListener("change", function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const result = reader.result;
+                    img.src = result;
+                    wrapper.classList.add("active");
+                }
+                cancelBtn.addEventListener("click", function() {
+                    img.src = "";
+                    wrapper.classList.remove("active");
                 })
-                tab[panelIndex].style.display = "block";
+                reader.readAsDataURL(file);
             }
-            show(0)
-        </script>
-
-        <script>
-            $(".side-nav ul li").click(function() {
-                $(this).addClass("active").siblings().removeClass("active");
-            });
-        </script>
-        <script>
-            const bar = document.querySelector(".bars");
-            const navM = document.querySelector(".nav-mobile");
-            bar.addEventListener("click", (nav) => {
-                navM.classList.toggle("show");
-            })
-        </script>
-        <script>
-            const Mbar = document.querySelector(".m-bar");
-            const aside = document.querySelector(".sidebar");
-            const close = document.querySelector(".close");
-            Mbar.addEventListener("click", () => {
-                aside.classList.add("show");
-            })
-            close.addEventListener("click", () => {
-                aside.classList.remove("show");
-            })
-        </script>
-        <script>
-            const wrapper = document.querySelector(".wrapper");
-            const fileName = document.querySelector(".file-name");
-            const defaultBtn = document.querySelector("#default-btn");
-            const customBtn = document.querySelector("#custom-btn");
-            const cancelBtn = document.querySelector("#cancel-btn i");
-            const img = document.querySelector(".imgt");
-            let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
-
-            function defaultBtnActive() {
-                defaultBtn.click();
+            if (this.value) {
+                let valueStore = this.value.match(regExp);
+                fileName.textContent = valueStore;
             }
-            defaultBtn.addEventListener("change", function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function() {
-                        const result = reader.result;
-                        img.src = result;
-                        wrapper.classList.add("active");
-                    }
-                    cancelBtn.addEventListener("click", function() {
-                        img.src = "";
-                        wrapper.classList.remove("active");
-                    })
-                    reader.readAsDataURL(file);
-                }
-                if (this.value) {
-                    let valueStore = this.value.match(regExp);
-                    fileName.textContent = valueStore;
-                }
-            });
-        </script>
-        <script>
-            const wrapper7 = document.querySelector(".wrapper7");
-            const fileName2 = document.querySelector(".file-name2");
-            const defaultBtn2 = document.querySelector("#default-btn2");
-            const customBtn2 = document.querySelector("#custom-btn2");
-            const cancelBtn2 = document.querySelector("#cancel-btn2 i");
-            const img2 = document.querySelector(".imgd");
-            let regExp2 = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+        });
 
-            function defaultBtnActive2() {
-                defaultBtn2.click();
+    </script>
+    <script>
+        const wrapper7 = document.querySelector(".wrapper7");
+        const fileName2 = document.querySelector(".file-name2");
+        const defaultBtn2 = document.querySelector("#default-btn2");
+        const customBtn2 = document.querySelector("#custom-btn2");
+        const cancelBtn2 = document.querySelector("#cancel-btn2 i");
+        const img2 = document.querySelector(".imgd");
+        let regExp2 = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+
+        function defaultBtnActive2() {
+            defaultBtn2.click();
+        }
+        defaultBtn2.addEventListener("change", function() {
+            const file2 = this.files[0];
+            if (file2) {
+                const reader2 = new FileReader();
+                reader2.onload = function() {
+                    const result2 = reader2.result;
+                    img2.src = result2;
+                    wrapper7.classList.add("active");
+                }
+                cancelBtn2.addEventListener("click", function() {
+                    img2.src = "";
+                    wrapper7.classList.remove("active");
+                })
+                reader2.readAsDataURL(file2);
             }
-            defaultBtn2.addEventListener("change", function() {
-                const file2 = this.files[0];
-                if (file2) {
-                    const reader2 = new FileReader();
-                    reader2.onload = function() {
-                        const result2 = reader2.result;
-                        img2.src = result2;
-                        wrapper7.classList.add("active");
-                    }
-                    cancelBtn2.addEventListener("click", function() {
-                        img2.src = "";
-                        wrapper7.classList.remove("active");
-                    })
-                    reader2.readAsDataURL(file2);
-                }
-                if (this.value) {
-                    let valueStore = this.value.match(regExp2);
-                    fileName2.textContent = valueStore;
-                }
+            if (this.value) {
+                let valueStore = this.value.match(regExp2);
+                fileName2.textContent = valueStore;
+            }
+        });
+
+    </script>
+    <script>
+        const selected = document.querySelector(".selected");
+        const optionsContainer = document.querySelector(".options-container");
+
+        const optionsList = document.querySelectorAll(".option");
+
+        selected.addEventListener("click", () => {
+            optionsContainer.classList.toggle("active");
+        });
+
+        optionsList.forEach(o => {
+            o.addEventListener("click", () => {
+                selected.innerHTML = o.querySelector("label").innerHTML;
+                optionsContainer.classList.remove("active");
             });
-        </script>
-        <script>
-            const selected = document.querySelector(".selected");
-            const optionsContainer = document.querySelector(".options-container");
+        });
 
-            const optionsList = document.querySelectorAll(".option");
+    </script>
+    <script>
+        const selected2 = document.querySelector(".selected2");
+        const optionsContainer2 = document.querySelector(".options-container2");
 
-            selected.addEventListener("click", () => {
-                optionsContainer.classList.toggle("active");
+        const optionsList2 = document.querySelectorAll(".option2");
+
+        selected2.addEventListener("click", () => {
+            optionsContainer2.classList.toggle("active");
+        });
+
+        optionsList2.forEach(o => {
+            o.addEventListener("click", () => {
+                selected2.innerHTML = o.querySelector("label").innerHTML;
+                optionsContainer2.classList.remove("active");
             });
+        });
 
-            optionsList.forEach(o => {
-                o.addEventListener("click", () => {
-                    selected.innerHTML = o.querySelector("label").innerHTML;
-                    optionsContainer.classList.remove("active");
-                });
+    </script>
+    <script>
+        const selected3 = document.querySelector(".selected3");
+        const optionsContainer3 = document.querySelector(".options-container3");
+
+        const optionsList3 = document.querySelectorAll(".option3");
+
+        selected3.addEventListener("click", () => {
+            optionsContainer3.classList.toggle("active");
+        });
+
+        optionsList3.forEach(o => {
+            o.addEventListener("click", () => {
+                selected3.innerHTML = o.querySelector("label").innerHTML;
+                optionsContainer3.classList.remove("active");
             });
-        </script>
-        <script>
-            const selected2 = document.querySelector(".selected2");
-            const optionsContainer2 = document.querySelector(".options-container2");
+        });
 
-            const optionsList2 = document.querySelectorAll(".option2");
+    </script>
 
-            selected2.addEventListener("click", () => {
-                optionsContainer2.classList.toggle("active");
-            });
-
-            optionsList2.forEach(o => {
-                o.addEventListener("click", () => {
-                    selected2.innerHTML = o.querySelector("label").innerHTML;
-                    optionsContainer2.classList.remove("active");
-                });
-            });
-        </script>
-        <script>
-            const selected3 = document.querySelector(".selected3");
-            const optionsContainer3 = document.querySelector(".options-container3");
-
-            const optionsList3 = document.querySelectorAll(".option3");
-
-            selected3.addEventListener("click", () => {
-                optionsContainer3.classList.toggle("active");
-            });
-
-            optionsList3.forEach(o => {
-                o.addEventListener("click", () => {
-                    selected3.innerHTML = o.querySelector("label").innerHTML;
-                    optionsContainer3.classList.remove("active");
-                });
-            });
-        </script>
-
-        <!--Outros links-->
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
-        <script src="../js/firebase.js"></script>
-        <script src="../js/funcionario_database.js"></script>
-        <script src="../js/turma_database.js"></script>
+    <!--Outros links-->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+    <script src="../js/firebase.js"></script>
+    <script src="../js/funcionario_database.js"></script>
+    <script src="../js/turma_database.js"></script>
 </body>
 
 </html>
