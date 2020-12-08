@@ -129,8 +129,8 @@
                                 document.getElementById("cpf_editar").value = cpf;
                                 document.getElementById("email_perfil").innerHTML = email_perfil;
                                 localStorage.setItem("escola_id", escola);
-                                //mandar_valores();
-                                //pegar_funcionarios();
+                                mandar_valores();
+                                pegar_funcionarios();
                                 pegar_turmas();
                                 // ...
                             });
@@ -247,16 +247,8 @@
                                     var periodo = funcionario[i].periodo;
                                     var func_id = btoa(email_func);
 
-                                    console.log(nome_func);
-                                    console.log(email_func);
-                                    console.log(vagas_ocupadas);
-                                    console.log(periodo);
-
                                     //buscar elemento avô
                                     var elemento_avo = document.getElementById("lista");
-
-                                    //criar elemento pai
-                                    var elemento_pai = document.createElement('li');
                                     
                                     var li = document.createElement('li');
                                     var div_item = document.createElement('div');
@@ -340,50 +332,9 @@
                                     div_item.appendChild(div_editar);
                                     div_item.appendChild(div_excluir);
                                     li.appendChild(div_item);
-                                    console.log(li);
                                     elemento_avo.appendChild(li);
                                     
 
-                                    //criar elemento filho imagem
-                                    var elemento_filho_imagem;
-
-                                    //criar elemento filho texto
-                                    var elemento_filho_texto = document.createElement('li');
-
-                                    //criar texto
-                                    elemento_filho_texto.textContent = nome_func;
-
-                                    var linha = "<li>" +
-                                        "<div class='item'>" +
-                                        "<div class='name'>" +
-                                        "<span>10° Ano</span>" +
-                                        "</div>" +
-                                        "<div class='phone'>" +
-                                        "<span>100</span>" +
-                                        "</div>" +
-                                        "<div class='phone'>" +
-                                        "<span>50</span>" +
-                                        "</div>" +
-                                        "<div class='status'>" +
-                                        "<span class='open'>Todo dia</span>" +
-                                        "</div>" +
-                                        "<div class='status'>" +
-                                        "<span><a href='#popup2'><button type='submit' class='form__button2'><i class='fas fa-pen' aria-hidden='true'></i></i></i></button></a></span>" +
-                                        "</div>" +
-                                        "<div class='status'>" +
-                                        "<span><button type='submit' class='form__button5'><i class='fa fa-trash' aria-hidden='true'>" +
-                                        "</i></i></i></button> </span>" +
-                                        "</div>" +
-                                        "</div>" +
-                                        "</li>";
-
-
-                                    //colocar a imagem no elemento pai
-                                    elemento_pai.innerHTML = linha;
-                                    //elemento_pai.appendChild(elemento_filho_texto);
-
-                                    //colocar o elemento pai no elemento avo
-                                    //elemento_avo.appendChild(elemento_pai);
                                 }
                             })
                         }
@@ -638,6 +589,7 @@
                             );
 
                             alert("Turma cadastrada");
+                            $(location).attr('href', 'adm.html');
 
                         }
 
@@ -902,17 +854,17 @@
                                 <div class="popup-photo3">
                                     <div class="center">
                                         <h2>Nivel Educacional</h2>
-                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Educação Infantil</label>
+                                        <label class="labelCheck" name="nivel_educacao"><input type="checkbox" name="check_escola">&nbsp;&nbsp;Educação Infantil</label>
                                         <br><br>
-                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Ensino Fundamental 1</label>
+                                        <label class="labelCheck" name="nivel_educacao"><input type="checkbox" name="check_escola">&nbsp;&nbsp;Ensino Fundamental 1</label>
                                         <br><br>
-                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Ensino Fundamental 2</label>
+                                        <label class="labelCheck" name="nivel_educacao"><input type="checkbox" name="check_escola">&nbsp;&nbsp;Ensino Fundamental 2</label>
                                         <br><br>
-                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Ensino Médio</label>
+                                        <label class="labelCheck" name="nivel_educacao"><input type="checkbox" name="check_escola">&nbsp;&nbsp;Ensino Médio</label>
                                         <br><br>
-                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;Educação Especial</label>
+                                        <label class="labelCheck" name="nivel_educacao"><input type="checkbox" name="check_escola">&nbsp;&nbsp;Educação Especial</label>
                                         <br><br>
-                                        <label class="labelCheck"><input type="checkbox" name="">&nbsp;&nbsp;EJA</label>
+                                        <label class="labelCheck" name="nivel_educacao"><input type="checkbox" name="check_escola">&nbsp;&nbsp;EJA</label>
                                     </div>
                                 </div>
 
@@ -938,7 +890,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="selected3" id="valor_periodo">Selecione a instituição&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+                                            <div class="selected3" id="valor_instituicao">Selecione a instituição&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -959,13 +911,13 @@
                                         <li><span>5</span>7646426747</li>
                                     </ul>
                                 </div>
-                                <button type="submit" class="form__button6" onclick=""><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
+                                <button type="submit" class="form__button6" onclick="editar_escola()"><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
                             </div>
                             <a class="popup-close3" href="#">X</a>
                         </div>
 
                         <br>
-                        <a href="#popup3"><button type="submit" class="form__button" onclick="editar_escola()"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
+                        <a href="#popup3"><button type="submit" class="form__button"><i class="fas fa-pen" aria-hidden="true"></i><i> Continuar edição</i></button></a>
                         <script>
                             async function editar_escola() {
                                 var nome = $('#nome_escola_editar').val();
@@ -973,11 +925,24 @@
                                 var cep = $('cep_editar').val();
                                 var numero = $('numero_editar').val();
                                 var complemento = $('comple_editar').val();
+                                
+                                var check = document.getElementsByName("check_escola");
+                                var nivel_educacao = document.getElementsByName("nivel_educacao");
+                                
+                                for(var i = 0; i < check.length; i++){
+                                    console.log(check[i]);
+                                    console.log(nivel_educacao[i].innerText);
+                                }
+                                
+                                var instituicao = document.getElementById("valor_instituicao").innerText;
+                                var telefone = $('#phone_editar').val();
+                                console.log(instituicao);
+                                console.log(telefone);
 
 
                                 // Prompt the user to re-provide their sign-in credentials
 
-                                const atualiza = await escola_database.new(
+                                /*const atualiza = await escola_database.new(
                                     nome,
                                     localStorage.getItem("email"),
                                     localStorage.getItem("cep"),
@@ -988,7 +953,7 @@
                                     localStorage.getItem("numero"),
                                     localStorage.getItem("complemento"),
                                     cnpj
-                                );
+                                );*/
                             }
 
                         </script>
