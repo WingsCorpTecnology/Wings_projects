@@ -100,7 +100,7 @@ public class PesquisaFrament extends Fragment {
         recyclerView.setAdapter(adapter);
 
         //Evento de Click
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
+        /*recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -123,7 +123,7 @@ public class PesquisaFrament extends Fragment {
                     public void onLongItemClick(View view, int position) {
 
                     }
-                }));
+                }));*/
 
         return root;
     }
@@ -153,10 +153,9 @@ public class PesquisaFrament extends Fragment {
 
                     listaEscolas.add(escola);
                 }
+                adapter.notifyDataSetChanged();
 
                 escolasFiltros();
-
-                adapter.notifyDataSetChanged();
             }
 
             @Override
