@@ -132,6 +132,7 @@
                                 mandar_valores();
                                 pegar_funcionarios();
                                 pegar_turmas();
+                                pegar_telefones();
                                 // ...
                             });
 
@@ -227,6 +228,31 @@
                                     }
                                 }
                             })
+                        }
+                        
+                        async function pegar_telefones(){
+                            var id_escola = localStorage.getItem("escola_id");
+                            return await firebase.database().ref('/TelefoneEscola/' + id_escola + "/").once('value').then(function(snapshot){
+                                var id_telefones = [snapshot.val()];
+                                var numero;
+                                
+                                var telefone = Object.values(id_telefones[0]);
+                                
+                                for(var i = 0; i < telefone.length; i++){
+                                    numero = telefone[i].Telefone;
+                                    console.log(numero);
+                                    var lista = document.getElementById("lista_telefone");
+                                    
+                                    var li = document.createElement('li');
+                                    var span = document.createElement('span');
+                                    var label = document.createElement('label');
+                                    span.textContent = i+1;
+                                    li.appendChild(span);
+                                    label.textContent = numero;
+                                    li.appendChild(label);
+                                    lista.appendChild(li);
+                                }
+                            });
                         }
 
                         async function pegar_turmas() {
@@ -903,12 +929,7 @@
                                 </div>
                                 <div class="box">
                                     <h2 class="h2">Telefones</h2>
-                                    <ul>
-                                        <li><span>1</span>2555255363</li>
-                                        <li><span>2</span>336763673673</li>
-                                        <li><span>3</span>66267264</li>
-                                        <li><span>4</span>7426467426674</li>
-                                        <li><span>5</span>7646426747</li>
+                                    <ul id="lista_telefone">
                                     </ul>
                                 </div>
                                 <button type="submit" class="form__button6" onclick="editar_escola()"><i class="fas fa-check"></i></i>&nbsp;Salvar</i></button>
@@ -925,19 +946,45 @@
                                 var cep = $('cep_editar').val();
                                 var numero = $('numero_editar').val();
                                 var complemento = $('comple_editar').val();
+                                var escola_id = localStorage.getItem("escola_id");
                                 
                                 var check = document.getElementsByName("check_escola");
                                 var nivel_educacao = document.getElementsByName("nivel_educacao");
+                                var nivel = {};
                                 
                                 for(var i = 0; i < check.length; i++){
                                     console.log(check[i]);
                                     console.log(nivel_educacao[i].innerText);
-                                }
+                                    if(check[i].checked){
+                                        nivel[i] = true;
+                                    }
+                                    else{
+                                        nivel[i] = false;
+                                    }
+                                };
+                                
+                                console.log(nivel);
                                 
                                 var instituicao = document.getElementById("valor_instituicao").innerText;
                                 var telefone = $('#phone_editar').val();
                                 console.log(instituicao);
                                 console.log(telefone);
+                                
+                                const atualizar_dados_escola = await escola_database.nivel(
+                                    nivel[0],
+                                    nivel[1],
+                                    nivel[2],
+                                    nivel[3],
+                                    nivel[4],
+                                    nivel[5],
+                                    instituicao,
+                                    escola_id
+                                );
+                                
+                                const insert_numero = await escola_database.telefone(
+                                    telefone,
+                                    escola_id
+                                )
 
 
                                 // Prompt the user to re-provide their sign-in credentials
