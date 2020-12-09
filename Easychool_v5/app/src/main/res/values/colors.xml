@@ -11,4 +11,5 @@
     <color name="colorTextWhite">#FFFFFF</color>
     <color name="color_back">#02950A</color>
     <color name="cinza_claro">#EEEEEE</color>
+    <color name="sem_vaga">#DF1818</color>
 </resources>

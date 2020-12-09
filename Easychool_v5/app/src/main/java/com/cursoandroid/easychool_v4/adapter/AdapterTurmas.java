@@ -31,20 +31,21 @@ public class AdapterTurmas extends RecyclerView.Adapter<AdapterTurmas.MyViewHold
         return new MyViewHolder(itemLista);
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Turma turma = turmas.get(position);
+        int vagas = turma.getVagasTotal() - turma.getVagasOcupadas();
 
         //Log.i("teste", "ultima alteração: "+turma.getUltimaAlteracao());
 
         holder.turma.setText(turma.getSerie());
-        holder.vagas.setText(turma.getVagasTotal() - turma.getVagasOcupadas()+ " vagas de " +turma.getVagasTotal());
+        holder.vagas.setText(vagas + " vagas de " + turma.getVagasTotal());
         holder.ultimaAlteracao.setText(turma.getUltimaAlteracao());
         holder.periodo.setText(turma.getPeriodo());
 
-        if(turma.getPeriodo().equals("Noite")){
+        if (turma.getPeriodo().equals("Noite")) {
             holder.periodo.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_brightness_3_24, 0);
         }
     }

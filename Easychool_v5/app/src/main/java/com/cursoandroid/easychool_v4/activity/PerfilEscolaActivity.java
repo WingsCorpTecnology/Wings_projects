@@ -212,7 +212,11 @@ public class PerfilEscolaActivity extends AppCompatActivity {
                     turma.setVagasOcupadas(Integer.parseInt((String) Objects.requireNonNull(dados.child("vagas_ocupadas").getValue())));
                     turma.setUltimaAlteracao((String) Objects.requireNonNull(dados.child("data_hora").getValue()));
 
-                    listaTurmas.add(turma);
+                    int vagas = turma.getVagasTotal() - turma.getVagasOcupadas();
+
+                    if(vagas != 0){
+                        listaTurmas.add(turma);
+                    }
                 }
 
                 adapterTurmas.notifyDataSetChanged();
