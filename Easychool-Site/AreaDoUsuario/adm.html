@@ -214,6 +214,7 @@
                                         starsRef.getDownloadURL().then(function(url) {
                                             // Insert url into an <img> tag to "download"
                                             const image = document.querySelector('#img_funcionario')
+                                            //image.setAttribute("width", "200");
                                             image.src = url
                                         }).catch(function(error) {
                                             console.log(error)
@@ -221,6 +222,7 @@
 
                                         //colocar a imagem no elemento pai
                                         elemento_pai.innerHTML = '<img width="200" src="img/images.png" alt="" id="img_funcionario">';
+                                        //elemento_pai.setAttribute("width", "200");
                                         elemento_pai.appendChild(elemento_filho_texto);
 
                                         //colocar o elemento pai no elemento avo
@@ -396,11 +398,11 @@
                 <div class="wrapper4">
                     <div class="search-input">
                         <a href="" target="_blank" hidden></a>
-                        <input type="text" placeholder="Pesquisar Funcionários..">
+                        <input type="text" placeholder="Pesquisar Funcionários.." id="search_func">
                         <div class="autocom-box">
                             <!-- here list are inserted from javascript -->
                         </div>
-                        <a href="#popup" onclick="pegar_funcionarios()">
+                        <a href="#popup">
                             <div class="icon"><i class="fas fa-search"></i></div>
                         </a>
                     </div>
