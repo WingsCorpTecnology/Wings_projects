@@ -13,9 +13,9 @@ import java.util.List;
 
 public class AdapterTelefones extends RecyclerView.Adapter<AdapterTelefones.MyViewHolder> {
 
-    private List<Long> telefones;
+    private List<String> telefones;
 
-    public AdapterTelefones(List<Long> telefones) {
+    public AdapterTelefones(List<String> telefones) {
         this.telefones = telefones;
     }
 
@@ -28,10 +28,10 @@ public class AdapterTelefones extends RecyclerView.Adapter<AdapterTelefones.MyVi
 
     @Override
     public void onBindViewHolder(AdapterTelefones.MyViewHolder holder, int position) {
-        Long telefoneEscola = telefones.get(position);
+        String telefoneEscola = telefones.get(position);
 
-        if(telefoneEscola != 0) {
-            holder.telefone.setText(String.valueOf(telefoneEscola));
+        if(telefones.size() != 0) {
+            holder.telefone.setText(telefoneEscola);
         }
         else{
             holder.telefone.setText("Nenhum telefone cadastrado");

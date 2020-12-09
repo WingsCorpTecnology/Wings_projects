@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,17 +29,12 @@ import com.cursoandroid.easychool_v4.config.ConfiguracaoFirebase;
 import com.cursoandroid.easychool_v4.config.RecyclerItemClickListener;
 import com.cursoandroid.easychool_v4.model.Escola;
 import com.cursoandroid.easychool_v4.model.Turma;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -52,7 +46,7 @@ public class PerfilEscolaActivity extends AppCompatActivity {
     private AdapterTurmas adapterTurmas;
     private RecyclerView recyclerView;
     private RecyclerView recyclerTurmas;
-    private List<Long> listaTelefone = new ArrayList<Long>();
+    private List<String> listaTelefone = new ArrayList<String>();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private DatabaseReference telefoneRef;
     private ValueEventListener valueEventListenerTelefone;
@@ -60,7 +54,7 @@ public class PerfilEscolaActivity extends AppCompatActivity {
     private String idEscola;
     private Escola escolaAtual;
     private TextView txtNome, txtEndereco, txtEstadoCidade, txtEmail;
-    private Long telefoneSelecionado;
+    private String telefoneSelecionado;
     private List<Turma> listaTurmas = new ArrayList<>();
     private ImageView imgEscola;
 
@@ -170,18 +164,23 @@ public class PerfilEscolaActivity extends AppCompatActivity {
         telefoneRef = firebaseRef.child("TelefoneEscola").child(Base64Custom.codificarBase64(txtEmail.getText().toString()));
 
         valueEventListenerTelefone = telefoneRef.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaTelefone.clear();
 
+                //Log.i("teste", "Qualquer coisa: ");
+
                 for(DataSnapshot dados : dataSnapshot.getChildren()){
-                    Long telefone = dados.getValue(Long.class);
+                    for(DataSnapshot teste : dados.getChildren()) {
+                        String telefone = Objects.requireNonNull(teste.getValue(String.class));
 
-                    //telefone.setId(dados.getKey());
+                        //telefone.setId(dados.getKey());
 
-                    listaTelefone.add(telefone);
+                        listaTelefone.add(telefone);
 
-                    //Log.i("teste", "telefone: "+telefone);
+                        Log.i("teste", "telefone: " +teste.getValue(String.class));
+                    }
                 }
 
                 adapter.notifyDataSetChanged();
