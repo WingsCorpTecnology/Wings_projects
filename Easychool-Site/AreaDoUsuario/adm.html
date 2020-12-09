@@ -261,6 +261,9 @@
                                 var id_turmas = [snapshot.val()];
                                 var nome_func;
 
+                                // Get the download URL
+
+
                                 var funcionario = Object.values(id_turmas[0]);
 
                                 for (var i = 0; i < funcionario.length; i++) {
@@ -356,8 +359,6 @@
                                     div_item.appendChild(div_excluir);
                                     li.appendChild(div_item);
                                     elemento_avo.appendChild(li);
-                                    
-
                                 }
                             })
                         }
@@ -377,12 +378,6 @@
                             <span><i class="fas fa-users"></i></span>
                             <h3>Turmas</h3>
                         </li>
-                        <!--<li onclick="show(2)">
-              <span><i class="far fa-clock"></i>-->
-                        <!-- <i class="fas fa-user-clock"></i> -->
-                        <!--</span>
-              <h3>Fila de Espera</h3>
-            </li>-->
                         <li onclick="show(3)">
                             <span><i class="fas fa-cog"></i></span>
                             <h3>Configurações</h3>
@@ -405,7 +400,7 @@
                         <div class="autocom-box">
                             <!-- here list are inserted from javascript -->
                         </div>
-                        <a href="#popup">
+                        <a href="#popup" onclick="pegar_funcionarios()">
                             <div class="icon"><i class="fas fa-search"></i></div>
                         </a>
                     </div>
