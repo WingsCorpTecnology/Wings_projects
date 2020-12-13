@@ -1513,6 +1513,28 @@ aside .search button{
   box-shadow: 0 10px 36px rgba(0,0,0,.15);
 }
 
+.form__button6{
+  position: absolute;
+  display: block;
+  margin-top: 55%;
+  margin-left: 75%;
+  padding: .75rem 2rem;
+  outline: none;
+  border: none;
+  background-color: #5CD83E/* #e92c2c */ ;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: .6rem;
+  cursor: pointer;
+  transition: .3s;
+  /* top: 50%;
+  left: 25%; */
+  
+}
+.form__button6:hover{
+  box-shadow: 0 10px 36px rgba(0,0,0,.15);
+}
+
 /* perfil da escola add foto */
 
 .container3{
